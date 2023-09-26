@@ -1,0 +1,16 @@
+function toCamelCase(str){
+    let ans = ""
+    let f = 0;
+    for(let i = 0; i<str.length;i++){
+        if(str[i]=="-"||str[i]=="_"){
+            f=1;
+            continue;
+        }
+        if (f==1)
+            ans+=str[i].toUpperCase();
+        else
+            ans+=str[i];
+        f=0;
+    }
+    return ans
+}

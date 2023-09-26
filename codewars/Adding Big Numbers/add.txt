@@ -1,0 +1,52 @@
+function add(a, b) {
+  let ans = "";
+  let last = "";
+  let dig="";
+  while (a.length!=0 || b.length!=0){
+    if(a.length==0 && b.length!=0){
+      if (last !=""){
+        dig =(Number(b[b.length-1])+Number(last)).toString();
+        last = "";}
+      b = b.slice(0,b.length-1);
+      if(dig.length>1){
+        ans = dig[1]+ans;
+        last = dig[0];
+        } else{
+          ans=dig+ans;
+        }
+      continue;
+    }
+    else if(b.length==0 && a.length !=0){
+      dig =(Number(a[a.length-1])+Number(last)).toString();
+      last = "";
+      a= a.slice(0,a.length-1);
+      if(dig.length>1){
+        ans = dig[1]+ans;
+        last = dig[0];
+        } else{
+          ans=dig+ans;
+        }
+      continue;
+    }
+    if (last !=""){
+      dig =(Number(a[a.length-1])+Number(b[b.length-1])+Number(last)).toString();
+      last = "";
+      a= a.slice(0,a.length-1);
+      b= b.slice(0,b.length-1);
+    } else{
+       dig =((Number(a[a.length-1])+Number(b[b.length-1])).toString());
+      a= a.slice(0,a.length-1);
+      b = b.slice(0,b.length-1);
+    }
+    if(dig.length>1){
+      ans = dig[1]+ans;
+      last = dig[0];
+      } else{
+        ans=dig+ans;
+      }
+  }
+  if(last!="")
+    return last + ans;
+  else
+    return ans; // Fix me!
+}

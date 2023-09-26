@@ -1,0 +1,19 @@
+function anagramDifference(w1,w2){
+   let arr1 = new Array(26);
+   let arr2 = new Array(26);
+   let ans = 0;
+   for(let i = 0;i<26;i++){
+        arr1[i]=0;
+        arr2[i]=0;
+    }
+   for(let i =0;i<w1.length;i++){
+        arr1[w1[i].charCodeAt(0)-97]++;
+    }
+   for(let i =0;i<w2.length;i++){
+        arr2[w2[i].charCodeAt(0)-97]++;
+    }
+    for(let i = 0;i<26;i++){
+        ans+=Math.abs(arr1[i]-arr2[i])
+    }
+    return ans;
+ }
