@@ -7,8 +7,8 @@ function tower_task( floors_count ) {
 		Array.from(
 			{ length : floors_count } ,
 		)
-		.reduce(
-			( res , _ , idx )=> {
+		.map(
+			( _ , idx )=> {
 				
 				var space_count = floors_count - 1 - idx;
 				var space_str = space.repeat( space_count );
@@ -18,12 +18,9 @@ function tower_task( floors_count ) {
 				
 				var floor = `${ space_str }${ star_str }${ space_str }`;
 				
-				res.push( floor );
+				return floor;
 				
-				return res;
-				
-			} ,
-			[] ,
+			}
 		)
 	);
 	
