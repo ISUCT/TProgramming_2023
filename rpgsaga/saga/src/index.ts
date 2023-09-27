@@ -1,16 +1,33 @@
-import { Phone } from './phone';
+import { Movie } from './movie';
 
-const first = new Phone('+7900-000 000 (123)', 1990, 'Телефон 1');
-first.year = 1998;
+const film1 = new Movie("Back to the Future", 1985, "Robert Zemeckis");
 
-first.year = -1998;
-first.call('12345');
-first.endCall();
+film1.play();
+film1.pause();
+film1.pause();
+film1.play();
+film1.play();
 
-const second = new Phone('+799900000', -5);
-// second.name = 'Телефон 2';
-console.log(second.year);
-second.call('12345');
-second.endCall();
+film1.volume(29);
+film1.volume(99);
+film1.volume(99999);
+film1.volume(-1);
 
-console.log(first, second, Phone.phoneCount);
+film1.year = 1894;
+
+console.log(`MOVIE INFO
+Title: ${film1.title}
+Year: ${film1.year}
+Director: ${film1.director}
+`);
+
+
+const film2 = new Movie("Star Wars: Episode I - The Phantom Menace", 1999, "George Lucas");
+
+film2.title = "Star Wars";
+film2.year = 1977;
+
+film1.volume(100);
+film1.play();
+
+console.log("Movi info:", film2.title + ", " + film2.director + ", " + film2.year + ".");
