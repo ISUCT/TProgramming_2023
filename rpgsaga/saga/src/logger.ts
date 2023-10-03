@@ -3,7 +3,7 @@ import color from 'colorts';
 
 export class Logger {
     static battleAnnouncement(firstEnemy: Character, secondEnemy: Character) {
-        console.log("\n" + color(firstEnemy.characterName + " vs " + secondEnemy.characterName).inverse.toString());
+        console.log("\n" + color(this.getFullCharactername(firstEnemy) + " vs " + this.getFullCharactername(secondEnemy)).inverse.toString());
     }
 
     static numberIsOddErrorMessage(){
@@ -29,38 +29,38 @@ export class Logger {
     }
 
     static startAttackMessage(assaulter: Character){
-        console.log(this.paintHeaderAction(assaulter.characterName + " собирается атаковать..."));
+        console.log(this.paintHeaderAction(this.getFullCharactername(assaulter) + " собирается атаковать..."));
     }
 
     static successAttackMessage(assaulter: Character, attackStrength: number, defending:Character, dodgeStrength:number, damage:number) {
         console.log(this.paintLooserPass(defending, dodgeStrength.toString()));
         console.log(this.paintWinnerPass(assaulter, attackStrength.toString()));
-        console.log(this.paintResultAction(assaulter.characterName + " успешно наносит урон в количестве: " + color(damage.toString()).red));
+        console.log(this.paintResultAction(this.getFullCharactername(assaulter) + " успешно наносит урон в количестве: " + color(damage.toString()).red));
     }
 
     static endFightMessage(winner:Character, looser:Character){
-        console.log(this.paintResultAction(looser.characterName + " падает без сознания"))
-        console.log(color(winner.characterName + " победил!").bgYellow.toString());
+        console.log(this.paintResultAction(this.getFullCharactername(looser) + " падает без сознания"))
+        console.log(color(this.getFullCharactername(winner) + " победил!").bgYellow.toString());
     }
 
     static failedAttackMessage(assaulter: Character, attackStrength: number, defending:Character, dodgeStrength:number) {
         console.log(this.paintWinnerPass(defending, dodgeStrength.toString()));
         console.log(this.paintLooserPass(assaulter, attackStrength.toString()));
-        console.log(this.paintResultAction(defending.characterName + " уворачивается"));
+        console.log(this.paintResultAction(this.getFullCharactername(defending) + " уворачивается"));
     }
 
     static roundResultMessage(winners:Character[], loosers:Character[], currentRound: number){
         console.log(color("\nРЕЗУЛЬТАТЫ " + currentRound +" РАУНДА").inverse.bold.toString());
         winners.forEach(winner => {
-            console.log(color(winner.characterName).inverse.toString());
+            console.log(color(this.getFullCharactername(winner)).inverse.toString());
         });
         loosers.forEach(looser => {
-            console.log(color(looser.characterName).strikethrough.toString());
+            console.log(color(this.getFullCharactername(looser)).strikethrough.toString());
         });
     }
 
     static EndGame(winner:Character){
-        console.log(color('\n' + winner.characterName + ' - ПОБЕДИТЕЛЬ ТУРНИРА').bgRed.toString())
+        console.log(color('\n' + this.getFullCharactername(winner) + ' - ПОБЕДИТЕЛЬ ТУРНИРА').bgRed.toString())
 
     }
 
@@ -73,14 +73,18 @@ export class Logger {
     }
 
     static paintLooserPass(character: Character, result: string):String {
-        return (character.characterName + ": " +color(result).red.toString());
+        return (this.getFullCharactername(character) + ": " +color(result).red.toString());
     }
 
     static paintWinnerPass(character: Character, result: string):String {
-        return (character.characterName + ": " +color(result).green.toString());
+        return (this.getFullCharactername(character) + ": " +color(result).green.toString());
     }
 
     static paintResultAction(message:string):String{
         return color(message).white.bold.italic.toString();
+    }
+
+    static getFullCharactername(character:Character){
+        return ("(" + character.className + ") " + character.characterName);
     }
 }

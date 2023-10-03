@@ -17,24 +17,25 @@ export let names: string[] = [
     "Арчибальд",
     "Андерс",
     "Арни",
-    "Алекс ",
+    "Алекс",
     "Арчи",
     "Антеон",
     "Альбус",
-    "Айбер ",
+    "Айбер",
     "Адам",
     "Бесталл",
     "Боркас",
     "Баэлнесс",
     "Брэндон",
-    "Боб    ",
+    "Боб",
     "Брандон",
-    "Беон  ",
+    "Беон",
     "Бобби",
     "Бурбон",
     "Берадот",
 ]
 
-export const maxHealth = 100;
-export const maxStrength = 20;
-export const maxDexterity = 10;
+export enum Classes {
+    KNIGHT = "KNIGHT",
+    ASSASIN = "ASSASIN"
+}

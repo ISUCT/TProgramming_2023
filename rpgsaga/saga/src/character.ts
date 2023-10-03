@@ -1,20 +1,23 @@
 import { MathHelper } from './mathHelper';
-import { maxDexterity, names } from './constants';
-import { maxHealth } from './constants';
-import { maxStrength } from './constants';
+import { names } from './constants';
 import color from 'colorts';
-import { resourceUsage } from 'process';
 
 export class Character{
+    className: string = "";
+
     private _health: number;
     get health(): number {
         return this._health;
     }
+    protected _minHealth = 50;
+    protected _maxHealth = 100;
 
     private _strength: number;
     get strength(): number {
         return this._strength;
     }
+    protected _minStrength = 50;
+    protected _maxStrength = 100;
 
     private _characterName: string;
     get characterName(): string {
@@ -25,15 +28,17 @@ export class Character{
     get dexterity(): number {
         return this._dexterity;
     }
+    protected _minDexterity = 50;
+    protected _maxDexterity = 100;
 
     constructor (){
         this.Generate();
     }
 
     private Generate(){
-        this._health = MathHelper.genrateRandomNumber(1, maxHealth); 
-        this._strength = MathHelper.genrateRandomNumber(1, maxStrength);
-        this._dexterity = MathHelper.genrateRandomNumber(1, maxDexterity)
+        this._health = MathHelper.genrateRandomNumber(this._minHealth, this._maxHealth); 
+        this._strength = MathHelper.genrateRandomNumber(this._minStrength, this._maxStrength);
+        this._dexterity = MathHelper.genrateRandomNumber(this._minDexterity, this._maxDexterity)
         this._characterName = this.SelectColorName(names[MathHelper.genrateRandomNumber(0, names.length - 1)]);
     }
 

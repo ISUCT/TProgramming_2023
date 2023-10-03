@@ -2,6 +2,9 @@ import { Character } from './character';
 import { Logger } from './logger';
 import { MathHelper } from './mathHelper';
 import * as readline from 'readline';
+import { Classes } from './constants';
+import { Knight } from './classes/knight';
+import { Assasin } from './classes/assasin';
 
 class Game {
     private numPlayers: number = 0;
@@ -36,7 +39,6 @@ class Game {
     setNumberPlayers(numPlayers: number) {
         if (!MathHelper.isOdd(numPlayers)) {
             this.numPlayers = numPlayers;
-            // console.log(this.numPlayers);
         }
         else {
         }
@@ -44,7 +46,19 @@ class Game {
 
     generatePlayers() {
         for (let i = 0; i < this.numPlayers; i++) {
-            let character = new Character();
+            let character:Character;
+            // let test = ;
+            switch (MathHelper.getRandomEnumValue(Classes)) {
+                case Classes.KNIGHT:
+                    character = new Knight;
+                    console.log("Knight");
+                    break;
+                case Classes.ASSASIN:
+                    character = new Assasin;
+                    console.log("Assasin");
+                    break;
+
+            }
             this.players.push(character);
         }
     }
