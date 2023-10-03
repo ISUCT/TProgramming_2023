@@ -11,7 +11,9 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "colorts": "^0.1.63"
+  },
   "devDependencies": {
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.0",
