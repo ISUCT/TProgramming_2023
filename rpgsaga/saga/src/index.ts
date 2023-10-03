@@ -36,7 +36,7 @@ class Game {
     setNumberPlayers(numPlayers: number) {
         if (!MathHelper.isOdd(numPlayers)) {
             this.numPlayers = numPlayers;
-            console.log(this.numPlayers);
+            // console.log(this.numPlayers);
         }
         else {
         }
@@ -49,32 +49,44 @@ class Game {
         }
     }
 
-    startNewRound(currentRound: number = 1, characters:Character[]) {
-
-        let firstEnemyNumber: number = 0;
-        let secondEnemyNumber: number = 1;
-
+    startNewRound(currentRound: number, characters:Character[]) {
         let winners: Character[] = [];
         let loosers: Character[] = [];
 
-        for (let i = 0; i < this.numPlayers / 2; i++) {
-            let fightResult: [Character, Character] = this.startFight(firstEnemyNumber, secondEnemyNumber);
+        let isWholeNumber = require('is-whole-number');
+
+        if(!isWholeNumber(characters.length / 2)){
+                winners.push(characters[0]);
+                characters.splice(0, 1);
+        }
+
+        let firstCharacterIndex: number = 0;
+        let secondCharacterIndex: number = 1;
+
+        for (let i = 0; i < characters.length / 2; i++) {
+            let fightResult: [Character, Character] = this.startFight(firstCharacterIndex, secondCharacterIndex, characters);
             Logger.endFightMessage(fightResult[0], fightResult[1]);
 
             winners.push(fightResult[0]);
             loosers.push(fightResult[1]);
 
-            firstEnemyNumber += 2;
-            secondEnemyNumber += 2;
+            firstCharacterIndex += 2;
+            secondCharacterIndex += 2;
         }
 
         Logger.roundResultMessage(winners, loosers, currentRound);
 
+        if(winners.length > 1){
+            this.startNewRound(currentRound+1, winners);
+        } else{
+            Logger.EndGame(winners[0]);
+        }
+
     }
 
-    startFight(firstCharacterNumber: number, secondCharacterNumber: number): [Character, Character] {
-        let firstCharacter: Character = this.players[firstCharacterNumber];
-        let secondCharacter: Character = this.players[secondCharacterNumber];
+    startFight(firstCharacterNumber: number, secondCharacterNumber: number, characters: Character[]): [Character, Character] {
+        let firstCharacter: Character = characters[firstCharacterNumber];
+        let secondCharacter: Character = characters[secondCharacterNumber];
 
         Logger.battleAnnouncement(firstCharacter, secondCharacter);
 

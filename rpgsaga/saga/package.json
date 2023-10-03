@@ -12,7 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "colorts": "^0.1.63"
+    "colorts": "^0.1.63",
+    "is-whole-number": "^1.1.0"
   },
   "devDependencies": {
     "@types/jest": "^27.0.3",

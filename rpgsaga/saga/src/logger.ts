@@ -59,6 +59,11 @@ export class Logger {
         });
     }
 
+    static EndGame(winner:Character){
+        console.log(color('\n' + winner.characterName + ' - ПОБЕДИТЕЛЬ ТУРНИРА').bgRed.toString())
+
+    }
+
     static errorMessage(message:string):String{
         return color(message).red.toString();
     }
