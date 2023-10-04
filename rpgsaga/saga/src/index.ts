@@ -136,11 +136,12 @@ class Game {
 
                 let defendingCharacter = characters[defendingCharacterIndex];
 
-                this.attack(attackingCharacter, defendingCharacter)
+                attackingCharacter.attack(defendingCharacter);
 
                 if (defendingCharacter.health <= 0) {
                     looser = characters[defendingCharacterIndex];
                     winner = attackingCharacter;
+                    winner.Hill();
                     break;
                 }
             }
@@ -149,21 +150,6 @@ class Game {
                 break;
         }
         return [winner, looser]
-    }
-
-    attack(enemy1: Character, enemy2: Character) {
-        Logger.startAttackMessage(enemy1);
-
-        let hitStrength = enemy1.checkHit();
-        let dodgeStrength = enemy2.checkDodge();
-
-        if (hitStrength > dodgeStrength) {
-            enemy2.takeDamage(hitStrength - dodgeStrength);
-            Logger.successAttackMessage(enemy1, hitStrength, enemy2, dodgeStrength, hitStrength - dodgeStrength)
-        }
-        else {
-            Logger.failedAttackMessage(enemy1, hitStrength, enemy2, dodgeStrength)
-        }
     }
 }
 

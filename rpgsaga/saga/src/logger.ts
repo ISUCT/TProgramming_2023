@@ -64,6 +64,14 @@ export class Logger {
 
     }
 
+    static UseAssasinSkill(assasin:Character, enemy:Character){
+        console.log(this.paintResultAction(`${this.getFullCharactername(assasin)} исчезает и готовится нанести удар из тени, ${this.getFullCharactername(enemy)} пытается найти противника и пропускает свой ход`))
+    }
+
+    static UseKnightSkill(knight:Character, enemy:Character, damage:Number){
+        console.log(this.paintResultAction(`${this.getFullCharactername(knight)} наносит сокрушительный удар, ${this.getFullCharactername(enemy)} получает ${damage} урона`))
+    }
+
     static errorMessage(message:string):String{
         return color(message).red.toString();
     }
