@@ -11,7 +11,6 @@ export class MathHelper {
 
     static getRandomEnumValue<T>(enumObj: T): T[keyof T] {
         const enumValues = Object.values(enumObj);
-        console.log(enumObj);
         const randomIndex = Math.floor(Math.random() * enumValues.length);
         return enumValues[randomIndex] as T[keyof T];
       }

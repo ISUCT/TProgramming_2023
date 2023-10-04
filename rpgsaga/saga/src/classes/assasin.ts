@@ -3,11 +3,11 @@ import { Character } from "../character"
 import { Logger } from "../logger";
 
 export class Assasin extends Character {
-    
+
     _minHealth = 5;
     _maxHealth = 8;
 
-    _minStrength = 5;
+    _minStrength = 7;
     _maxStrength = 10;
 
     _minDexterity = 8;
@@ -22,13 +22,12 @@ export class Assasin extends Character {
     className: string = "Ассасин";
 
     attack(enemy: Character): void {
-        if(this.classSkillCost < this.mana)
-        {
-            enemy.Stun();
-            this._mana -= this.classSkillCost;
-            Logger.UseAssasinSkill(this, enemy);
-        } 
         super.attack(enemy);
+        if (this.classSkillCost < this.mana) {
+            enemy.Stun();
+            Logger.UseAssasinSkill(this, enemy);
+            this._mana -= this.classSkillCost;
+        }
     }
 
     constructor() {

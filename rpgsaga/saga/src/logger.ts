@@ -65,7 +65,15 @@ export class Logger {
     }
 
     static UseAssasinSkill(assasin:Character, enemy:Character){
-        console.log(this.paintResultAction(`${this.getFullCharactername(assasin)} исчезает и готовится нанести удар из тени, ${this.getFullCharactername(enemy)} пытается найти противника и пропускает свой ход`))
+        console.log(this.paintResultAction(`${this.getFullCharactername(assasin)} исчезает и готовится нанести удар из тени, ${this.getFullCharactername(enemy)} теряет из вида противника и пропускает свой ход`))
+    }
+
+    static UseArcherSkill(archer:Character, enemy:Character){
+        console.log(this.paintResultAction(`${this.getFullCharactername(archer)} стреляет зажжёной стрелой, ${this.getFullCharactername(enemy)} начинает гореть!`))
+    }
+
+    static CharacterBurn(character:Character, firedamage){
+        console.log(this.paintResultAction(`${this.getFullCharactername(character)} продолжает гореть и теряет ${firedamage} единиц здоровья`))
     }
 
     static UseKnightSkill(knight:Character, enemy:Character, damage:Number){

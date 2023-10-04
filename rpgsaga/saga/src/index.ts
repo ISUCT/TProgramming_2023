@@ -5,6 +5,7 @@ import * as readline from 'readline';
 import { Classes } from './constants';
 import { Knight } from './classes/knight';
 import { Assasin } from './classes/assasin';
+import { Archer } from './classes/archer';
 
 class Game {
     private numPlayers: number = 0;
@@ -28,7 +29,7 @@ class Game {
                 } else {
                     Logger.numberIsOddErrorMessage();
                 }
-            } else{
+            } else {
                 Logger.isNotANumberMessage();
             }
 
@@ -46,16 +47,16 @@ class Game {
 
     generatePlayers() {
         for (let i = 0; i < this.numPlayers; i++) {
-            let character:Character;
-            // let test = ;
+            let character: Character;
             switch (MathHelper.getRandomEnumValue(Classes)) {
                 case Classes.KNIGHT:
                     character = new Knight;
-                    console.log("Knight");
                     break;
                 case Classes.ASSASIN:
                     character = new Assasin;
-                    console.log("Assasin");
+                    break;
+                case Classes.ARCHER:
+                    character = new Archer;
                     break;
 
             }
@@ -63,15 +64,15 @@ class Game {
         }
     }
 
-    startNewRound(currentRound: number, characters:Character[]) {
+    startNewRound(currentRound: number, characters: Character[]) {
         let winners: Character[] = [];
         let loosers: Character[] = [];
 
         let isWholeNumber = require('is-whole-number');
 
-        if(!isWholeNumber(characters.length / 2)){
-                winners.push(characters[0]);
-                characters.splice(0, 1);
+        if (!isWholeNumber(characters.length / 2)) {
+            winners.push(characters[0]);
+            characters.splice(0, 1);
         }
 
         let firstCharacterIndex: number = 0;
@@ -90,9 +91,9 @@ class Game {
 
         Logger.roundResultMessage(winners, loosers, currentRound);
 
-        if(winners.length > 1){
-            this.startNewRound(currentRound+1, winners);
-        } else{
+        if (winners.length > 1) {
+            this.startNewRound(currentRound + 1, winners);
+        } else {
             Logger.EndGame(winners[0]);
         }
 
@@ -136,12 +137,13 @@ class Game {
 
                 let defendingCharacter = characters[defendingCharacterIndex];
 
-                attackingCharacter.attack(defendingCharacter);
+                attackingCharacter.characterTurn(defendingCharacter);
 
                 if (defendingCharacter.health <= 0) {
                     looser = characters[defendingCharacterIndex];
                     winner = attackingCharacter;
-                    winner.Hill();
+                    winner.hillHP();
+                    winner.endBurn();
                     break;
                 }
             }

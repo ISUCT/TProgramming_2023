@@ -1,11 +1,14 @@
 import { MathHelper } from './mathHelper';
-import { names } from './constants';
+import { fireDamage, names } from './constants';
 import color from 'colorts';
 import { Logger } from './logger';
 
 export class Character {
-
     className: string = "";
+    private _isBurn:boolean = false;
+    get isBurn(): boolean {
+        return this._isBurn;
+    }
 
     protected isStunned: boolean = false;
     private _health: number;
@@ -114,7 +117,20 @@ export class Character {
         return result;
     }
 
-    attack(enemy: Character) {
+    startBurn(){
+        this._isBurn = true;
+    }
+
+    endBurn(){
+        this._isBurn = false;
+    }
+
+    characterTurn(enemy:Character){
+        this.attack(enemy);
+        this.processEffects();
+    }
+
+    protected attack(enemy: Character) {
         if (!this.isStunned) {
             Logger.startAttackMessage(this);
 
@@ -129,14 +145,25 @@ export class Character {
             else {
                 Logger.failedAttackMessage(this, hitStrength, enemy, dodgeStrength)
             }
-
-            this._mana += this._manaRegeneration;
-        } else {
-            this.isStunned = false;
         }
     }
 
-    Hill(){
+    hillHP(){
         this._health += 100;
+    }
+
+    protected processEffects(){
+        if(this._isBurn)
+        {
+            this._health -= fireDamage;
+            Logger.CharacterBurn(this, fireDamage);
+        }
+
+        if(this.isStunned)
+        {
+            this.isStunned = false;
+        }
+
+        this._mana += this._manaRegeneration;
     }
 }

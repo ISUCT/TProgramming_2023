@@ -37,5 +37,8 @@ export let names: string[] = [
 
 export enum Classes {
     KNIGHT = "KNIGHT",
-    ASSASIN = "ASSASIN"
+    ASSASIN = "ASSASIN",
+    ARCHER = "ARCHER"
 }
+
+export const fireDamage:number = 10;
