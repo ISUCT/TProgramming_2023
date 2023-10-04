@@ -1,36 +1,34 @@
-import color from "colorts";
-import { Character } from "../character"
-import { Logger } from "../logger";
+import { Character } from '../character';
+import { Logger } from '../logger';
 
 export class Assasin extends Character {
+  minHealth = 5;
+  maxHealth = 8;
 
-    _minHealth = 5;
-    _maxHealth = 8;
+  minStrength = 7;
+  maxStrength = 10;
 
-    _minStrength = 7;
-    _maxStrength = 10;
+  minDexterity = 8;
+  maxDexterity = 10;
 
-    _minDexterity = 8;
-    _maxDexterity = 10;
+  minManaRegeneration = 8;
+  maxManaRegeneration = 10;
 
-    _minManaRegeneration = 8;
-    _maxManaRegeneration = 10;
+  minClassSkillCost = 15;
+  maxClassSkillCost = 20;
 
-    _minClassSkillCost = 15;
-    _maxClassSkillCost = 20;
+  className = 'Ассасин';
 
-    className: string = "Ассасин";
-
-    attack(enemy: Character): void {
-        super.attack(enemy);
-        if (this.classSkillCost < this.mana) {
-            enemy.Stun();
-            Logger.UseAssasinSkill(this, enemy);
-            this._mana -= this.classSkillCost;
-        }
+  attack(enemy: Character): void {
+    super.attack(enemy);
+    if (this.classSkillCostValue < this.manaValue) {
+      enemy.stun();
+      Logger.useAssasinSkill(this, enemy);
+      this.mana -= this.classSkillCostValue;
     }
+  }
 
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 }

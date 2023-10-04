@@ -1,43 +1,38 @@
-import { Character } from "../character"
-import { Logger } from "../logger";
+import { Character } from '../character';
+import { Logger } from '../logger';
 
 export class Knight extends Character {
+  minHealth = 6;
+  maxHealth = 8;
 
-    _minHealth = 6;
-    _maxHealth = 8;
+  minStrength = 7;
+  maxStrength = 10;
 
-    _minStrength = 7;
-    _maxStrength = 10;
+  minDexterity = 3;
+  maxDexterity = 7;
 
-    _minDexterity = 3;
-    _maxDexterity = 7;
+  minManaRegeneration = 4;
+  maxManaRegeneration = 10;
 
-    _minManaRegeneration = 4;
-    _maxManaRegeneration = 10;
+  minClassSkillCost = 20;
+  maxClassSkillCost = 25;
 
-    _minClassSkillCost = 20;
-    _maxClassSkillCost = 25;
+  className = 'Рыцарь';
 
-    className: string = "Рыцарь";
-
-    attack(enemy: Character): void {
-
-        if (this.classSkillCost < this.mana) {
-            Logger.startAttackMessage(this);
-            let damage = this.checkHit();
-            damage += (damage / 100 * 10);
-            enemy.takeDamage(damage);
-            Logger.UseKnightSkill(this, enemy, damage);
-            this._mana -= this.classSkillCost;
-        }
-        else {
-            super.attack(enemy);
-        }
-
-
+  attack(enemy: Character): void {
+    if (this.classSkillCostValue < this.manaValue) {
+      Logger.startAttackMessage(this);
+      let damage = this.checkHit();
+      damage += (damage / 100) * 10;
+      enemy.takeDamage(damage);
+      Logger.useKnightSkill(this, enemy, damage);
+      this.mana -= this.classSkillCostValue;
+    } else {
+      super.attack(enemy);
     }
+  }
 
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 }
