@@ -1,5 +1,12 @@
 {
     "compilerOptions": {
-        "types": ["jest", "node"]
-    }
+        "target": "ES6",
+        "forceConsistentCasingInFileNames": true,
+        "types": ["jest", "node"],
+        "strict": true
+    },
+    "exclude": [
+        "node_modules",
+        "typings"
+      ]
 }

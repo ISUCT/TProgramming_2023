@@ -1,5 +1,5 @@
 export class Phone {
-  private aYear: number;
+  private aYear!: number;
   phoneNumber: string;
 
   static phoneCount = 0;
