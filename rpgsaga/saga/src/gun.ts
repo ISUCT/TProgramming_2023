@@ -1,22 +1,35 @@
 export class Gun {
   readonly serialNumber: string = 's52001';
-  model: string;
   caliber: number;
-  magazine: number;
-  cartridges: number;
+  model: string;
 
-  constructor(modelName: string, gunCalider: number) {
+  magazin = 20;
+
+  constructor(modelName: string, public bullets: number, gunCaliber?: number) {
     this.model = modelName;
-    this.caliber = gunCalider;
+    this.bullets = bullets;
+    this.caliber = gunCaliber;
   }
 
-  shot(): void {
-    console.log('You fired');
+  // выстрел
+  shot(): string {
+    return `The Model ${this.model} pistol fired`;
   }
-  fullMagazine() {
-    return this.cartridges === this.magazine ? 'magazine full' : 'go reload';
+
+  // перезарядка
+  recharge(): string {
+    return 'The magazine is being recharged';
   }
-  recharge(): void {
-    console.log('The magazine is being recharged');
+
+  // проверка магазина
+  fullMagazin(): string {
+    this.bullets = this.bullets === undefined ? 0 : this.bullets;
+    if (this.magazin === this.bullets) {
+      return 'magazine full';
+    } else if (this.bullets > this.magazin / 2) {
+      return `in magazine ${this.bullets} bullets`;
+    } else {
+      return 'go recharge';
+    }
   }
 }
