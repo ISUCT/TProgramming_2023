@@ -1,0 +1,31 @@
+function isSolved(board) {
+    let arr = []
+    var isnull = false
+    for (let i of board){
+        for (let j of i){
+        if (j == 0){
+            isnull = true
+        }
+        arr.push(j)
+    }
+    }
+    for (let i = 0; i < 9; i += 3){
+        let temp = arr[i]
+        if (temp== arr[i+1] && temp == arr[i+2] && temp != 0 && i < 7){
+            return temp
+        } else if (i < 3) {
+            if (temp== arr[i+3] && temp == arr[i+6] && temp != 0){
+                return temp    
+            }
+        }
+    }
+    let temp = arr[4]
+    if ((temp == arr[0] && temp == arr[8] && temp != 0) || (temp == arr[2] && temp == arr[6] && temp != 0)){
+        return temp
+    }
+    if (isnull){
+        return -1
+    } else {
+        return 0
+    }
+}

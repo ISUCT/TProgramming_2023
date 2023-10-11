@@ -1,0 +1,20 @@
+function toCamelCase(str){
+    let str2 = ""
+    let uppercase = false
+    let a = ""
+    for (let i = 0; i < str.length; i++){
+        if (uppercase){
+            a = (str[i]).toUpperCase()
+            uppercase = false
+        } else {
+            a = str[i]
+        }
+
+        if (a != "-" && a !="_"){
+        str2 += a
+        } else {
+            uppercase = true
+        }
+    }
+    return str2
+}

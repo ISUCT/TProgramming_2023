@@ -1,0 +1,25 @@
+function add(a, b) {
+    let temp = 0
+    let mem = 0
+    if (Number(a) > Number(b)){
+        let c = a
+        a = b
+        b = c
+    }
+    while (a.length < b.length){
+        a = "0" + a
+    }
+    let ans = ""
+    for (let i = a.length-1; i >= 0; i--){
+        temp = Number(a[i]) + Number(b[i]) + mem
+        mem = 0
+        if (temp >= 10){
+            temp -= 10
+            mem = 1
+        }
+        ans = String(temp) + ans
+    }
+    if (mem == 1)
+        return String(mem) + ans
+    return ans
+}

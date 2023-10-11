@@ -1,0 +1,22 @@
+export function towerBuilder (nFloors: number) {
+    let nStars = 1
+    let nSpaces = nFloors - 1
+    let arr: string[] = []
+    let str = ""
+    for (let i = 0; i < nFloors; i++){
+        for (let j = 0; j < nSpaces; j++){
+            str += " "
+        }
+        for (let j = 0; j < nStars; j++){
+            str += "*"
+        }
+        for (let j = 0; j < nSpaces; j++){
+            str += " "
+        }
+        arr.push(str)
+        str = ""
+        nStars += 2
+        nSpaces -= 1
+    }
+    return arr
+}

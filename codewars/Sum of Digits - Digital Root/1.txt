@@ -1,0 +1,12 @@
+export const digitalRoot = (n:number):number => {
+    let num = String(n);
+    let sum = 0;
+    while (num.length > 1){
+        for (let i = 0; i < num.length; i++){
+            sum += Number(num[i]);
+        }
+        num = String(sum)
+        sum = 0
+    }
+    return Number(num)
+  };

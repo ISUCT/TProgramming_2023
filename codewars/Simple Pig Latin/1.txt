@@ -1,0 +1,15 @@
+export function pigIt (a : string) {
+    let ans = ""
+    let arr = a.split(" ")
+    for (let i of arr){
+        if (i != ""){
+            if (i == "!" || i == "." || i == "," || i == "?"){
+                ans += i + " "
+            } else
+            ans += i.substring(1, i.length) + i[0] + "ay ";
+        } else 
+        ans += " "
+    }
+
+    return ans.substring(0, ans.length-1)
+}
