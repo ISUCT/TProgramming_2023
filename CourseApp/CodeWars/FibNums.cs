@@ -16,5 +16,4 @@ public class FibNums
 
         return new ulong[] { a, b, (ulong)(a * b == prod ? 1 : 0) };
     }
-        
 }

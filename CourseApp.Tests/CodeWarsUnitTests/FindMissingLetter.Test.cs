@@ -1,6 +1,6 @@
-﻿using CodWearsTests;
+﻿namespace CodeWarsTests.UnitTest;
 
-namespace CodeWarsTests.UnitTest;
+using CodWearsTests;
 
 public class FindMissingLetter_Test
 {

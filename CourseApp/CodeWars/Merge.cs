@@ -1,5 +1,7 @@
 ﻿namespace CodWearsTests;
 
+using System.Collections.Generic;
+
 public class Merge
 {
     public static string[] MergeArrays(string[] arr1, string[] arr2)

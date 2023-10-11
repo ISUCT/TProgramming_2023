@@ -1,7 +1,6 @@
-﻿using CodeWarsTests;
-using CodWearsTests;
+﻿namespace CodeWarsTests.UnitTest;
 
-namespace CodeWarsTests.UnitTest;
+using CodWearsTests;
 
 public class Merge_Tests
 {

@@ -1,7 +1,6 @@
-﻿using CodeWarsTests;
-using CodWearsTests;
+﻿namespace CodeWarsTests.UnitTest;
 
-namespace CodeWarsTests.UnitTest;
+using CodWearsTests;
 
 public class TowerTest
 {
@@ -20,7 +19,8 @@ public class TowerTest
     [Fact]
     public void Test3()
     {
-        Assert.Equal(string.Join(",", new[] { "  *  ", " *** ", "*****" }),
+        Assert.Equal(
+            string.Join(",", new[] { "  *  ", " *** ", "*****" }),
             string.Join(",", Towerbuild.TowerBuilder(3)));
     }
 }

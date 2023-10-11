@@ -4,7 +4,6 @@ public class TicTacToe
 {
     public int IsSolved(int[,] board)
     {
-
         for (int i = 0; i < 2; i++)
         {
             if (board[i, 0] == board[i, 1] && (board[i, 1] == board[i, 2]) && board[i, 1] != 0)
@@ -15,7 +14,6 @@ public class TicTacToe
             {
                 return board[i, 0];
             }
-
             else if ((board[0, 0] == board[1, 1] && board[1, 1] == board[2, 2] && board[1, 1] != 0) ||
                      (board[2, 0] == board[1, 1] && board[1, 1] == board[0, 2] && board[1, 1] != 0))
             {
@@ -33,7 +31,6 @@ public class TicTacToe
             }
         }
 
-        
         return 0;
     }
 }

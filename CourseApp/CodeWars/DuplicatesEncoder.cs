@@ -1,5 +1,8 @@
 ﻿namespace CodWearsTests;
 
+using System.Linq;
+using System.Collections.Generic;
+
 public class DuplicatesEncoder
 {
     public static string DuplicateEncode(string word)
@@ -11,6 +14,6 @@ public class DuplicatesEncoder
             mass.Add(word.Count(x => x == sym) != 1 ? ")" : "(");
         }
 
-        return string.Join("", mass);
+        return string.Join(string.Empty, mass);
     }
 }

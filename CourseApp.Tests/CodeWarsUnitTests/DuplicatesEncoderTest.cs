@@ -1,13 +1,13 @@
-using CodWearsTests;
-
 namespace CodeWarsTests.UnitTest;
+
+using CodWearsTests;
 
 public class DuplicatesEncoderTest
 {
     [Fact]
     public void Test1()
     {
-        //Act
+        // Act
         var res = DuplicatesEncoder.DuplicateEncode("din");
 
         Assert.Equal("(((", res);
@@ -16,7 +16,7 @@ public class DuplicatesEncoderTest
     [Fact]
     public void Test2()
     {
-        //Act
+        // Act
         var res = DuplicatesEncoder.DuplicateEncode("recede");
 
         Assert.Equal("()()()", res);
@@ -25,7 +25,7 @@ public class DuplicatesEncoderTest
     [Fact]
     public void Test3()
     {
-        //Act
+        // Act
         var res = DuplicatesEncoder.DuplicateEncode("Success");
 
         Assert.Equal(")())())", res);
@@ -34,7 +34,7 @@ public class DuplicatesEncoderTest
     [Fact]
     public void Test4()
     {
-        //Act
+        // Act
         var res = DuplicatesEncoder.DuplicateEncode("(( @");
 
         Assert.Equal("))((", res);
