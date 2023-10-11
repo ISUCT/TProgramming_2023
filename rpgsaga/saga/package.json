@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node --script-mode src/gun.ts",
-    "index": "ts-node --script-mode src/index.ts", 
+    "dev": "ts-node --script-mode src/index.ts",
     "test": "jest",
     "lint": "eslint src --ext .js --ext .jsx --ext .ts --ext .tsx",
     "lint:fix": "npm run lint -- --fix"

@@ -1,35 +1,42 @@
 export class Gun {
-  readonly serialNumber: string = 's52001';
-  caliber: number;
+  readonly serialNumber: string = 's00001';
+  private aMagazine: number;
   model: string;
 
-  magazin = 20;
+  shotCount = 0;
 
-  constructor(modelName: string, public bullets: number, gunCaliber?: number) {
+  constructor(modelName: string, magazine: number, public bullets?: number) {
     this.model = modelName;
-    this.bullets = bullets;
-    this.caliber = gunCaliber;
+    this.magazine = magazine;
+    this.bullets = this.bullets < this.magazine && this.bullets >= 0 ? this.bullets : this.magazine;
+  }
+  // инфо :)
+  info() {
+    return `You're create gun model: "${this.model}". He has a magazine for ${this.magazine} bullets and ${this.bullets} bullets.`;
   }
 
   // выстрел
   shot(): string {
-    return `The Model ${this.model} pistol fired`;
+    if (this.bullets > 0) {
+      this.shotCount += 1;
+      this.bullets -= 1;
+      return `The gun ${this.model} fired ${this.shotCount} times`;
+    } else {
+      return 'You are out of ammo. Recharge';
+    }
   }
 
   // перезарядка
   recharge(): string {
+    this.bullets = this.magazine;
     return 'The magazine is being recharged';
   }
 
   // проверка магазина
-  fullMagazin(): string {
-    this.bullets = this.bullets === undefined ? 0 : this.bullets;
-    if (this.magazin === this.bullets) {
-      return 'magazine full';
-    } else if (this.bullets > this.magazin / 2) {
-      return `in magazine ${this.bullets} bullets`;
-    } else {
-      return 'go recharge';
-    }
+  set magazine(magazine: number) {
+    this.aMagazine = magazine >= 0 && magazine < 21 ? magazine : this.aMagazine ?? 20;
+  }
+  get magazine() {
+    return this.aMagazine;
   }
 }
