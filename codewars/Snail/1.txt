@@ -1,0 +1,20 @@
+function snail (arr) {
+    let iteration = 0
+    let n = arr[0].length
+    let ans = []
+    for (let iteration = 0; iteration < Math.round(n/2); iteration++){
+        for (let i = 0+iteration; i<n-iteration; i++){
+            ans.push(arr[iteration][i])
+        }
+        for (let i = 1+iteration; i<n-1-iteration; i++){
+            ans.push(arr[i][n-1-iteration])
+        }
+        for (let i = n-1-iteration; i > iteration; i-- ){
+            ans.push(arr[n-1-iteration][i])
+        }
+        for(let i = n-1-iteration; i >= iteration+1; i--){
+            ans.push(arr[i][iteration])
+        }
+    }
+        return ans
+}

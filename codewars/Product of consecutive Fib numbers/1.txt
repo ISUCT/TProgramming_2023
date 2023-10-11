@@ -1,0 +1,14 @@
+export function productFib (prod:number){
+    let a = 1
+    while (fib(a) * fib(a-1) <= prod){
+        if (fib(a) * fib(a-1) == prod)
+            return [fib(a-1), fib(a), true]
+        a++
+    }
+    return [fib(a-1), fib(a), false]
+}
+
+export function fib (a: number): number{
+    let fiveroot = Math.sqrt(5)
+    return Math.round((((1 + fiveroot)/2)**a-((1 - fiveroot)/2)**a)/fiveroot)
+}

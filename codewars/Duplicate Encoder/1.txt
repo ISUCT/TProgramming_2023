@@ -1,0 +1,19 @@
+export function duplicateEncode(word: string){
+    word = word.toLowerCase();
+    var ans = "";
+    var counter = 0;
+    for(var num = 0; num<word.length; num++) {
+        counter = 0;
+        for(var num2 = 0; num2<word.length; num2++){
+            if (word[num] == word[num2]){
+                counter++;
+            }
+        }
+        if (counter > 1){
+            ans += ")";
+        } else {
+            ans += "(";
+        }
+        }
+    return ans
+}

@@ -1,0 +1,22 @@
+function mergeArrays(a, b) {
+    let array = [];
+    let max = 0;
+    if (a.length >= b.length){
+        max = a.length;
+    } else {
+        max = b.length;
+    }
+
+
+    for (var i = 0; i < max; i++ ){
+        if (i < a.length){
+            array.push(a[i]);
+        }
+        if (i < b.length){
+            array.push(b[i]);
+        }
+
+    }
+
+    return array
+}

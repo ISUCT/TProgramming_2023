@@ -1,0 +1,9 @@
+function deepCount(a){
+    let counter = 0
+    for (let i of a){
+        counter++
+        if (typeof i == "object")
+            counter = counter + deepCount(i)
+    }
+    return counter
+}

@@ -1,16 +1,46 @@
-import { Phone } from './phone';
+import { Game } from './game';
+import { names } from './names';
 
-const first = new Phone('+7900-000 000 (123)', 1990, 'Телефон 1');
-first.year = 1998;
+// Вызов игры
+const fighters = Game.generatePlayers(2, names);
+Game.startGame(fighters);
 
-first.year = -1998;
-first.call('12345');
-first.endCall();
+// Отладка баланса
+// let archers = 0;
+// let warriors = 0;
+// let mages = 0;
+// let berserkers = 0;
+// let brawlers = 0;
+// let paladins = 0;
 
-const second = new Phone('+799900000', -5);
-// second.name = 'Телефон 2';
-console.log(second.year);
-second.call('12345');
-second.endCall();
+// for (let i = 0; i < 1; i++) {
+//   const namesarr: string[] = names;
+//   const fighters = Game.generatePlayers(2, namesarr);
+//   Game.startGame(fighters);
+//   switch (fighters[0].className) {
+//     case 'Воин':
+//       warriors++;
+//       break;
+//     case 'Лучник':
+//       archers++;
+//       break;
+//     case 'Маг':
+//       mages++;
+//       break;
+//     case 'Берсерк':
+//       berserkers++;
+//       break;
+//     case 'Боец':
+//       brawlers++;
+//       break;
+//     case 'Паладин':
+//       paladins++;
+//       break;
+//   }
+// }
 
-console.log(first, second, Phone.phoneCount);
+// console.log(`Воины: ${warriors}`);
+// console.log(`Лучники: ${archers}`);
+// console.log(`Маги: ${mages}`);
+// console.log(`Берсерки: ${berserkers}`);
+// console.log(`Паладины: ${paladins}`);

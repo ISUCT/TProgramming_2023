@@ -1,0 +1,17 @@
+function moveZeros(arr) {
+    let arr2 = []
+    let count = 0
+    for (let i = 0; i < arr.length; i++){
+        if (arr[i] === 0) {
+            count++
+        } else {
+            arr2.push(arr[i])
+        }
+    }
+    for (let i = 0; i < count; i++){
+        arr2.push(0)
+    }
+    return arr2
+  }
+
+console.log(moveZeros([false,1,0,1,2,0,1,3,"a"]))
