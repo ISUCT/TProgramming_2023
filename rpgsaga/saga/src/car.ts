@@ -14,8 +14,8 @@ export class Car {
     return this.kph;
   }
 
-  public signal() {
-    console.log('BEEP! BEEP!');
+  public signal(): string {
+    return `BEEP! BEEP!`;
   }
 
   public brakePathLength() {
@@ -24,9 +24,9 @@ export class Car {
 
   willCrash(distance: number) {
     if (this.brakePathLength() > distance) {
-      console.log('YES');
+      return `YES`;
     } else {
-      console.log('NO');
+      return `NO`;
     }
   }
 }
