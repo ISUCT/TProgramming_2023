@@ -34,6 +34,6 @@ describe('Testing gun methods', () => {
   });
   it('Gun must recharge', () => {
     const first = new Gun('Пистолет 7', 2, 3.62);
-    expect(first.shot()).toEqual('The Model Пистолет 7 pistol fired');
+    expect(first.recharge()).toEqual('The magazine is being recharged');
   });
 });
