@@ -1,7 +1,6 @@
 {
     "compilerOptions": {
         "target": "ES6",
-        "forceConsistentCasingInFileNames": true,
         "types": ["jest", "node"],
         "strict": true
     },

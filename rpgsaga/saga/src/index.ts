@@ -8,11 +8,17 @@ const channels: Array<Channel> = [
   new Channel('Cartoon Network'),
 ];
 
-const tv = new Television('Sony', 'BH-200', 'SVD2349874324XD');
-
-tv.channels = channels;
+const tv = new Television('Sony', 'BH-200', 'SVD2349874324XD', channels);
 
 console.log(tv.printedTV());
+
+tv.currentChannel = 2;
+console.log(tv.printedTV());
+
+console.log(tv.prevChannel());
+console.log(tv.prevChannel());
+console.log(tv.prevChannel());
+console.log(tv.prevChannel());
 /*
 Phones example:
 import { Phone } from './phone';
