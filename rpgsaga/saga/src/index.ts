@@ -4,7 +4,7 @@ const Vasiliy: Cat = new Cat("Vasiliy", 3, "black", true)
 
 Vasiliy.meow()
 Vasiliy.information()
-Vasiliy.gender_cat()
+Vasiliy.сharacteristiccat()
 
 
 
