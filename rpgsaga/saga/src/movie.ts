@@ -1,23 +1,21 @@
-export class Movie {
+import { Art } from './art';
+
+export class Movie extends Art {
+    toString(): string {
+        return `${this.title}, ${this.yearPremiere}, ${this.director}`
+    }
+
     private playingStatus = false;
     private playerVolume = 100;
-
-    title: string;
     yearPremiere: number;
-    director: string;
 
     constructor(title: string, year: number, director: string) {
-        this.title = title;
-        this.yearPremiere = year;
-        this.director = director;
+        super(title, year, director);
+        this.yearPremiere = year >= 1895 && year <= 2023 ? year : 1895;
     }
 
     set year(year: number) {
-        this.yearPremiere = year >= 1895 && year < 2023 ? year : this.yearPremiere ?? 1900;
-    }
-
-    get year(): number {
-        return this.yearPremiere;
+        this.yearPremiere = year >= 1895 && year <= 2023 ? year : 1895;
     }
 
     play() {
