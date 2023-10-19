@@ -36,13 +36,13 @@ film1.play();
 console.log("Movi info:", film2.title + ", " + film2.director + ", " + film2.year + ".");
 
 
-const book1 = new Book("Капитанская дочка", 1836, "Александр Пушкин");
+const book1 = new Book("Капитанская дочка", 1836, "Александр Пушкин", 10);
 
 console.log(book1.toString())
 
 const artArray: Art[] = [
     new Movie("Movie 1", 2020, "Director 1"),
-    new Book("Book 1", 2000, "Author 1")
+    new Book("Book 1", 2000, "Author 1", 100)
 ];
 
 for (const art of artArray) {
