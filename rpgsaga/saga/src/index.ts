@@ -1,3 +1,5 @@
+import { Knight, Mage } from './saga/classes';
+import { Battle } from './saga/battle';
 import { Television, Channel } from './tv';
 
 const channels: Array<Channel> = [
@@ -19,22 +21,8 @@ console.log(tv.prevChannel());
 console.log(tv.prevChannel());
 console.log(tv.prevChannel());
 console.log(tv.prevChannel());
-/*
-Phones example:
-import { Phone } from './phone';
 
-const first = new Phone('+7900-000 000 (123)', 1990, 'Телефон 1');
-first.year = 1998;
-
-first.year = -1998;
-first.call('12345');
-first.endCall();
-
-const second = new Phone('+799900000', -5);
-// second.name = 'Телефон 2';
-console.log(second.year);
-second.call('12345');
-second.endCall();
-
-console.log(first, second, Phone.phoneCount);
-*/
+const player1 = new Knight(12, 4, 'Tatsuya');
+const player2 = new Mage(11, 2, 'May');
+const battle = new Battle(player1, player2);
+battle.initiate();
