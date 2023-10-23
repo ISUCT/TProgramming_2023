@@ -1,0 +1,1 @@
+import { Rabbit } from '../src/rabbit';
