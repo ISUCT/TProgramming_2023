@@ -12,7 +12,7 @@ describe('Testing printing TV ASCII', () => {
   it('should return accurate TV image', () => {
     const tv = new Television('CoolTV', 'N200', 'DVG01901948', channels);
     expect(tv.printedTV()).toEqual(
-        `
+      `
            o
   o       /
    \\     /

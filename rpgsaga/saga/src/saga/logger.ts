@@ -25,7 +25,7 @@ export class ConsoleLogger {
 
   public actionLog(attacker: Player, input: ActionResult) {
     if (this.isEnabled) {
-      const defender = this.player1 === attacker ? this.player1 : this.player2;
+      const defender = this.player1 === attacker ? this.player2 : this.player1;
       if (input.actionName === 'default attack') {
         console.log(
           '(%s) %s наносит урон %d противнику (%s) %s',
@@ -63,6 +63,15 @@ export class ConsoleLogger {
   public endLog(defeated: Player) {
     if (this.isEnabled) {
       console.log('(%s) %s погибает', defeated.constructor.name, defeated.name);
+    }
+  }
+
+  public logCurrentTournament(players: Array<Player>) {
+    if (this.isEnabled){
+        console.log("\n В турнире участвуют \n")
+        for (let i = 0; i < players.length; i++) {
+            console.log(players[i].name, " ")            
+        }
     }
   }
 }

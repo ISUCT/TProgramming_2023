@@ -1,6 +1,7 @@
-import { Knight, Mage } from './saga/classes';
+import { Archer, Knight, Mage } from './saga/classes';
 import { Battle } from './saga/battle';
 import { Television, Channel } from './tv';
+import { Tournament } from './saga/tournaments';
 
 const channels: Array<Channel> = [
   new Channel('Первый канал'),
@@ -22,7 +23,9 @@ console.log(tv.prevChannel());
 console.log(tv.prevChannel());
 console.log(tv.prevChannel());
 
-const player1 = new Knight(12, 4, 'Tatsuya');
-const player2 = new Mage(11, 2, 'May');
-const battle = new Battle(player1, player2, true);
-battle.initiate();
+const p1 = new Knight(12, 4, 'Tatsuya');
+const p2 = new Mage(11, 2, 'May');
+const p3 = new Archer(13, 2, 'Robin');
+const p4 = new Mage(10, 3, 'Ann');
+const tournament = new Tournament([p1, p2, p3, p4], true);
+tournament.startTournament();
