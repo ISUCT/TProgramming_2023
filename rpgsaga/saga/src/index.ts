@@ -24,5 +24,5 @@ console.log(tv.prevChannel());
 
 const player1 = new Knight(12, 4, 'Tatsuya');
 const player2 = new Mage(11, 2, 'May');
-const battle = new Battle(player1, player2);
+const battle = new Battle(player1, player2, true);
 battle.initiate();
