@@ -24,4 +24,4 @@ jobs:
     - name: Run tests
       run: |
         cd CourseApp.Tests
-        dotnet test 
+        dotnet test CodeWarsTests.UnitTests.csproj
