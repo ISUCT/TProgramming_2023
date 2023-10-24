@@ -1,34 +1,44 @@
 namespace DefaultNamespace;
 
+using System;
+using System.Collections.Generic;
+
 public class Dog
 {
     private int _age;
 
     private string _name;
 
+    private List<Dog> _flock;
+
     public string Name
     {
-        get
-        {
-            return _name;
-        }
+        get => _name;
 
-        set
-        {
-            _name = value;
-        }
+        set => _name = value;
     }
 
     public int Age
     {
-        get
-        {
-            return _age;
-        }
+        get => _age;
 
-        set
+        set => _age = value;
+    }
+
+    public List<Dog> Flock
+    {
+        get => _flock;
+
+        set => _flock = value;
+    }
+
+    public void PrintInfo()
+    {
+        Console.WriteLine($"Dog name is {this._name}, {this._name}'s age is {this._age}.");
+        Console.WriteLine("Flock contains:");
+        foreach (var friend in this._flock)
         {
-            _age = value;
+            Console.WriteLine($"{friend._name} {friend._age}");
         }
     }
 }

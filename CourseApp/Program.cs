@@ -1,5 +1,7 @@
 ﻿namespace CourseApp;
 
+using System.Collections.Generic;
+
 using DefaultNamespace;
 
     public class Program
@@ -7,9 +9,13 @@ using DefaultNamespace;
         public static void Main(string[] args)
         {
             var dog = new Dog();
+            dog.Name = "Sam";
             dog.Age = 15;
-            System.Console.WriteLine(dog.Age);
+            dog.Flock = new List<Dog>
+            {
+                new Dog() { Name = "Steve", Age = 4 },
+            };
 
-            System.Console.WriteLine(dog);
+            dog.PrintInfo();
         }
     }
