@@ -23,5 +23,5 @@ jobs:
         dotnet build --configuration Release
     - name: Run tests
       run: |
-        cd CourseApp.Tests
+        cd CourseApp.Tests/CodeWarsUnitTests
         dotnet test
