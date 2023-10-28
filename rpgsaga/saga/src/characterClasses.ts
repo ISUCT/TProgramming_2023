@@ -8,7 +8,7 @@ export enum CharacterClass
 }
 
 // HP: 110-120
-class Knight extends Character
+export class Knight extends Character
 {
     constructor(name: string, healthPoints: number)
     {
@@ -17,7 +17,7 @@ class Knight extends Character
 }
 
 // HP: 90-110
-class Archer extends Character
+export class Archer extends Character
 {
     constructor(name: string, healthPoints: number)
     {
@@ -26,7 +26,7 @@ class Archer extends Character
 }
 
 // HP: 80-90
-class Mage extends Character
+export class Mage extends Character
 {
     constructor(name: string, healthPoints: number)
     { 

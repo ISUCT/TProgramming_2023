@@ -5,6 +5,8 @@ export abstract class Character
 {
     public name: string;
     public class: string;
+
+    public effects: Effect[] = [];
     
     private _healthPoints: number;
     private _strength: number = 5;
@@ -30,28 +32,50 @@ export abstract class Character
         this.class = characterClass;
         this.healthPoints = healthPoints;
     }
+
+    dealDamage(target: Character, points: number): string
+    {
+        target.healthPoints -= points;
+        return `${this.name} (${this.class}) attacked ${target.name} (${target.class}) and dealt ${points} of damage!`;
+    }
 }
 
 export abstract class Ability
 {
-    public name: string;
+    protected name: string;
+    protected points: number;
+    protected effect: Effect;
+
     // public activationFunction: Function;
 
-    public execute(user: Character, target: Character)
+    constructor(name: string, points: number)
     {
-        
+        this.name = name;
+        this.points = points;
+    }
+
+    execute(caster: Character, target: Character): void
+    {
+        console.log(`${caster.name} (${caster.class}) used ability "${this.name}" on ${target.name} (${target.class})!`);
     }
 }
 
-class Checker
+export abstract class Effect
 {
-    /* 
-        Функция, которая проверяет, промазала ли обычная атака или нет.
-        Шанс промаха: 33%.
-    */
-    static hasAttackMissed(): boolean
+    protected target: Character;
+    protected points: number;
+    protected duration: number;
+
+    constructor(target: Character, points: number, duration: number)
     {
-        var randomValue: number = randomIntFromInterval(1, 10);
-        return (randomValue <= 3) ? true : false;
+        this.target = target;
+        this.points = points;
+        this.duration = duration;
+    }
+
+    // Проверка на duration в apply
+    apply(): void
+    {
+        this.duration -= 1;
     }
 }
