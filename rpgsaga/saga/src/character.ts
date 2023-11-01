@@ -8,6 +8,9 @@ export abstract class Character
 
     public effects: Effect[] = [];
     
+    static readonly minHealthPoints: number;
+    static readonly maxHealthPoints: number;
+
     private _healthPoints: number;
     private _strength: number = 5;
 
