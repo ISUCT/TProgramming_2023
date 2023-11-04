@@ -1,16 +1,20 @@
-import { Phone } from './phone';
+import { Employee } from './employee';
 
-const first = new Phone('+7900-000 000 (123)', 1990, 'Телефон 1');
-first.year = 1998;
+const employee1 = new Employee('Буянов Никита Васильвич', 'PR-менеджер', '15 октября 2014');
 
-first.year = -1998;
-first.call('12345');
-first.endCall();
+employee1.position = 'Аналитик';
+employee1.salary = 100000;
+employee1.email = 'nbuynowov1986@tarkov.com'
 
-const second = new Phone('+799900000', -5);
-// second.name = 'Телефон 2';
-console.log(second.year);
-second.call('12345');
-second.endCall();
+const employee2 = new Employee('Дмитриев Иван Иванович', 'Тестировщик', '26 ноября 2014');
 
-console.log(first, second, Phone.phoneCount);
+employee2.position = 'Разработчики';
+employee2.salary = 240000;
+employee2.phoneNumber = '+7915-323-00-00'
+
+const employee3 = new Employee(undefined, undefined, '15 октября 2014', 'nbuynowov1986@tarkov.com', '+7915-323-00-00', 100000);
+
+console.log(employee1.getInfo())
+console.log(employee2.getInfo())
+console.log(employee3.getInfo())
+console.log(`Количество сотрудников: ${Employee.employeeCount}`)
