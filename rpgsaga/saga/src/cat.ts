@@ -1,37 +1,46 @@
 export class Cat {
-  private age: number;
-  private name: string;
-  private breed: string;
+  private theAge: number;
+  private theName: string;
+  private theBreed: string;
+  private theWeight: number;
 
-  constructor(age: number, name: string, breed: string) {
-    this.age = age;
-    this.name = name;
-    this.breed = breed;
+  constructor(age: number, name: string, breed: string, weight: number) {
+    this.theAge = age;
+    this.theName = name;
+    this.theBreed = breed;
+    this.theWeight = weight;
   }
    set Age(age: number){
-    this.age = age;
+    this.theAge = age;
   }
 
   get Age(): number {
-    return this.age;
+    return this.theAge;
   }
 
  set Name(name: string){
-    this.name = name;
+    this.theName = name;
   }
 
   get Name(): string {
-    return this.name;
+    return this.theName;
   }
 
  set Breed(breed: string){
-    this.breed = breed;
+    this.theBreed = breed;
   }
   
   get Breed(): string {
-    return this.breed;
+    return this.theBreed;
+  }
+  set Weight(weight: number){
+    this.theWeight = weight;
+  }
+
+  get Weight(): number{
+    return this.theWeight;
   }
  getInfo(): string {
-      return `Имя: ${this.name}; Порода: ${this.breed}; Возраст: ${this.age}.`
+      return `Имя: ${this.theName}; Порода: ${this.theBreed}; Возраст: ${this.theAge}; Вес:${this.theWeight}.`
     }   
 }
