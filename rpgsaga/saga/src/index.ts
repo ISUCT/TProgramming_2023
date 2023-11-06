@@ -1,16 +1,20 @@
-import { Phone } from './phone';
+import { Cat } from './cat';
 
-const first = new Phone('+7900-000 000 (123)', 1990, 'Телефон 1');
-first.year = 1998;
+const Cat1 = new Cat (7, 'Кеша', 'Шотландский вислоухий');
+Cat1.Age = 7;
+Cat1.Weight = 5;
+Cat1.Breed = 'Шотландский вислоухий';
 
-first.year = -1998;
-first.call('12345');
-first.endCall();
+const Cat2 = new Cat (undefined, 'Кисик', 'Британский');
+Cat2.Age = 6;
+Cat2.Weight = 7;
+Cat2.Breed = 'Британский';
 
-const second = new Phone('+799900000', -5);
-// second.name = 'Телефон 2';
-console.log(second.year);
-second.call('12345');
-second.endCall();
+const Cat3 = new Cat (15, 'Юми', 'Русский голубой');
+Cat2.Age = 3;
+Cat2.Weight = 4;
+Cat2.Breed = 'Русский голубой';
 
-console.log(first, second, Phone.phoneCount);
+console.log(Cat1.getInfo())
+console.log(Cat2.getInfo())
+console.log(Cat3.getInfo())
