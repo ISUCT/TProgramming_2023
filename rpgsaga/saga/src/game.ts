@@ -1,12 +1,15 @@
 import { Character } from "./character";
-import { getRandomCharacterFactory } from "./characterFactory";
+import { CharacterClass } from "./characterClasses";
+import { CharacterFactory } from "./characterFactory";
+import { randomEnumValue } from "./randomMath";
 
 class Game
 {
     private players: Character[] = [];
     private currentPlayers: Character[] = [];
-    private newPlayerIndex: number = 2;
+    private newPlayerIndex: number;
     private _quantityOfPlayers: number;
+    private generation: CharacterFactory;
 
     set quantityOfPlayers(value: number)
     {
@@ -19,14 +22,14 @@ class Game
     constructor(quantityOfPlayers: number)
     {
         this.quantityOfPlayers = quantityOfPlayers;
-    }
+        this.newPlayerIndex = 2;
 
-    public initialize()
-    {
         for (let i = 1; i <= this.quantityOfPlayers; ++i)
         {
-            var factory = getRandomCharacterFactory();
-            this.players.push(factory.createCharacter());
+            this.generation.set(randomEnumValue(CharacterClass));
+            this.players.push(this.generation.factory.createCharacter());
         }
+
+        this.currentPlayers = [this.players[0], this.players[1]];
     }
 }

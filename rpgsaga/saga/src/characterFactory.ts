@@ -1,4 +1,4 @@
-import { Mage, Knight, Archer } from "./characterClasses";
+import { Mage, Knight, Archer, CharacterClass } from "./characterClasses";
 import { Character } from "./character";
 import { randomIntFromInterval, getRandomArrayIndex } from "./randomMath";
 
@@ -69,9 +69,23 @@ class ArcherGenerator extends CharacterGenerator
     }
 }
 
-const factories: CharacterGenerator[] = [new KnightGenerator(), new MageGenerator(), new ArcherGenerator()];
-
-export function getRandomCharacterFactory(): CharacterGenerator
+export class CharacterFactory
 {
-    return factories[getRandomArrayIndex(CharacterGenerator.length)];
+    public factory: CharacterGenerator;
+
+    public set(characterClass: CharacterClass)
+    {
+        if (characterClass == CharacterClass.archer)
+        {
+            this.factory = new ArcherGenerator();
+        }
+        else if (characterClass == CharacterClass.knight)
+        {
+            this.factory = new KnightGenerator();
+        }
+        else if (characterClass == CharacterClass.mage)
+        {
+            this.factory = new MageGenerator();
+        }
+    }
 }
