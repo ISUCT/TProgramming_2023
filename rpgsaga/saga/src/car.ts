@@ -9,16 +9,12 @@ export class Car extends Vehicle {
   public signal(sig: string): string {
     return `${sig}! ${sig}!`;
   }
-  public brakePathLength() {
+  public brakePathLength(): number {
     return ((this.speed * 1000) / 3600) ** 2 / (2 * 0.8 * 10);
   }
 
-  public willCrash(distance: number) {
-    if (this.brakePathLength() > distance) {
-      return 'YES';
-    } else {
-      return 'NO';
-    }
+  public willCrash(distance: number): string {
+    return this.brakePathLength() > distance ? 'YES' : 'NO';
   }
   public toString = () => `This is ${this.name}`;
 }

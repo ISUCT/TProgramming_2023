@@ -1,16 +1,15 @@
-import { Phone } from './phone';
+import { Car } from "./car";
+import { Vehicle } from "./vehicle";
 
-const first = new Phone('+7900-000 000 (123)', 1990, 'Телефон 1');
-first.year = 1998;
+try{
+    let car1 = new Car(2005, 45, "95", "Toyota");
+    car1.speed = 100;
+    console.log(car1.speed);
+    console.log(car1.signal("BEEP"));
+    console.log(car1.brakePathLength());
+    console.log(car1.willCrash(50));
+    console.log(`${car1}`)
+}catch(e){
+    console.log(e)
+}
 
-first.year = -1998;
-first.call('12345');
-first.endCall();
-
-const second = new Phone('+799900000', -5);
-// second.name = 'Телефон 2';
-console.log(second.year);
-second.call('12345');
-second.endCall();
-
-console.log(first, second, Phone.phoneCount);
