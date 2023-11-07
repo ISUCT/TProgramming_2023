@@ -1,32 +1,24 @@
-export class Car {
-  public year: number;
-  private kph: number;
+import { Vehicle } from './vehicle';
 
-  constructor(vyear: number, speed: number, public name?: string) {
-    this.year = vyear;
-    this.kph = speed;
-    this.name = name;
+export class Car extends Vehicle {
+  public fuel: string;
+  constructor(year: number, speed: number, fuel: string, name?: string) {
+    super(year, speed, name);
+    this.fuel = fuel;
   }
-  set speed(speed: number) {
-    this.kph = speed >= 0 && speed <= 150 ? speed : this.kph;
+  public signal(sig: string): string {
+    return `${sig}! ${sig}!`;
   }
-  get speed(): number {
-    return this.kph;
-  }
-
-  public signal(): string {
-    return `BEEP! BEEP!`;
-  }
-
   public brakePathLength() {
-    return ((this.kph * 1000) / 3600) ** 2 / (2 * 0.8 * 10);
+    return ((this.speed * 1000) / 3600) ** 2 / (2 * 0.8 * 10);
   }
 
-  willCrash(distance: number) {
+  public willCrash(distance: number) {
     if (this.brakePathLength() > distance) {
-      return `YES`;
+      return 'YES';
     } else {
-      return `NO`;
+      return 'NO';
     }
   }
+  public toString = () => `This is ${this.name}`;
 }
