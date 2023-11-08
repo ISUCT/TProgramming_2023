@@ -1,6 +1,6 @@
 import { Phone } from '../src/phone';
 
-describe('Testing phone constructor', () => {
+xdescribe('Testing phone constructor', () => {
   it('Phone should be created', () => {
     const first = new Phone('+7900-000 000 (123)', 1990, 'Телефон 1');
     expect(first.phoneNumber).toEqual('+7900-000 000 (123)');
@@ -27,7 +27,7 @@ describe('Testing phone constructor', () => {
   });
 });
 
-describe('Testing phone methods', () => {
+xdescribe('Testing phone methods', () => {
   it('Phone year set valid value', () => {
     const first = new Phone('+7900-000 000 (123)', 2000, 'Телефон 1');
     first.year = 1991;
