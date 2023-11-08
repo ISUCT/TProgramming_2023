@@ -1,3 +1,5 @@
+import {Ability, Action, Attack, State} from "./actions"
+
 export abstract class Player {
     health: number;
     readonly maxHealth: number;
@@ -17,12 +19,12 @@ export abstract class Player {
     }
 
     public attack(): ActionResult {
-        return new ActionResult(this.strength, false, false, 'default attack');
+        return new ActionResult(this.strength, false, false, new Attack());
     }
 
     public ability(): ActionResult {
         // when no ability, return null
-        return new ActionResult(0, false, false, 'debug ability');
+        return new ActionResult(0, false, false, new Ability('debug ability'));
     }
 
     public act(): ActionResult {
@@ -33,10 +35,11 @@ export abstract class Player {
                 return this.ability();
             }
         } else{
-            return new ActionResult(0,false,false, "frozen")
+            return new ActionResult(0,false,false, new State("frozen"))
         }
     }
-    public passTurn(input: ActionResult) {
+    public passTurn(input: ActionResult): StateChange {
+        const res = new StateChange(0, false,false, new State(""))
         this.health -= input.damage;
         if (this.isFrozenCounter === 0) {
             if (input.setEffectFreeze) {
@@ -44,12 +47,15 @@ export abstract class Player {
             }
         } else {
             this.isFrozenCounter -= 1;
+            res.isFrosenCancelled = true;
+            res.action = new State("unfrozen")
         }
         if (this.isBurned) {
             this.health -= 2;
         } else {
             this.isBurned = input.setEffectBurn;
         }
+        return res;
     }
 
     fullHeal(){
@@ -61,13 +67,27 @@ export class ActionResult {
     damage: number;
     setEffectFreeze: boolean;
     setEffectBurn: boolean;
-    actionName = '';
+    action: Action;
 
-    constructor(damage: number, burn: boolean, freeze: boolean, name: string) {
+    constructor(damage: number, burn: boolean, freeze: boolean, action: Action) {
         this.damage = damage;
         this.setEffectFreeze = freeze;
         this.setEffectBurn = burn;
-        this.actionName = name;
+        this.action = action;
+    }
+}
+
+export class StateChange{
+    isBurnedCancelled: boolean;
+    isFrosenCancelled: boolean;
+    pointsHealed: number;
+    action : Action;
+
+    constructor(hpAdded: number, burn: boolean, frozen: boolean, action: Action){
+        this.pointsHealed = hpAdded;
+        this.isBurnedCancelled = burn;
+        this.isFrosenCancelled = frozen;
+        this.action = action;
     }
 }
 

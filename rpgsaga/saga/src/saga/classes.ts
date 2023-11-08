@@ -1,3 +1,4 @@
+import { Ability, AbilityAttack } from './actions';
 import { Player, ActionResult } from './player';
 
 export class Knight extends Player {
@@ -6,7 +7,7 @@ export class Knight extends Player {
   }
 
   public ability(): ActionResult {
-    return new ActionResult(this.strength * 1.3, false, false, 'Удар возмездия');
+    return new ActionResult(this.strength * 1.3, false, false, new AbilityAttack('Удар возмездия'));
   }
 }
 
@@ -17,7 +18,7 @@ export class Mage extends Player {
   }
 
   public ability(): ActionResult {
-    return new ActionResult(0, false, true, 'Заворожение');
+    return new ActionResult(0, false, true, new Ability('Заворожение'));
   }
 }
 
@@ -28,6 +29,6 @@ export class Archer extends Player {
   }
 
   public ability(): ActionResult {
-    return new ActionResult(0, true, false, 'Огненные стрелы');
+    return new ActionResult(0, true, false, new Ability('Огненные стрелы'));
   }
 }
