@@ -1,21 +1,25 @@
 ﻿namespace CourseApp;
 
+using System;
 using System.Collections.Generic;
-
-using DefaultNamespace;
+using RpgSaga;
 
     public class Program
     {
         public static void Main(string[] args)
         {
-            var dog = new Dog();
-            dog.Name = "Sam";
-            dog.Age = 15;
-            dog.Flock = new List<Dog>
+            var rnd = new Random();
+            var list = new List<Hero>()
             {
-                new Dog() { Name = "Steve", Age = 4 },
+                new Archer(),
+                new Magican(),
+                new Warrior(),
             };
 
-            dog.PrintInfo();
+            Hero visor = new Magican();
+            while (true)
+            {
+                visor.Fight(list[rnd.Next(0, 2)], list[rnd.Next(0, 2)]);
+            }
         }
     }
