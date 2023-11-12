@@ -1,13 +1,13 @@
 export class Rabbit {
     private _age: number;
-    private breed: string;
-    private color: string;
-    private _name: string;
+    breed: string;
+    color: string;
   
-    constructor(rabAge: number, rabBreed: string, rabColor: string) {
+    constructor(rabAge: number, rabBreed: string, rabColor: string, public rabName?: string) {
       this.age = rabAge;
       this.breed = rabBreed;
       this.color = rabColor;
+      this.rabName = rabName;
     }
   
     get age(): number {
@@ -15,18 +15,14 @@ export class Rabbit {
     }
   
     set age(n: number) {
-      if (n < 0 || n > 12) {
-        console.log('Недопустимый возраст!');
-      } else {
-        this._age = n;
-      }
+        this._age = n >= 1 && n < 12 ? n : this._age ?? 1;
     }
   
     get name(): string {
-      return this._name;
+      return this.rabName;
     }
   
     public set name(str: string) {
-      this._name = str;
+      this.rabName = str;
     }
   }
