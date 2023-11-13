@@ -1,10 +1,13 @@
-export class Phone {
+import { IDisplayable } from './IDisplayable';
+
+export abstract class Phone implements IDisplayable {
   private aYear: number;
   phoneNumber: string;
 
   static phoneCount = 0;
 
   constructor(number: string, year: number, public name?: string) {
+    console.log('Creating phone');
     Phone.phoneCount += 1;
     this.phoneNumber = number;
     this.year = year;
@@ -19,10 +22,20 @@ export class Phone {
   }
 
   set year(year: number) {
-    this.aYear = year >= 1900 && year < 2023 ? year : this.aYear ?? 1900;
+    if (year >= 1900 && year < 2023) {
+      this.aYear = year;
+      return;
+    }
+    throw new Error(`incorrect year`);
   }
 
   get year(): number {
     return this.aYear;
   }
+
+  toString(): string {
+    return `this is phone ${this.name}`;
+  }
+
+  abstract display(): string;
 }
