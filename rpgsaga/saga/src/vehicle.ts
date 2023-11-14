@@ -8,7 +8,7 @@ export abstract class Vehicle {
         this.name = name;
     }
     set speed(speed: number) {
-        if (speed > 150) {
+        if (speed > 150 || speed <-70) {
             throw new Error("Too high speed");
         }
         this.kph = speed
