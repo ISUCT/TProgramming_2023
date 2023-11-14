@@ -24,10 +24,10 @@ describe(`Car methods test`, () => {
         const car1 = new Car(2000, 150, "95", `Toyota`);
         try {
             car1.speed = -100;
-        } catch (error){
-            car1.speed =-70;
+        } catch (error) {
+            car1.speed = -70;
         }
-    expect(car1.speed).toEqual(-70);
+        expect(car1.speed).toEqual(-70);
     });
     it(`Set too high car speed`, () => {
         const car1 = new Car(2000, 150, "95", `Toyota`);
@@ -36,7 +36,6 @@ describe(`Car methods test`, () => {
         } catch (error) {
             car1.speed = 150;
         }
-        ;
         expect(car1.speed).toEqual(150);
     });
 });
