@@ -35,6 +35,11 @@ export abstract class Character
         this.class = characterClass;
         this.healthPoints = healthPoints;
     }
+
+    public receiveDamage(points: number)
+    {
+        this.healthPoints -= points;
+    }
 }
 
 /*
@@ -43,26 +48,6 @@ export abstract class Character
   висит мёртвым грузом.
  ===================================================
 */
-
-export abstract class Ability
-{
-    protected name: string;
-    protected points: number;
-    protected effect: Effect;
-
-    // public activationFunction: Function;
-
-    constructor(name: string, points: number)
-    {
-        this.name = name;
-        this.points = points;
-    }
-
-    execute(caster: Character, target: Character): void
-    {
-        console.log(`${caster.name} (${caster.class}) used ability "${this.name}" on ${target.name} (${target.class})!`);
-    }
-}
 
 export abstract class Effect
 {

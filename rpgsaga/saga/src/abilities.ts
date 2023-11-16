@@ -1,36 +1,24 @@
-import { Ability, Character,  } from "./character";
+import {Character} from "./character";
 
-class PoisonArrow extends Ability
+interface IAbility
 {
-    execute(caster: Character, target: Character): void
-    {
-        super.execute(caster, target);
-
-        caster.dealDamage(target, this.points);
-        target.effects.push(this.effect);
-    }   
+    execute(caster: Character, target: Character): void;
 }
 
-class Stun extends Ability
+export class AttackAbility implements IAbility
 {
-    execute(caster: Character, target: Character): void
-    {
-        super.execute(caster, target);
+    private points: number;
 
-        target.effects.push(this.effect);
+    // public activationFunction: Function;
+
+    constructor(points: number)
+    {
+        this.points = points;
     }
-}
-
-class Vampirism extends Ability
-{
-    private readonly percentage = 0.5;
 
     execute(caster: Character, target: Character): void
     {
-        super.execute(caster, target);
-        
-        caster.dealDamage(target, this.points);
-        caster.healthPoints += this.points * this.percentage;
-        target.effects.push(this.effect);
+        console.log(`${caster.name} (${caster.class}) attacked ${target.name} (${target.class}) and dealt ${this.points}!`);
+        target.receiveDamage(this.points);
     }
 }
