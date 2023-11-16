@@ -11,7 +11,7 @@ export class ConsoleLogger {
         this.isEnabled = enable;
     }
 
-    public startLog() {
+    public startLog(): void {
         if (this.isEnabled) {
             console.log(
                 '(%s) %s vs (%s) %s',
@@ -23,7 +23,7 @@ export class ConsoleLogger {
         }
     }
 
-    public actionLog(attacker: Player, input: ActionResult) {
+    public actionLog(attacker: Player, input: ActionResult): void {
         if (this.isEnabled) {
             const defender = this.player1 === attacker ? this.player2 : this.player1;
             switch (input.action.constructor.name) {
@@ -73,7 +73,7 @@ export class ConsoleLogger {
         }
     }
 
-    public stateLog(player: Player, input: StateChange) {
+    public stateLog(player: Player, input: StateChange): void {
         if (this.isEnabled) {
             if (input.action.name === "unfrozen") {
                 console.log(
@@ -85,13 +85,13 @@ export class ConsoleLogger {
         }
     }
 
-    public endLog(defeated: Player) {
+    public endLog(defeated: Player): void {
         if (this.isEnabled) {
             console.log('(%s) %s погибает\n', defeated.constructor.name, defeated.name);
         }
     }
 
-    public logCurrentTournament(players: Array<Player>) {
+    public logCurrentTournament(players: Array<Player>): void {
         if (this.isEnabled && players.length > 0) {
             if (players.length > 1) {
                 console.log("\nВ турнире участвуют \n")

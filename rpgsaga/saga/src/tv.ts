@@ -1,20 +1,9 @@
-export class Channel {
-  static chCount = -1;
-  public name: string;
-  public id: number;
-
-  constructor(name: string) {
-    Channel.chCount += 1;
-    this.name = name;
-    this.id = Channel.chCount;
-  }
-}
+import { Channel } from './channel';
 
 export class Television {
-  static tvCount = 0;
-  static channels: Array<Channel>;
-  static noChannel = new Channel('No Channel');
-  static tvAsciiParts: Array<string> = [
+  private static channels: Array<Channel>;
+  private static noChannel = new Channel('No Channel');
+  private static tvAsciiParts: Array<string> = [
     `
            o
   o       /
@@ -35,13 +24,13 @@ export class Television {
 []                    []`,
   ];
   // This TV has 18 white spaces to complete screen between parts
-  brand: string;
-  model: string;
-  serialNumber: string;
-  channel: Channel;
+  private readonly brand: string;
+  private readonly model: string;
+  private readonly serialNumber: string;
+
+  private channel: Channel;
 
   constructor(brand: string, model: string, serialNumber: string, channels: Array<Channel>) {
-    Television.tvCount += 1;
     this.brand = brand;
     this.model = model;
     this.serialNumber = serialNumber;
@@ -49,21 +38,20 @@ export class Television {
     this.channel = Television.noChannel;
   }
 
-  public printedTV(): string {
+  public printTV(): string {
     let channelAscii = '';
+    let name: string;
     if (this.channel.name.length <= 18) {
-      if (this.channel.name.length % 2 === 0) {
-        channelAscii =
-          ' '.repeat((18 - this.channel.name.length) / 2) +
-          this.channel.name +
-          ' '.repeat((18 - this.channel.name.length) / 2);
-      } else {
-        channelAscii =
-          ' '.repeat((18 - this.channel.name.length) / 2) +
-          this.channel.name +
-          ' '.repeat((18 - this.channel.name.length) / 2 + 1);
-      }
+      name = this.channel.name;
+    } else {
+      name = this.channel.name.slice(18);
     }
+    if (name.length % 2 === 0) {
+      channelAscii = ' '.repeat((18 - name.length) / 2) + name + ' '.repeat((18 - name.length) / 2);
+    } else {
+      channelAscii = ' '.repeat((18 - name.length) / 2) + this.channel.name + ' '.repeat((18 - name.length) / 2 + 1);
+    }
+
     return `${Television.tvAsciiParts[0] + channelAscii + Television.tvAsciiParts[1]} 
     ${this.brand} ${this.model}`;
   }
@@ -84,14 +72,15 @@ export class Television {
     } else {
       this.channel = Television.channels[this.channel.id - 1 + 1];
     }
-    return this.printedTV();
+    return this.printTV();
   }
+
   public prevChannel(): string {
     if (this.channel.id === 1) {
       this.channel = Television.channels[Channel.chCount - 1];
     } else {
       this.channel = Television.channels[this.channel.id - 1 - 1];
     }
-    return this.printedTV();
+    return this.printTV();
   }
 }

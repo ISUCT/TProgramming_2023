@@ -1,5 +1,22 @@
 import {Ability, Action, Attack, State} from "./actions"
 
+enum Aff { Normal, Block, Resist, Reflect, Weak }
+export enum ActionType { Fire, Ice, Electric, Normal, Support }
+
+class AffinityList {
+    Normal: Aff;
+    Fire: Aff;
+    Ice: Aff;
+    Electric: Aff;
+
+    constructor(aff: Aff[]){
+        this.Normal = aff[0];
+        this.Fire = aff[1];
+        this.Ice = aff[2];
+        this.Electric = aff[3];
+    }
+}
+
 export abstract class Player {
     health: number;
     readonly maxHealth: number;
@@ -11,11 +28,15 @@ export abstract class Player {
 
     protected currentAttack = 0;
 
-    constructor(health: number, strength: number, name: string) {
+    affinities: AffinityList
+
+    constructor(health: number, strength: number, name: string, affinity: Aff[]) {
         this.health = health;
         this.maxHealth = health;
         this.strength = strength;
         this.name = name;
+        this.affinities = new AffinityList(affinity)
+
     }
 
     public attack(): ActionResult {
@@ -40,6 +61,7 @@ export abstract class Player {
     }
     public passTurn(input: ActionResult): StateChange {
         const res = new StateChange(0, false,false, new State(""))
+
         this.health -= input.damage;
         if (this.isFrozenCounter === 0) {
             if (input.setEffectFreeze) {
