@@ -71,9 +71,9 @@ class ArcherGenerator extends CharacterGenerator
 
 export class CharacterFactory
 {
-    public factory: CharacterGenerator;
+    private factory: CharacterGenerator;
 
-    public set(characterClass: CharacterClass)
+    private set(characterClass: CharacterClass)
     {
         if (characterClass == CharacterClass.archer)
         {
@@ -87,5 +87,11 @@ export class CharacterFactory
         {
             this.factory = new MageGenerator();
         }
+    }
+
+    public getCharacter(characterClass: CharacterClass): Character
+    {
+        this.set(characterClass);
+        return this.factory.createCharacter();
     }
 }

@@ -9,7 +9,7 @@ export function getRandomArrayIndex(arrayLength: number)
     return randomIntFromInterval(0, arrayLength-1);
 }
 
-export function randomEnumValue (enumeration)
+export function getRandomEnumValue (enumeration)
 {
     const values = Object.keys(enumeration);
     const enumKey = values[Math.floor(Math.random() * values.length)];

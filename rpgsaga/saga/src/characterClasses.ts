@@ -7,7 +7,6 @@ export enum CharacterClass
     archer = "archer",
 }
 
-// HP: 110-120
 export class Knight extends Character
 {
     static readonly minHealthPoints: number = 110;
@@ -19,7 +18,7 @@ export class Knight extends Character
     }
 }
 
-// HP: 90-110
+
 export class Archer extends Character
 {
     static readonly minHealthPoints: number = 90;
@@ -31,7 +30,6 @@ export class Archer extends Character
     }
 }
 
-// HP: 80-90
 export class Mage extends Character
 {
     static readonly minHealthPoints: number = 80;

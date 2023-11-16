@@ -35,13 +35,14 @@ export abstract class Character
         this.class = characterClass;
         this.healthPoints = healthPoints;
     }
-
-    dealDamage(target: Character, points: number): string
-    {
-        target.healthPoints -= points;
-        return `${this.name} (${this.class}) attacked ${target.name} (${target.class}) and dealt ${points} of damage!`;
-    }
 }
+
+/*
+ ===================================================
+  Пока не знаю, как имплементировать систему абилок и т. д., так что этот код
+  висит мёртвым грузом.
+ ===================================================
+*/
 
 export abstract class Ability
 {
