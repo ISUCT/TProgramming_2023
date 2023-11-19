@@ -1,7 +1,26 @@
 export class Phone {
 	
-	model : string;
-	year : number;
+	_model : string;
+	get model() { return this._model };
+	set model( model : string ) {
+		this._model = model;
+	};
+	
+	_year : number;
+	get year() { return this._year };
+	set year ( year : number ) {
+		
+		if( year < 1980 || year > 2023 ) {
+			
+			throw new Error(
+				`Invalid year ${ year }`
+			);
+			
+		}
+		
+		this._year = year;
+		
+	};
 	
 	constructor(
 		model : string ,
@@ -19,29 +38,32 @@ export class Phone {
 		);
 	};
 	
+	_typed_number = '';
+	get typed_number() { return this._typed_number };
 	
-	typed_number = '';
-	
-	type_number( number : string ) {
-			
-		this.typed_number = number;
+	set typed_number( num : string )
+	{
+		
+		if( !this.number_valid( num ) ) {
+			throw new Error(
+				`Invalid typed number ${ num }`
+			);
+		}
+					
+		this._typed_number = num;
 		
 	};
-	
+		
 	show_typed_number() {
 		console.log(
 			`current typed number: ${ this.typed_number }`
 		);
 	};
 	
-	reset_typed_number() {
-		this.type_number( '' );
-	};
 	
-	
-	private typed_number_valid() {
+	private number_valid( number : string ) {
 		
-		var number = this.typed_number;
+		if( number === "" ) return true;
 		
 		if( number.startsWith( '+7' ) ) {
 			return number.length === 12;
@@ -55,25 +77,10 @@ export class Phone {
 	};
 	
 	
-	call() {
-		
-		if(
-			this.typed_number_valid()
-		) {
-			
-			return (
-				`Calling ${ this.typed_number } ...`
-			);
-			
-		}
-		else {
-			
-			return (
-				`${ this.typed_number } is not valid phone number.`
-			);
-			
-		}
-		
+	call() {			
+		return (
+			`Calling ${ this.typed_number } ...`
+		);		
 	};
 	
 };

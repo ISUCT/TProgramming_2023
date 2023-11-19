@@ -16,13 +16,29 @@ describe(
 		);
 		
 		test(
+			'create with invalid year' , ()=> {
+				
+				expect( ()=> new Phone( 'Nokia' , 2050 ) )
+				.toThrow(
+					"Invalid year 2050"
+				)
+				
+				expect( ()=> new Phone( 'Nokia' , 1900 ) )
+				.toThrow(
+					"Invalid year 1900"
+				)
+				
+			} ,
+		);
+		
+		test(
 			'type number' , ()=> {
 				
 				var phone = new Phone( 'Nokia' , 2012 );
 				
 				expect( phone.typed_number ).toEqual( '' );
 				
-				phone.type_number( '+72169660990' );
+				phone.typed_number ='+72169660990';
 				
 				expect( phone.typed_number ).toEqual( '+72169660990' );
 				
@@ -36,11 +52,11 @@ describe(
 				
 				expect( phone.typed_number ).toEqual( '' );
 				
-				phone.type_number( '+72169660990' );
+				phone.typed_number = '+72169660990';
 				
 				expect( phone.typed_number ).toEqual( '+72169660990' );
 				
-				phone.reset_typed_number();
+				phone.typed_number = "";
 				
 				expect( phone.typed_number ).toEqual( '' );
 				
@@ -52,7 +68,7 @@ describe(
 				
 				var phone = new Phone( 'Nokia' , 2012 );
 				
-				phone.type_number( '+72169660990' );
+				phone.typed_number = '+72169660990';
 				
 				expect( phone.call() )
 				.toEqual(
@@ -67,7 +83,7 @@ describe(
 				
 				var phone = new Phone( 'Nokia' , 2012 );
 				
-				phone.type_number( '82169660990' );
+				phone.typed_number = '82169660990';
 				
 				expect( phone.call() )
 				.toEqual(
@@ -78,45 +94,51 @@ describe(
 		);
 		
 		test(
-			'call invalid +7' , ()=> {
+			'type invalid +7' , ()=> {
 				
 				var phone = new Phone( 'Nokia' , 2012 );
 				
-				phone.type_number( '+721696609901' );
-				
-				expect( phone.call() )
-				.toEqual(
-					'+721696609901 is not valid phone number.'
+				expect(
+					()=> {
+						phone.typed_number = '+721696609901';
+					}
+				)
+				.toThrow(
+					"Invalid typed number +721696609901"
 				);
 				
 			} ,
 		);
 		
 		test(
-			'call invalid 8' , ()=> {
+			'type invalid 8' , ()=> {
 				
 				var phone = new Phone( 'Nokia' , 2012 );
 				
-				phone.type_number( '821696609901' );
-				
-				expect( phone.call() )
-				.toEqual(
-					'821696609901 is not valid phone number.'
+				expect(
+					()=> {
+						phone.typed_number = '821696609901';
+					}
+				)
+				.toThrow(
+					"Invalid typed number 821696609901"
 				);
 				
 			} ,
 		);
 		
 		test(
-			'call invalid' , ()=> {
+			'type invalid' , ()=> {
 				
 				var phone = new Phone( 'Nokia' , 2012 );
 				
-				phone.type_number( '12345678910' );
-				
-				expect( phone.call() )
-				.toEqual(
-					'12345678910 is not valid phone number.'
+				expect(
+					()=> {
+						phone.typed_number = '12345678910';
+					}
+				)
+				.toThrow(
+					"Invalid typed number 12345678910"
 				);
 				
 			} ,
