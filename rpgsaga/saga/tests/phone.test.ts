@@ -16,6 +16,16 @@ describe(
 		);
 		
 		test(
+			'to string' , ()=> {
+				
+				var phone = new Phone( 'Nokia' , 2012 );
+				expect( phone + "" )
+				.toEqual( "model: Nokia. 2012" );
+				
+			} ,
+		);
+		
+		test(
 			'create with invalid year' , ()=> {
 				
 				expect( ()=> new Phone( 'Nokia' , 2050 ) )

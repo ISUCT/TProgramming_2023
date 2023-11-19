@@ -32,9 +32,9 @@ export class Phone {
 		
 	};
 	
-	show_info() {
-		console.log(
-			`model: ${ this.model }\n${ this.year }`
+	toString(){
+		return (
+			`model: ${ this.model }. ${ this.year }`
 		);
 	};
 	
