@@ -5,7 +5,9 @@ import { CarnivoreNames } from './enums/carnivoreNames';
 
 export class Pig extends Animal implements Herbivore {
   constructor(mass: number, identificator?: string) {
-    super(identificator);
+    super(mass, identificator);
+
+    // У свиньи есть ограничение по весу, так что снова переопределяем массу с помощью сеттера
     this.mass = mass;
   }
 
@@ -36,10 +38,10 @@ export class Pig extends Animal implements Herbivore {
   }
 
   eatPlant(plantName: PlantNames): string {
-    return `Pig "${this.identificator}" is peacefully eating a ${plantName}.`;
+    return `Pig '${this.identificator}' is peacefully eating a ${plantName}.`;
   }
 
   runFromCarnivore(carnivoreName: CarnivoreNames): string {
-    return `Pig "${this.identificator}" successfully ran away from a ${carnivoreName}`;
+    return `Pig '${this.identificator}' successfully ran away from a ${carnivoreName}`;
   }
 }

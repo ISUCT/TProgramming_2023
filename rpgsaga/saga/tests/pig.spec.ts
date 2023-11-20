@@ -1,4 +1,6 @@
-import { Pig, PlantNames, CarnivoreNames } from '../src/pig';
+import { Pig } from '../src/pig';
+import { CarnivoreNames } from '../src/enums/carnivoreNames';
+import { PlantNames } from '../src/enums/plantNames';
 
 describe('Testing pig constructor', () => {
   it('Pig should be created', () => {
@@ -63,7 +65,8 @@ describe('Testing Pig methods', () => {
   });
   it('Should successfully run away from carnivore', () => {
     const pig = new Pig(100, 'ADJ820');
-    expect(pig.runFromCarnivore(CarnivoreNames.wolf)).toEqual(`
-    Pig '${pig.identificator}' successfully ran away from a wolf`);
+    expect(pig.runFromCarnivore(CarnivoreNames.wolf)).toEqual(
+      `Pig '${pig.identificator}' successfully ran away from a wolf`,
+    );
   });
 });
