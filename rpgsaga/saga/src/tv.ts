@@ -61,8 +61,16 @@ export class Television {
   }
 
   public set currentChannel(v: number) {
-    if (v < Channel.chCount) {
-      this.channel = Television.channels[v + 1];
+    try {
+      if (v < Channel.chCount && v > 0) {
+        this.channel = Television.channels[v - 1];
+      } else {
+        throw new Error('Unexpected channel number');
+      }
+    } catch (err) {
+      if (err instanceof Error) {
+        console.log(err.message);
+      }
     }
   }
 
