@@ -1,38 +1,7 @@
-// Список растений, овощей и фруктов, которые ест PlantEater
-export enum PlantNames {
-  carrot = 'carrot',
-  grass = 'grass',
-  apple = 'apple',
-  pear = 'pear',
-  cucumber = 'cucumber',
-  cabbage = 'cabbage',
-}
-
-// Список хищников, которые могут охотиться на Herbivore
-export enum CarnivoreNames {
-  wolf = 'wolf',
-  bear = 'bear',
-}
-
-abstract class Animal {
-  protected _mass: number;
-  public identificator: string; // код животного на бирке, прикрепленной на ухо
-
-  constructor(animalName?: string) {
-    if (animalName) {
-      this.identificator = animalName;
-    } else {
-      this.identificator = 'Unknown identificator';
-    }
-  }
-
-  abstract makeSound(): string;
-}
-
-interface Herbivore {
-  runFromCarnivore(carnivoreName: CarnivoreNames): string;
-  eatPlant(plantName: PlantNames): string;
-}
+import { Animal } from './animal';
+import { Herbivore } from './interfaces/herbivore';
+import { PlantNames } from './enums/plantNames';
+import { CarnivoreNames } from './enums/carnivoreNames';
 
 export class Pig extends Animal implements Herbivore {
   constructor(mass: number, identificator?: string) {
