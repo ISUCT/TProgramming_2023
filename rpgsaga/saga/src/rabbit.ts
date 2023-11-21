@@ -15,14 +15,28 @@ export class Rabbit {
     }
   
     set age(n: number) {
-        this._age = n >= 1 && n < 12 ? n : this._age ?? 1;
+        if (this._age < 1) {
+            throw new Error("Возраст не может быть меньше 1");
+        } else if (this._age > 12) {
+            throw new Error("Возраст не может быть больше 12");
+        } else {
+            this._age = n;
+        }
     }
   
     get name(): string {
       return this.rabName;
     }
   
-    public set name(str: string) {
+    set name(str: string) {
       this.rabName = str;
+    }
+
+    voice() {
+        console.log("!SCREECHING!")
+    }
+
+    toString(): string {
+        return `the ${this.breed} rabbit called ${this.rabName}`;
     }
   }
