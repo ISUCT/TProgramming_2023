@@ -1,26 +1,31 @@
-﻿namespace CourseApp
-{
-    using System;
+﻿namespace CourseApp;
 
-    public class Program
+using System;
+using System.Collections.Generic;
+using RpgSaga;
+
+public class Program
     {
         public static void Main(string[] args)
         {
-            Phone phone1 = new Phone("iPhone", -7);
-            phone1.Show();
-            phone1.Diagonal = 7;
-            phone1.Show();
-            phone1.Diagonal = -16;
-            phone1.Show();
+            var rnd = new Random();
 
-            Phone tablet = new Phone("Android", 6);
-            tablet.Diagonal = 6;
-            tablet.Show();
-            tablet.Diagonal = -10;
-            tablet.Show();
-            tablet.Diagonal = 8;
-            tablet.Show();
-            Console.WriteLine("Hello World");
+            Hero visor = new Magican();
+            for (int i = 0; i < 1000; i++)
+            {
+                var list = new List<Hero>()
+                {
+                    new Archer(),
+                    new Magican(),
+                    new Warrior(),
+                };
+                var hero1 = list[rnd.Next(0, 3)];
+                var hero2 = list[rnd.Next(0, 3)];
+                if (hero1 != hero2)
+                {
+                    visor.Fight(hero1, hero2);
+                    Console.WriteLine("Fight finish \n\n");
+                }
+            }
         }
     }
-}
