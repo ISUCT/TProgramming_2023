@@ -3,12 +3,13 @@
 using System;
 using System.Collections.Generic;
 using RpgSaga;
+using DefaultNamespace;
 
     public class Program
     {
         public static void Main(string[] args)
         {
-            var rnd = new Random();
+            /*var rnd = new Random();
             var list = new List<Hero>()
             {
                 new Archer(),
@@ -20,6 +21,6 @@ using RpgSaga;
             while (true)
             {
                 visor.Fight(list[rnd.Next(0, 2)], list[rnd.Next(0, 2)]);
-            }
+            }*/
         }
     }

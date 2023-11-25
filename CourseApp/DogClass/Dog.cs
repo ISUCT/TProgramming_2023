@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class Dog
 {
-    private int _age;
+    private uint _age;
 
     private string _name;
 
@@ -18,7 +18,7 @@ public class Dog
         set => _name = value;
     }
 
-    public int Age
+    public uint Age
     {
         get => _age;
 
