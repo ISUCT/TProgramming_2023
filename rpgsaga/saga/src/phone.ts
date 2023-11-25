@@ -1,12 +1,12 @@
 export class Phone {
 	
-	_model : string;
+	private _model : string;
 	get model() { return this._model };
 	set model( model : string ) {
 		this._model = model;
 	};
 	
-	_year : number;
+	private _year : number;
 	get year() { return this._year };
 	set year ( year : number ) {
 		
@@ -38,7 +38,7 @@ export class Phone {
 		);
 	};
 	
-	_typed_number = '';
+	private _typed_number = '';
 	get typed_number() { return this._typed_number };
 	
 	set typed_number( num : string )
