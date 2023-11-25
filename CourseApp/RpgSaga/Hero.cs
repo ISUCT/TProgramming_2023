@@ -73,18 +73,15 @@ public abstract class Hero
 
     public void Fight(Hero person1, Hero person2)
     {
-        while (true)
+        if ((person1._health > 0) || (person2._health > 0))
         {
-            while (person1._health > 0 || person2._health > 0)
-            {
-                person2 = person1.Attack(person2);
-                Thread.Sleep(1000);
-                person1 = person2.Attack(person1);
-                Thread.Sleep(1000);
-            }
-
-            Thread.Sleep(3000);
+            person2 = person1.Attack(person2);
+            Thread.Sleep(1000);
+            person1 = person2.Attack(person1);
+            Thread.Sleep(1000);
         }
+
+        Thread.Sleep(3000);
     }
 
     protected abstract Hero Attack(Hero enemy);

@@ -16,14 +16,14 @@ public class Warrior : Hero
     {
         if (!SpellUsed)
         {
+            Console.WriteLine($"{this.Type} {this.Name} use spell and attack {enemy.Type}, damage = {this.Damage}, {enemy.Type} {enemy.Name} health =  {enemy.Health - UseSpell()}");
             enemy.Health -= UseSpell();
-            Console.WriteLine($"{Type} {Name} use spell and attack {enemy.Type}, damage = {Damage}, {enemy.Type} health =  {enemy.Health - Damage}");
             SpellUsed = true;
         }
         else
         {
-            enemy.Health -= Damage;
-            Console.WriteLine($"{Type} {Name} attack {enemy.Type}, damage = {Damage}, {enemy.Type} health =  {enemy.Health - Damage}");
+            enemy.Health -= this.Damage;
+            Console.WriteLine($"{this.Type} {this.Name} attack {enemy.Type}, damage = {this.Damage}, {enemy.Type} {enemy.Name} health =  {enemy.Health - Damage}");
         }
 
         return enemy;

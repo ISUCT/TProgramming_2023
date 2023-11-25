@@ -1,8 +1,7 @@
-namespace DefaultNamespace;
+namespace CourseApp.DogClass;
 
 using System;
 using System.Collections.Generic;
-
 public class Dog
 {
     private uint _age;
