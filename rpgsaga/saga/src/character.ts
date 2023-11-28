@@ -1,70 +1,37 @@
-import { CharacterClass } from "./characterClasses";
-import { randomIntFromInterval } from "./randomMath";
+import { CharacterClass } from './characterClasses';
 
-export abstract class Character
-{
-    public name: string;
-    public class: string;
+export abstract class Character {
+  public name: string;
+  public class: string;
 
-    public effects: Effect[] = [];
-    
-    static readonly minHealthPoints: number;
-    static readonly maxHealthPoints: number;
+  // public effects: Effect[] = [];
 
-    private _healthPoints: number;
-    private _strength: number = 5;
+  static readonly minHealthPoints: number;
+  static readonly maxHealthPoints: number;
 
-    get strength()
-    {
-        return this._strength;
-    }
+  private _healthPoints: number;
+  private _strength: number;
 
-    get healthPoints()
-    {
-        return this._healthPoints;
-    }
+  get strength() {
+    return this._strength;
+  }
 
-    set healthPoints(value: number)
-    {
-        this._healthPoints = value;
-    }
+  get healthPoints() {
+    return this._healthPoints;
+  }
 
-    constructor(name: string, characterClass: CharacterClass, healthPoints: number)
-    {
-        this.name = name;
-        this.class = characterClass;
-        this.healthPoints = healthPoints;
-    }
+  set healthPoints(value: number) {
+    this._healthPoints = value;
+  }
 
-    public receiveDamage(points: number)
-    {
-        this.healthPoints -= points;
-    }
-}
+  constructor(name: string, characterClass: CharacterClass, healthPoints: number) {
+    this.name = name;
+    this.class = characterClass;
+    this.healthPoints = healthPoints;
+    this._strength = 5;
+  }
 
-/*
- ===================================================
-  Пока не знаю, как имплементировать систему абилок и т. д., так что этот код
-  висит мёртвым грузом.
- ===================================================
-*/
-
-export abstract class Effect
-{
-    protected target: Character;
-    protected points: number;
-    protected duration: number;
-
-    constructor(target: Character, points: number, duration: number)
-    {
-        this.target = target;
-        this.points = points;
-        this.duration = duration;
-    }
-
-    // Проверка на duration в apply
-    apply(): void
-    {
-        this.duration -= 1;
-    }
+  public receiveDamage(points: number) {
+    this.healthPoints -= points;
+  }
 }
