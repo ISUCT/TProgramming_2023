@@ -2,7 +2,7 @@ export enum Mode {
     ALIVE = "Alive",
     DIED = "Died"
 };
-export class Animal {
+export abstract class Animal {
     _mode: Mode = Mode.ALIVE;
     _color: string;
     _healthpool: number = 100;

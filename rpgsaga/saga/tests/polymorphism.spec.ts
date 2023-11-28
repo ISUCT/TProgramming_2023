@@ -3,7 +3,6 @@ import { Animal } from "../src/polymorphism/animal";
 import { Mode } from "../src/polymorphism/animal";
 import { Fox } from "../src/polymorphism/fox";
 import { chinchilla } from "../src/polymorphism/chinchilla";
-import { generateKeyPair } from "crypto";
 
 describe('Testing Animals constructor', () => {
     it('Animals should be created with incorrect age', () => {
@@ -36,6 +35,4 @@ describe('Testing Animals methods', () => {
         expect(Karina.sound()).toEqual("Миу");
         expect(Evgenia.sound()).toEqual("Фыр-фыр");
     });
-    it("Method color with same color and not", () => {
-    })
 });
