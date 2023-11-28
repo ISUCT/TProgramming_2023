@@ -1,7 +1,7 @@
 import { Bina } from './bina';
 import { Character } from './character';
 import { CharacterClass } from './characterClasses';
-import { CharacterFactory } from './characterGenerators/characterGenerator';
+import { CharacterFactory } from './characterFactory';
 import { getRandomEnumValue } from './randomMath';
 
 class Game {
