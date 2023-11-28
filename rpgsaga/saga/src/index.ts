@@ -1,16 +1,17 @@
-import { Phone } from './phone';
+import { Rabbit } from './rabbit';
 
-const first = new Phone('+7900-000 000 (123)', 1990, 'Телефон 1');
-first.year = 1998;
+try {
+    var myRabbit = new Rabbit(5, 'black', 'Dutch dwarf');
+    myRabbit.age = 10;
+    console.log(myRabbit.age);
+} catch(e) {
+    console.log(e);
+}
 
-first.year = -1998;
-first.call('12345');
-first.endCall();
 
-const second = new Phone('+799900000', -5);
-// second.name = 'Телефон 2';
-console.log(second.year);
-second.call('12345');
-second.endCall();
+myRabbit.name = 'Malebu';
+console.log(myRabbit.name);
+myRabbit.voice();
+myRabbit.toString();
 
-console.log(first, second, Phone.phoneCount);
+console.log(myRabbit);
