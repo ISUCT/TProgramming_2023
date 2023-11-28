@@ -1,6 +1,14 @@
 import { ActionType } from './player';
 
-export abstract class Action {
+export interface IAction{
+    name: string
+    type: ActionType
+    damage?: number
+    burn?: boolean
+    freeze?: boolean
+}
+
+abstract class Action {
   name: string;
   type: ActionType;
 
@@ -13,7 +21,7 @@ export abstract class Action {
 export class Attack extends Action {
   damage: number;
 
-  constructor(dmg: number, type: ActionType) {
+  constructor(dmg: number) {
     super('default attack', ActionType.Normal);
     this.damage = dmg;
   }

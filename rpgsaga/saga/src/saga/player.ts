@@ -1,6 +1,6 @@
-import {Ability, Action, Attack, State} from "./actions"
+import {Ability, IAction, Attack, State} from "./actions"
 
-enum Aff { Normal, Block, Resist, Reflect, Weak }
+export enum Aff { Normal, Block, Resist, Reflect, Weak }
 export enum ActionType { Fire, Ice, Electric, Normal, Support }
 
 class AffinityList {
@@ -10,6 +10,9 @@ class AffinityList {
     Electric: Aff;
 
     constructor(aff: Aff[]){
+        while (aff.length< 4){
+            aff.push(Aff.Normal)
+        }
         this.Normal = aff[0];
         this.Fire = aff[1];
         this.Ice = aff[2];
@@ -40,12 +43,12 @@ export abstract class Player {
     }
 
     public attack(): ActionResult {
-        return new ActionResult(this.strength, false, false, new Attack());
+        return new ActionResult(new Attack(this.strength));
     }
 
     public ability(): ActionResult {
         // when no ability, return null
-        return new ActionResult(0, false, false, new Ability('debug ability'));
+        return new ActionResult(new Ability('debug ability', ActionType.Support, 0, false, false));
     }
 
     public act(): ActionResult {
@@ -56,11 +59,11 @@ export abstract class Player {
                 return this.ability();
             }
         } else{
-            return new ActionResult(0,false,false, new State("frozen"))
+            return new ActionResult(new State("frozen"))
         }
     }
     public passTurn(input: ActionResult): StateChange {
-        const res = new StateChange(0, false,false, new State(""))
+        const res = new StateChange(0, false, false, new State(""))
 
         this.health -= input.damage;
         if (this.isFrozenCounter === 0) {
@@ -89,12 +92,12 @@ export class ActionResult {
     damage: number;
     setEffectFreeze: boolean;
     setEffectBurn: boolean;
-    action: Action;
+    action: IAction;
 
-    constructor(damage: number, burn: boolean, freeze: boolean, action: Action) {
-        this.damage = damage;
-        this.setEffectFreeze = freeze;
-        this.setEffectBurn = burn;
+    constructor(action: IAction) {
+        this.damage = action.damage != undefined ? action.damage : 0;
+        this.setEffectFreeze = action.freeze != undefined ? action.freeze : false;
+        this.setEffectBurn = action.burn != undefined ? action.burn : false;
         this.action = action;
     }
 }
@@ -103,12 +106,12 @@ export class StateChange{
     isBurnedCancelled: boolean;
     isFrosenCancelled: boolean;
     pointsHealed: number;
-    action : Action;
+    action : IAction;
 
-    constructor(hpAdded: number, burn: boolean, frozen: boolean, action: Action){
+    constructor(hpAdded: number, burnCancel: boolean, frozenCancel: boolean, action: IAction){
         this.pointsHealed = hpAdded;
-        this.isBurnedCancelled = burn;
-        this.isFrosenCancelled = frozen;
+        this.isBurnedCancelled = burnCancel;
+        this.isFrosenCancelled = frozenCancel;
         this.action = action;
     }
 }
