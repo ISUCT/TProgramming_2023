@@ -3,6 +3,7 @@ import { CharacterClass } from './characterClasses';
 export abstract class Character {
   public name: string;
   public class: string;
+  public arrayIndex: number;
 
   // public effects: Effect[] = [];
 
