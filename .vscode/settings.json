@@ -1,7 +1,7 @@
 {
     "files.exclude": {
-        "rpgsaga": true,
-        "codewars": true,
-        "onlineshop": true,
+        "rpgsaga": false,
+        "codewars": false,
+        "onlineshop": false,
     }
 }

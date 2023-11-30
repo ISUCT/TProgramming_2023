@@ -1,7 +1,7 @@
 export class Person {
-  private name: string;
-  private age: number;
-  private gender: 'man' | 'woman';
+  public name: string;
+  public age: number;
+  public gender: 'man' | 'woman';
   
   
   constructor(name: string, age: number, gender: 'man' | 'woman' = 'man') {
