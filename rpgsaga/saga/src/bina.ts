@@ -1,5 +1,4 @@
 import { ArrayItem } from './arrayItem';
-import { Character } from './character';
 
 export class Bina {
   public attack(attacker: ArrayItem, target: ArrayItem) {

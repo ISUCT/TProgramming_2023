@@ -13,6 +13,8 @@ export class Game {
 
   private bina: Bina = new Bina();
 
+  private winner: Character = null;
+
   constructor(quantityOfPlayers: number) {
     this.quantityOfPlayers = quantityOfPlayers;
     this.newPlayerIndex = 2;
@@ -40,48 +42,87 @@ export class Game {
     this.currentPlayers[1] = temp;
   }
 
-  private findDeadBody(): number {
+  private findDeadBodies(): number[] {
+    const deadBodiesIndexes: number[] = [];
+
     for (let i = 0; i < this.currentPlayers.length; i++) {
       if (this.isPlayerDead(this.currentPlayers[i].player)) {
         this.quantityOfPlayers -= 1;
-        return i;
+        deadBodiesIndexes.push(i);
+      }
+    }
+
+    if (deadBodiesIndexes.length > 0) {
+      return deadBodiesIndexes;
+    } else {
+      return null;
+    }
+  }
+
+  private replaceDeadBodies(deadPlayerIndexes: number[]) {
+    for (let i = 0; i < this.currentPlayers.length; i++) {
+      const deadPlayerIndex: number = deadPlayerIndexes[i];
+      if (this.isPlayerDead(this.currentPlayers[deadPlayerIndex].player)) {
+        this.currentPlayers[deadPlayerIndex] = new ArrayItem(this.players[this.newPlayerIndex], this.newPlayerIndex);
+        this.newPlayerIndex += 1;
+      }
+    }
+  }
+
+  private countDeadPlayers(): number {
+    let counter = 0;
+    for (let i = 0; i < this.currentPlayers.length; i++) {
+      if (this.isPlayerDead(this.currentPlayers[i].player)) {
+        counter += 1;
+      }
+    }
+
+    return counter;
+  }
+
+  private findWinner(): Character {
+    const deadPlayersCount: number = this.countDeadPlayers();
+    if (deadPlayersCount === 1) {
+      for (let i = 0; i < this.currentPlayers.length; i++) {
+        const currentPlayer = this.currentPlayers[i];
+        if (!this.isPlayerDead(currentPlayer.player)) {
+          return currentPlayer.player;
+        }
       }
     }
 
     return null;
   }
 
-  private replaceDeadBody(deadPlayerIndex: number) {
-    if (this.quantityOfPlayers > 2 && this.isPlayerDead(this.currentPlayers[deadPlayerIndex].player)) {
-      this.currentPlayers[deadPlayerIndex] = new ArrayItem(this.players[this.newPlayerIndex], this.newPlayerIndex);
-      this.newPlayerIndex += 1;
-    }
-  }
-
-  private findWinner(): Character {
-    for (let i = 0; i < this.currentPlayers.length; i++) {
-      if (!this.isPlayerDead(this.currentPlayers[i].player)) {
-        return this.currentPlayers[i].player;
-      }
-    }
-  }
-
   private announceWinner() {
-    const winner = this.findWinner();
-    console.log(`The winner is ${winner.name} (${winner.class})!`);
+    if (this.winner !== null) {
+      console.log(`The winner is ${this.winner.name} (${this.winner.class})!`);
+    } else {
+      console.log(`It's a draw!`);
+    }
   }
 
-  // private playOneRound();
+  private canPlayOneMoreRound() {
+    return this.quantityOfPlayers > 2 ? true : false;
+  }
+
+  private playOneRound() {
+    this.bina.attack(this.currentPlayers[0], this.currentPlayers[1]);
+
+    this.swapCurrentPlayers();
+
+    const deadBodyIndexes = this.findDeadBodies();
+    if (deadBodyIndexes !== null) {
+      this.replaceDeadBodies(deadBodyIndexes);
+    }
+
+    this.winner = this.findWinner();
+  }
 
   public start() {
     for (; !this.isGameOver(); ) {
-      this.bina.attack(this.currentPlayers[0], this.currentPlayers[1]);
-
-      this.swapCurrentPlayers();
-
-      const deadBodyIndex = this.findDeadBody();
-      if (deadBodyIndex !== null) {
-        this.replaceDeadBody(deadBodyIndex);
+      if (this.canPlayOneMoreRound()) {
+        this.playOneRound();
       }
     }
 
