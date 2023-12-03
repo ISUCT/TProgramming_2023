@@ -18,7 +18,7 @@ export class Game {
     this.newPlayerIndex = 2;
 
     const factory: CharacterFactory = new CharacterFactory();
-    for (let i = 0; i < this.quantityOfPlayers; ++i) {
+    for (let i = 0; i < this.quantityOfPlayers; i++) {
       const character = factory.getCharacter(getRandomEnumValue(CharacterClass));
       this.players.push(character);
     }
@@ -40,32 +40,49 @@ export class Game {
     this.currentPlayers[1] = temp;
   }
 
-  private replaceDeadBodies() {
+  private findDeadBody(): number {
     for (let i = 0; i < this.currentPlayers.length; i++) {
       if (this.isPlayerDead(this.currentPlayers[i].player)) {
         this.quantityOfPlayers -= 1;
+        return i;
+      }
+    }
 
-        this.currentPlayers[i].player = this.players[this.newPlayerIndex];
-        this.currentPlayers[i].index = this.newPlayerIndex;
-        this.newPlayerIndex += 1;
+    return null;
+  }
+
+  private replaceDeadBody(deadPlayerIndex: number) {
+    if (this.quantityOfPlayers > 2 && this.isPlayerDead(this.currentPlayers[deadPlayerIndex].player)) {
+      this.currentPlayers[deadPlayerIndex] = new ArrayItem(this.players[this.newPlayerIndex], this.newPlayerIndex);
+      this.newPlayerIndex += 1;
+    }
+  }
+
+  private findWinner(): Character {
+    for (let i = 0; i < this.currentPlayers.length; i++) {
+      if (!this.isPlayerDead(this.currentPlayers[i].player)) {
+        return this.currentPlayers[i].player;
       }
     }
   }
 
   private announceWinner() {
-    for (let i = 0; i < this.currentPlayers.length; i++) {
-      if (!this.isPlayerDead(this.currentPlayers[i].player)) {
-        const winner = this.currentPlayers[i].player;
-        console.log(`${winner.name} (${winner.class}) has won!`);
-      }
-    }
+    const winner = this.findWinner();
+    console.log(`The winner is ${winner.name} (${winner.class})!`);
   }
+
+  // private playOneRound();
 
   public start() {
     for (; !this.isGameOver(); ) {
       this.bina.attack(this.currentPlayers[0], this.currentPlayers[1]);
+
       this.swapCurrentPlayers();
-      this.replaceDeadBodies();
+
+      const deadBodyIndex = this.findDeadBody();
+      if (deadBodyIndex !== null) {
+        this.replaceDeadBody(deadBodyIndex);
+      }
     }
 
     this.announceWinner();
