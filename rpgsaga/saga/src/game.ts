@@ -13,8 +13,6 @@ export class Game {
 
   private bina: Bina = new Bina();
 
-  private winner: Character = null;
-
   constructor(quantityOfPlayers: number) {
     this.quantityOfPlayers = quantityOfPlayers;
     this.newPlayerIndex = 2;
@@ -98,9 +96,9 @@ export class Game {
     return null;
   }
 
-  private announceWinner() {
-    if (this.winner !== null) {
-      console.log(`The winner is ${this.winner.name} (${this.winner.class})!`);
+  private announceWinner(winner: Character) {
+    if (winner !== null) {
+      console.log(`The winner is ${winner.name} (${winner.class})!`);
     } else {
       console.log(`It's a draw!`);
     }
@@ -115,8 +113,6 @@ export class Game {
     if (deadBodyIndexes !== null && this.canReplaceDeadPlayer()) {
       this.replaceDeadBodies(deadBodyIndexes);
     }
-
-    this.winner = this.findWinner();
   }
 
   public start() {
@@ -124,6 +120,7 @@ export class Game {
       this.playOneRound();
     }
 
-    this.announceWinner();
+    const winner: Character = this.findWinner();
+    this.announceWinner(winner);
   }
 }
