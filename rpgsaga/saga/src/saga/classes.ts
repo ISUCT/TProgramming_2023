@@ -3,7 +3,7 @@ import { Player, ActionResult, ActionType, Aff } from './player';
 
 export class Knight extends Player {
   constructor(public health: number, public strength: number, public name: string) {
-    super(health, strength, name, [Aff.Resist, Aff.Normal, Aff.Normal]);    
+    super(health, strength, name, [Aff.Resist, Aff.Normal, Aff.Normal]);
   }
 
   public ability(): ActionResult {

@@ -12,26 +12,26 @@ export class Tournament {
     this.players = players;
     this.isLogEnabled = logEnable;
 
-    this.logger = new ConsoleLogger(new Knight(0,0,""), new Knight(0,0,""), true) 
+    this.logger = new ConsoleLogger(new Knight(0, 0, ''), new Knight(0, 0, ''), true);
   }
-  
-  startTournament():Player{
+
+  startTournament(): Player {
     return this.runTournament(this.players);
   }
 
   runTournament(players: Array<Player>): Player {
     this.logger.logCurrentTournament(players);
-    if (players.length < 2){
-        return players[0]
+    if (players.length < 2) {
+      return players[0];
     } else {
-        const newCycle: Array<Player> = [];
-        for (let i = 0; i < players.length; i += 2) {
-            players[i].fullHeal()
-            players[i+1].fullHeal()
-            const battle = new Battle(players[i], players[i+1], this.isLogEnabled)
-            newCycle.push(battle.initiate());
-        }
-        return this.runTournament(newCycle);
+      const newCycle: Array<Player> = [];
+      for (let i = 0; i < players.length; i += 2) {
+        players[i].fullHeal();
+        players[i + 1].fullHeal();
+        const battle = new Battle(players[i], players[i + 1], this.isLogEnabled);
+        newCycle.push(battle.initiate());
+      }
+      return this.runTournament(newCycle);
     }
   }
 }
