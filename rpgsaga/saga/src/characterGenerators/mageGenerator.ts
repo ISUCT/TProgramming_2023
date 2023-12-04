@@ -5,6 +5,9 @@ import { randomIntFromInterval } from '../randomMath';
 import { CharacterGenerator } from './characterGenerator';
 
 export class MageGenerator extends CharacterGenerator {
+  readonly minHealthPoints: number = 80;
+  readonly maxHealthPoints: number = 90;
+
   protected nameList: string[] = [
     'Thalindra',
     'Malachar',
@@ -35,6 +38,6 @@ export class MageGenerator extends CharacterGenerator {
   ];
 
   public createCharacter(): Character {
-    return new Mage(this.getRandomNameAndSurname(), randomIntFromInterval(Mage.minHealthPoints, Mage.maxHealthPoints));
+    return new Mage(this.getRandomNameAndSurname(), randomIntFromInterval(this.minHealthPoints, this.maxHealthPoints));
   }
 }

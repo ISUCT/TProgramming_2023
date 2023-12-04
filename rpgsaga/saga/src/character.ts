@@ -3,12 +3,8 @@ import { CharacterClass } from './characterClasses';
 export abstract class Character {
   public name: string;
   public class: string;
-  public arrayIndex: number;
 
   // public effects: Effect[] = [];
-
-  static readonly minHealthPoints: number;
-  static readonly maxHealthPoints: number;
 
   private _healthPoints: number;
   private _strength: number;

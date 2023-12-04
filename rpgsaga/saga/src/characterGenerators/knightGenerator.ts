@@ -5,6 +5,9 @@ import { randomIntFromInterval } from '../randomMath';
 import { CharacterGenerator } from './characterGenerator';
 
 export class KnightGenerator extends CharacterGenerator {
+  readonly minHealthPoints: number = 110;
+  readonly maxHealthPoints: number = 120;
+
   protected nameList: string[] = [
     'Seraphina',
     'Elara',
@@ -37,7 +40,7 @@ export class KnightGenerator extends CharacterGenerator {
   public createCharacter(): Character {
     return new Knight(
       this.getRandomNameAndSurname(),
-      randomIntFromInterval(Knight.minHealthPoints, Knight.maxHealthPoints),
+      randomIntFromInterval(this.minHealthPoints, this.maxHealthPoints),
     );
   }
 }

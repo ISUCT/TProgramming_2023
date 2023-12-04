@@ -2,6 +2,9 @@ import { Character } from '../character';
 import { getRandomArrayIndex } from '../randomMath';
 
 export abstract class CharacterGenerator {
+  readonly minHealthPoints: number;
+  readonly maxHealthPoints: number;
+
   protected nameList: string[];
   protected surnameList: string[];
 
