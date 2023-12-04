@@ -30,7 +30,7 @@ export class Tournament {
     }
   }
 
-  private startTournament():Player{
+  private startTournament(): Player {
     return this.runTournament(this.players);
   }
 }

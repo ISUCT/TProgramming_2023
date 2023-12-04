@@ -1,5 +1,6 @@
 import { Ability, AbilityAttack } from './actions';
-import { Player, ActionResult, ActionType, Aff } from './player';
+import { Player, ActionResult } from './player';
+import { ActionType, Aff } from './affinities';
 
 export class Knight extends Player {
   constructor(public health: number, public strength: number, public name: string) {
