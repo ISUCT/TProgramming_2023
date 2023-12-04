@@ -2,8 +2,8 @@ import { ConsoleLogger } from './logger';
 import { Player, randomBool } from './player';
 
 export class Battle {
-  opponents: Array<Player>;
-  useLogger: boolean;
+  private opponents: Array<Player>;
+  private useLogger: boolean;
 
   constructor(player1: Player, player2: Player, useLogger: boolean) {
     this.opponents = new Array<Player>(player1, player2);

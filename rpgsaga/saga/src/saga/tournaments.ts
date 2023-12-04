@@ -4,22 +4,17 @@ import { ConsoleLogger } from './logger';
 import { Player } from './player';
 
 export class Tournament {
-  players: Array<Player>;
-  isLogEnabled: boolean;
-  logger: ConsoleLogger;
-
+  private isLogEnabled: boolean;
+  private logger: ConsoleLogger;
+  private players: Array<Player>;
   constructor(players: Array<Player>, logEnable: boolean) {
     this.players = players;
     this.isLogEnabled = logEnable;
 
     this.logger = new ConsoleLogger(new Knight(0,0,""), new Knight(0,0,""), true) 
   }
-  
-  startTournament():Player{
-    return this.runTournament(this.players);
-  }
 
-  runTournament(players: Array<Player>): Player {
+  private runTournament(players: Array<Player>): Player {
     this.logger.logCurrentTournament(players);
     if (players.length < 2){
         return players[0]
@@ -33,5 +28,9 @@ export class Tournament {
         }
         return this.runTournament(newCycle);
     }
+  }
+
+  private startTournament():Player{
+    return this.runTournament(this.players);
   }
 }

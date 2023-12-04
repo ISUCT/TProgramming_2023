@@ -19,7 +19,7 @@ abstract class Action {
 }
 
 export class Attack extends Action {
-  damage: number;
+  private damage: number;
 
   constructor(dmg: number) {
     super('default attack', ActionType.Normal);
@@ -28,9 +28,9 @@ export class Attack extends Action {
 }
 
 export class AbilityAttack extends Action {
-  damage: number;
-  burnEffect: boolean;
-  freezeEffect: boolean;
+  private burnEffect: boolean;
+  private damage: number;
+  private freezeEffect: boolean;
 
   constructor(name: string, type: ActionType, dmg: number, burn: boolean, freeze: boolean) {
     super(name, type);
@@ -41,8 +41,8 @@ export class AbilityAttack extends Action {
 }
 
 export class Ability extends Action {
-  burnEffect: boolean;
-  freezeEffect: boolean;
+  private burnEffect: boolean;
+  private freezeEffect: boolean;
 
   constructor(name: string, type: ActionType, dmg: number, burn: boolean, freeze: boolean) {
     super(name, type);

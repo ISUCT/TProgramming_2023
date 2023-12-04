@@ -1,26 +1,13 @@
 import { Player, ActionResult, StateChange } from './player';
 
 export class ConsoleLogger {
-    player1: Player;
-    player2: Player;
-    isEnabled: boolean;
-
+    private isEnabled: boolean;
+    private player1: Player;
+    private player2: Player;
     constructor(player1: Player, player2: Player, enable: boolean) {
         this.player1 = player1;
         this.player2 = player2;
         this.isEnabled = enable;
-    }
-
-    public startLog(): void {
-        if (this.isEnabled) {
-            console.log(
-                '(%s) %s vs (%s) %s',
-                this.player1.constructor.name,
-                this.player1.name,
-                this.player2.constructor.name,
-                this.player2.name,
-            );
-        }
     }
 
     public actionLog(attacker: Player, input: ActionResult): void {
@@ -73,18 +60,6 @@ export class ConsoleLogger {
         }
     }
 
-    public stateLog(player: Player, input: StateChange): void {
-        if (this.isEnabled) {
-            if (input.action.name === "unfrozen") {
-                console.log(
-                    '(%s) %s разморожен и готов атаковать',
-                    player.constructor.name,
-                    player.name
-                );
-            }
-        }
-    }
-
     public endLog(defeated: Player): void {
         if (this.isEnabled) {
             console.log('(%s) %s погибает\n', defeated.constructor.name, defeated.name);
@@ -101,6 +76,30 @@ export class ConsoleLogger {
             } else {
                 console.log("\nВ турнире побеждает \n")
                 console.log(players[0].name, " ")
+            }
+        }
+    }
+
+    public startLog(): void {
+        if (this.isEnabled) {
+            console.log(
+                '(%s) %s vs (%s) %s',
+                this.player1.constructor.name,
+                this.player1.name,
+                this.player2.constructor.name,
+                this.player2.name,
+            );
+        }
+    }
+
+    public stateLog(player: Player, input: StateChange): void {
+        if (this.isEnabled) {
+            if (input.action.name === "unfrozen") {
+                console.log(
+                    '(%s) %s разморожен и готов атаковать',
+                    player.constructor.name,
+                    player.name
+                );
             }
         }
     }
