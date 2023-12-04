@@ -26,7 +26,7 @@ export class Game {
     this.currentPlayers = [new ArrayItem(this.players[0], 0), new ArrayItem(this.players[1], 1)];
   }
 
-  private isPlayerDead(player: Character) {
+  private isPlayerDead(player: Character): boolean {
     return player.healthPoints <= 0 ? true : false;
   }
 
@@ -34,7 +34,7 @@ export class Game {
     return this.quantityOfPlayers <= 1 ? true : false;
   }
 
-  private swapCurrentPlayers() {
+  private swapCurrentPlayers(): void {
     const temp = this.currentPlayers[0];
     this.currentPlayers[0] = this.currentPlayers[1];
     this.currentPlayers[1] = temp;
@@ -57,11 +57,11 @@ export class Game {
     }
   }
 
-  private canReplaceDeadPlayer() {
+  private canReplaceDeadPlayer(): boolean {
     return this.newPlayerIndex < this.players.length;
   }
 
-  private replaceDeadBodies(deadPlayerIndexes: number[]) {
+  private replaceDeadBodies(deadPlayerIndexes: number[]): void {
     for (let i = 0; i < deadPlayerIndexes.length; i++) {
       const deadPlayerIndex: number = deadPlayerIndexes[i];
       if (this.isPlayerDead(this.currentPlayers[deadPlayerIndex].player)) {
@@ -96,7 +96,7 @@ export class Game {
     return null;
   }
 
-  private announceWinner(winner: Character) {
+  private announceWinner(winner: Character): void {
     if (winner !== null) {
       console.log(`The winner is ${winner.name} (${winner.class})!`);
     } else {
@@ -104,7 +104,7 @@ export class Game {
     }
   }
 
-  private playOneRound() {
+  private playOneRound(): void {
     this.bina.attack(this.currentPlayers[0], this.currentPlayers[1]);
 
     this.swapCurrentPlayers();
@@ -115,7 +115,7 @@ export class Game {
     }
   }
 
-  public start() {
+  public start(): void {
     for (; !this.isGameOver(); ) {
       this.playOneRound();
     }
