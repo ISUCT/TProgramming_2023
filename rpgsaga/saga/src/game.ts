@@ -59,8 +59,12 @@ export class Game {
     }
   }
 
+  private canReplaceDeadPlayer() {
+    return this.newPlayerIndex < this.players.length;
+  }
+
   private replaceDeadBodies(deadPlayerIndexes: number[]) {
-    for (let i = 0; i < this.currentPlayers.length; i++) {
+    for (let i = 0; i < deadPlayerIndexes.length; i++) {
       const deadPlayerIndex: number = deadPlayerIndexes[i];
       if (this.isPlayerDead(this.currentPlayers[deadPlayerIndex].player)) {
         this.currentPlayers[deadPlayerIndex] = new ArrayItem(this.players[this.newPlayerIndex], this.newPlayerIndex);
@@ -102,17 +106,13 @@ export class Game {
     }
   }
 
-  private canPlayOneMoreRound() {
-    return this.quantityOfPlayers > 2 ? true : false;
-  }
-
   private playOneRound() {
     this.bina.attack(this.currentPlayers[0], this.currentPlayers[1]);
 
     this.swapCurrentPlayers();
 
     const deadBodyIndexes = this.findDeadBodies();
-    if (deadBodyIndexes !== null) {
+    if (deadBodyIndexes !== null && this.canReplaceDeadPlayer()) {
       this.replaceDeadBodies(deadBodyIndexes);
     }
 
@@ -121,9 +121,7 @@ export class Game {
 
   public start() {
     for (; !this.isGameOver(); ) {
-      if (this.canPlayOneMoreRound()) {
-        this.playOneRound();
-      }
+      this.playOneRound();
     }
 
     this.announceWinner();
