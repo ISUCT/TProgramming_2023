@@ -1,11 +1,11 @@
-import { ActionType } from './player';
+import { ActionType } from './affinities';
+import { IStatus } from './statuses';
 
-export interface IAction{
-    name: string
-    type: ActionType
-    damage?: number
-    burn?: boolean
-    freeze?: boolean
+export interface IAction {
+  name: string;
+  type: ActionType;
+  damage?: number;
+  status?: IStatus;
 }
 
 abstract class Action {

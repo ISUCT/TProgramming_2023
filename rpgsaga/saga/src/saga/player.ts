@@ -1,5 +1,6 @@
 import { Ability, IAction, Attack, State } from './actions';
 import { Aff, AffinityList, ActionType } from './affinities';
+import { IStatus, Status } from './statuses';
 
 export abstract class Player {
   health: number;
@@ -47,8 +48,8 @@ export abstract class Player {
 
     this.health -= input.damage;
     if (this.isFrozenCounter === 0) {
-      if (input.setEffectFreeze) {
-        this.isFrozenCounter = 1;
+      if (input.status.turnCounter > 0) {
+        this.isFrozenCounter = input.status.turnCounter;
       }
     } else {
       this.isFrozenCounter -= 1;
@@ -70,14 +71,12 @@ export abstract class Player {
 
 export class ActionResult {
   damage: number;
-  setEffectFreeze: boolean;
-  setEffectBurn: boolean;
+  status: IStatus;
   action: IAction;
 
   constructor(action: IAction) {
     this.damage = action.damage !== undefined ? action.damage : 0;
-    this.setEffectFreeze = action.freeze !== undefined ? action.freeze : false;
-    this.setEffectBurn = action.burn !== undefined ? action.burn : false;
+    this.status = action.status !== undefined ? action.status : new Status('');
     this.action = action;
   }
 }
