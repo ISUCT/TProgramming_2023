@@ -1,8 +1,11 @@
+import { ActionType } from './affinities';
+
 export interface IStatus {
   name: string;
-  turnCounter: number;
-  dmgPerTurn: number;
-  skipTurn: boolean;
+  dmgType: ActionType;
+  dmgPerTurn?: number;
+  turnCounter?: number;
+  skipTurn?: boolean;
 }
 
 export class Status {
@@ -10,4 +13,11 @@ export class Status {
   public turnCounter: number; // use negative number to make status never cast off
   public dmgPerTurn: number;
   public skipTurn: boolean;
+
+  constructor(name: string, dmgType: ActionType, dmgPerTurn = 0, turnCounter = 0, skipTurn = false) {
+    this.name = name;
+    this.turnCounter = turnCounter;
+    this.dmgPerTurn = dmgPerTurn;
+    this.skipTurn = skipTurn;
+  }
 }
