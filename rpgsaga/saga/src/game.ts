@@ -42,13 +42,21 @@ export class Game {
     this.currentPlayers[1] = temp;
   }
 
+  private announceDeadBody(deadBody: Character): void {
+    console.log(`${deadBody.name} (${deadBody.class}) has died!`);
+  }
+
   private findDeadBodies(): number[] {
     const deadBodiesIndexes: number[] = [];
 
     for (let i = 0; i < this.currentPlayers.length; i++) {
-      if (this.isPlayerDead(this.currentPlayers[i].player)) {
+      const currectPlayer = this.currentPlayers[i].player;
+
+      if (this.isPlayerDead(currectPlayer)) {
         this.quantityOfPlayers -= 1;
         deadBodiesIndexes.push(i);
+
+        this.announceDeadBody(currectPlayer);
       }
     }
 
@@ -97,9 +105,9 @@ export class Game {
     const deadPlayersCount: number = this.countDeadPlayers();
     if (deadPlayersCount === 1) {
       for (let i = 0; i < this.currentPlayers.length; i++) {
-        const currentPlayer = this.currentPlayers[i];
-        if (!this.isPlayerDead(currentPlayer.player)) {
-          return currentPlayer.player;
+        const currentPlayer = this.currentPlayers[i].player;
+        if (!this.isPlayerDead(currentPlayer)) {
+          return currentPlayer;
         }
       }
     }
@@ -115,13 +123,28 @@ export class Game {
     }
   }
 
-  private playOneRound(): void {
+  private announceCurrentRoundPlayers(): void {
+    const firstPlayer = this.currentPlayers[0].player;
+    const secondPlayer = this.currentPlayers[1].player;
+    console.log(`${firstPlayer.name} (${firstPlayer.class}) vs ${secondPlayer.name} (${secondPlayer.class})`);
+  }
+
+  private playOneTurn(): number[] {
     this.bina.attack(this.currentPlayers[0], this.currentPlayers[1]);
 
     this.swapCurrentPlayers();
 
-    const deadBodyIndexes = this.findDeadBodies();
-    if (deadBodyIndexes !== null && this.canReplaceDeadPlayer()) {
+    return this.findDeadBodies();
+  }
+
+  private playOneRound(): void {
+    let deadBodyIndexes: number[] = null;
+
+    for (; deadBodyIndexes === null; ) {
+      deadBodyIndexes = this.playOneTurn();
+    }
+
+    if (this.canReplaceDeadPlayer()) {
       this.replaceDeadBodies(deadBodyIndexes);
       this.restoreCurrentPlayers();
     }
@@ -129,7 +152,9 @@ export class Game {
 
   public start(): void {
     for (; !this.isGameOver(); ) {
+      this.announceCurrentRoundPlayers();
       this.playOneRound();
+      console.log('\n');
     }
 
     const winner: Character = this.findWinner();

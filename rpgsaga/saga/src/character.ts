@@ -6,6 +6,7 @@ export abstract class Character {
 
   // public effects: Effect[] = [];
 
+  public readonly maxHealthPoints: number;
   private _healthPoints: number;
   private _strength: number;
 
@@ -25,6 +26,7 @@ export abstract class Character {
     this.name = name;
     this.class = characterClass;
     this.healthPoints = healthPoints;
+    this.maxHealthPoints = healthPoints;
     this._strength = 5;
   }
 
