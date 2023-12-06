@@ -1,3 +1,5 @@
+import { cloneDeep } from 'lodash';
+
 import { Bina } from './bina';
 import { Character } from './character';
 import { CharacterClass } from './characterClasses';
@@ -23,7 +25,7 @@ export class Game {
       this.players.push(character);
     }
 
-    this.currentPlayers = [new ArrayItem(this.players[0], 0), new ArrayItem(this.players[1], 1)];
+    this.currentPlayers = [new ArrayItem(cloneDeep(this.players[0]), 0), new ArrayItem(cloneDeep(this.players[1]), 1)];
   }
 
   private isPlayerDead(player: Character): boolean {
@@ -65,7 +67,10 @@ export class Game {
     for (let i = 0; i < deadPlayerIndexes.length; i++) {
       const deadPlayerIndex: number = deadPlayerIndexes[i];
       if (this.isPlayerDead(this.currentPlayers[deadPlayerIndex].player)) {
-        this.currentPlayers[deadPlayerIndex] = new ArrayItem(this.players[this.newPlayerIndex], this.newPlayerIndex);
+        this.currentPlayers[deadPlayerIndex] = new ArrayItem(
+          cloneDeep(this.players[this.newPlayerIndex]),
+          this.newPlayerIndex,
+        );
         this.newPlayerIndex += 1;
       }
     }
@@ -80,6 +85,12 @@ export class Game {
     }
 
     return counter;
+  }
+
+  private restoreCurrentPlayers(): void {
+    for (let i = 0; i < this.currentPlayers.length; i++) {
+      this.currentPlayers[i].player = cloneDeep(this.players[this.currentPlayers[i].index]);
+    }
   }
 
   private findWinner(): Character {
@@ -112,6 +123,7 @@ export class Game {
     const deadBodyIndexes = this.findDeadBodies();
     if (deadBodyIndexes !== null && this.canReplaceDeadPlayer()) {
       this.replaceDeadBodies(deadBodyIndexes);
+      this.restoreCurrentPlayers();
     }
   }
 
