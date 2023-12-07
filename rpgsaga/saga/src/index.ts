@@ -1,16 +1,20 @@
-import { Phone } from './phone';
+function randElement(arr) {
+    if (arr.length === 0) {
+      return undefined;
+    }
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    return arr[randomIndex];
+  }
 
-const first = new Phone('+7900-000 000 (123)', 1990, 'Телефон 1');
-first.year = 1998;
+function name_generator() : string {
+    let name_list1 = ["Theo", "Neo", "Proto", "Sonato", "Ahillo", "Elde", "Akwe"]
+    let name_list2 = ["win", "dor", "gen", "slav", "strator", "richt", "lord"]
+    return randElement(name_list1) + randElement(name_list2)
+}
 
-first.year = -1998;
-first.call('12345');
-first.endCall();
-
-const second = new Phone('+799900000', -5);
-// second.name = 'Телефон 2';
-console.log(second.year);
-second.call('12345');
-second.endCall();
-
-console.log(first, second, Phone.phoneCount);
+abstract class Player {
+    abstract name: string;
+    abstract health: number;
+    abstract strength: number;
+}
+console.log(name_generator())
