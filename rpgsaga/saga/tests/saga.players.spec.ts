@@ -1,4 +1,3 @@
-import { Player } from '../src/saga/player';
 import { PlayerGenerator } from '../src/saga/playerGenerator';
 
 describe('Testing creating players', () => {

@@ -10,24 +10,40 @@ export class PlayerGenerator {
   public createPlayers(knights: number, archers: number, mages: number): Player[] {
     const result = [];
     for (let i = 0; i < knights; i++) {
-      const name = this.nameBank[Math.abs(Math.random() * this.nameBank.length)];
-      const hp = randomIntFromInterval(this.statsBank.knight.hpClamp[0], this.statsBank.knight.hpClamp[1]);
-      const strength = randomIntFromInterval(this.statsBank.knight.stClamp[0], this.statsBank.knight.stClamp[1]);
-      result.push(createPlayer(name, hp, strength, 'knight'));
+      result.push(this.generate('knight'));
     }
     for (let i = 0; i < archers; i++) {
-      const name = this.nameBank[Math.abs(Math.random() * this.nameBank.length)];
-      const hp = randomIntFromInterval(this.statsBank.archer.hpClamp[0], this.statsBank.archer.hpClamp[1]);
-      const strength = randomIntFromInterval(this.statsBank.archer.stClamp[0], this.statsBank.archer.stClamp[1]);
-      result.push(createPlayer(name, hp, strength, 'knight'));
+      result.push(this.generate('archer'));
     }
     for (let i = 0; i < mages; i++) {
-      const name = this.nameBank[Math.abs(Math.random() * this.nameBank.length)];
-      const hp = randomIntFromInterval(this.statsBank.mage.hpClamp[0], this.statsBank.mage.hpClamp[1]);
-      const strength = randomIntFromInterval(this.statsBank.mage.stClamp[0], this.statsBank.mage.stClamp[1]);
-      result.push(createPlayer(name, hp, strength, 'knight'));
+      result.push(this.generate('mage'));
     }
     return result;
+  }
+
+  private generate(type: string): Player {
+    const name = this.nameBank[randomIntFromInterval(0, this.nameBank.length - 1)];
+    const clamps = [];
+    switch (type) {
+      case 'knight':
+        clamps[0] = this.statsBank.knight.hpClamp;
+        clamps[1] = this.statsBank.knight.stClamp;
+        break;
+      case 'archer':
+        clamps[0] = this.statsBank.archer.hpClamp;
+        clamps[1] = this.statsBank.archer.stClamp;
+        break;
+      case 'mage':
+        clamps[0] = this.statsBank.mage.hpClamp;
+        clamps[1] = this.statsBank.mage.stClamp;
+        break;
+    }
+    return createPlayer(
+      name,
+      randomIntFromInterval(clamps[0][0], clamps[0][1]),
+      randomIntFromInterval(clamps[1][0], clamps[1][1]),
+      type,
+    );
   }
 }
 
