@@ -1,16 +1,28 @@
-import { Phone } from './phone';
+import { Document } from "./Document";
 
-const first = new Phone('+7900-000 000 (123)', 1990, 'Телефон 1');
-first.year = 1998;
+//Определяем класс, который расширяет класс Document и реализует интерфейс для печати
+export class ExtendedDocument extends Document implements Printable {
+  public author: string;
 
-first.year = -1998;
-first.call('12345');
-first.endCall();
+//Конструктор для инициализации заголовка, содержимого, автора и формата расширенного документа
+  constructor(title: string, content: string, author: string, format: string = "A4") {
+    super(title, content, format);
+    this.author = author;
+  }
 
-const second = new Phone('+799900000', -5);
-// second.name = 'Телефон 2';
-console.log(second.year);
-second.call('12345');
-second.endCall();
+//Метод печати расширенного документа
+  public print(): void {
+    console.log(`Printing extended document: ${this.title} by ${this.author}`);
+  }
 
-console.log(first, second, Phone.phoneCount);
+//Метод реализации интерфейса
+  public implementInterface(): void {
+    console.log("Implementing interface method");
+  }
+}
+
+//Определяем доступный для печати интерфейс с помощью методов print и implementInterface
+interface Printable {
+  print(): void;
+  implementInterface(): void;
+}
