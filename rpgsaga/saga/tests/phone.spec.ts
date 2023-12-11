@@ -1,4 +1,4 @@
-import { Phone } from '../src/phone';
+import { Phone } from '../src/Document';
 
 describe('Testing phone constructor', () => {
   it('Phone should be created', () => {

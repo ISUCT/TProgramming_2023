@@ -1,0 +1,15 @@
+export function digitalRoot(n: number): number {
+  while (n >= 10) {
+    n = getDigitalSum(n);
+  }
+  return n;
+}
+
+function getDigitalSum(num: number): number {
+  let sum = 0;
+  while (num > 0) {
+    sum += num % 10;
+    num = Math.floor(num / 10);
+  }
+  return sum;
+}
