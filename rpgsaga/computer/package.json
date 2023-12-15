@@ -9,6 +9,7 @@
     "typescript": "^5.3.2"
   },
   "scripts": {
-    "test": "jest computer.test.ts"
+    "test": "jest tests/computer.test.ts",
+    "start": "ts-node --esm src/main.ts"
   }
 }
