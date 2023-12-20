@@ -1,6 +1,6 @@
-import { Ability, IAction, Attack, State } from './actions';
+import { IAction, Attack, Skill } from './actions';
 import { Aff, AffinityList, ActionType } from './affinities';
-import { IStatus, Status } from './statuses';
+import { IStatus } from './statuses';
 
 export abstract class Player {
   health: number;
@@ -8,12 +8,14 @@ export abstract class Player {
   readonly strength: number;
   readonly name: string;
 
-  protected status: IStatus[] = [];
+  protected statuses: IStatus[] = [];
   protected isFrozenCounter = 0;
 
   protected currentAttack = 0;
 
   affinities: AffinityList;
+
+  protected abilityList: Skill[] = [];
 
   constructor(health: number, strength: number, name: string, affinity: Aff[]) {
     this.health = health;
@@ -27,59 +29,89 @@ export abstract class Player {
     return new ActionResult(new Attack(this.strength));
   }
 
-  public ability(): ActionResult {
+  public ability(index: number): ActionResult {
+    const ability = this.abilityList[index];
     // when no ability, return null
-    return new ActionResult(new Ability('debug ability', ActionType.Support, 0, false, false));
+    if (ability !== undefined) {
+      if (ability.type === ActionType.Support) {
+        this.applySupportSkill(ability);
+      }
+      return new ActionResult(ability);
+    } else {
+      throw new Error(`Ability ${String(index)} doesnt exist`);
+    }
   }
 
-  public act(): ActionResult {
-    if (this.isFrozenCounter === 0) {
+  public act(): ActionResult | undefined {
+    let isSkipping = false;
+    for (let i = 0; i < this.statuses.length; i++) {
+      if (this.statuses[i].skipTurn === true) {
+        isSkipping = true;
+        break;
+      }
+    }
+    if (!isSkipping) {
       if (randomBool() === 0) {
         return this.attack();
       } else {
-        return this.ability();
+        return this.ability(0);
       }
-    } else {
-      return new ActionResult(new State('frozen'));
     }
   }
 
-  public passTurn(input: ActionResult): StateChange {
-    const res = new StateChange(0, false, false, new State(''));
+  public passTurn(input?: ActionResult): PassResult {
+    const reflect = new Skill('reflect', ActionType.Normal, 0);
 
-    // deal with damage, no defence
-    this.health -= this.calcDamage(input.damage, input.action.type, this.affinities);
-
-    for (let i = 0; i < this.status.length; i++) {
-      const element = this.status[i];
-      element.turnCounter--;
-      this.health -= this.calcDamage(input.status.dmgPerTurn, input.status.dmgType, this.affinities);
+    if (input !== undefined) {
+      const attackDmg = this.calcDamage(input.damage, input.action.type);
+      if (attackDmg[1] === Aff.Reflect) {
+        reflect.damage = attackDmg[0];
+      } else {
+        this.health -= attackDmg[0];
+      }
     }
+
+    for (let i = 0; i < this.statuses.length; i++) {
+      const element = this.statuses[i];
+      element.turnCounter--;
+      if (element.turnCounter >= 0) {
+        this.health -= element.dmgPerTurn;
+      }
+      if (element.turnCounter === -1) {
+        this.statuses.splice(i, 1);
+      }
+    }
+
     // is likely to be mutated afterwards, be careful!
     // there's no check for stacking lots of same statuses!
-    this.status.push(input.status);
+    if (input !== undefined && input.status !== undefined) {
+      const aff = this.calcDamage(0, input.status.dmgType)[1];
+      if (aff !== Aff.Block && aff !== Aff.Reflect && aff !== Aff.Resist) {
+        this.statuses.push(input.status);
+      }
+    }
 
-    // this is from when flags and counters were used for statuses
-    // if (this.isFrozenCounter === 0) {
-    //   if (input.status.turnCounter > 0) {
-    //     this.isFrozenCounter = input.status.turnCounter;
-    //   }
-    // } else {
-    //   this.isFrozenCounter -= 1;
-    //   res.isFrosenCancelled = true;
-    //   res.action = new State('unfrozen');
-    // }
-    // if (this.isBurned) {
-    //   this.health -= 2;
-    // } else {
-    //   this.isBurned = input.setEffectBurn;
-    // }
-    return res;
+    return new PassResult(this.statuses, reflect);
   }
 
-  protected calcDamage(dmg: number, dmgType: ActionType, affs: AffinityList): number {
+  public simplePassTurn(input?: IAction) {
+    // this one just takes damage and applies it to player, no affinities, no effects
+    // used for reflect damage
+    if (input !== undefined && input.damage !== undefined) {
+      this.health -= input.damage;
+    }
+  }
+
+  protected applySupportSkill(input: IAction) {
+    if (input.damage !== undefined) {
+      this.health += input.damage;
+    }
+  }
+
+  protected calcDamage(dmg: number, dmgType: ActionType): [number, Aff] {
+    const affs = this.affinities;
     // compare damage type
-    let currAff: Aff;
+    let currAff: Aff = Aff.Block;
     switch (dmgType) {
       case ActionType.Normal:
         currAff = affs.Normal;
@@ -95,26 +127,26 @@ export abstract class Player {
         break;
       default:
         // idk how to cancel if dmgType is Support
-        return 0;
+        return [0, currAff];
         break;
     }
     switch (currAff) {
       case Aff.Block:
-        return 0;
+        return [0, currAff];
         break;
       case Aff.Resist:
         // here's the damage amplifier for Resist
-        return dmg * 0.8;
+        return [dmg * 0.8, currAff];
         break;
       case Aff.Weak:
-        return dmg * 1.6;
+        // here's the damage amplifier for Weak
+        return [dmg * 1.6, currAff];
         break;
       case Aff.Normal:
-        return dmg;
+        return [dmg, currAff];
         break;
       case Aff.Reflect:
-        // NO IMPLEMINTATION YET, idk how to make counterattack damage
-        return 0;
+        return [dmg, currAff];
         break;
     }
   }
@@ -126,27 +158,23 @@ export abstract class Player {
 
 export class ActionResult {
   damage: number;
-  status: IStatus;
+  status: IStatus | undefined;
   action: IAction;
 
   constructor(action: IAction) {
     this.damage = action.damage !== undefined ? action.damage : 0;
-    this.status = action.status !== undefined ? action.status : new Status('');
+    this.status = action.status;
     this.action = action;
   }
 }
 
-export class StateChange {
-  isBurnedCancelled: boolean;
-  isFrosenCancelled: boolean;
-  pointsHealed: number;
-  action: IAction;
+export class PassResult {
+  statuses: IStatus[];
+  reflectiveAttack: IAction;
 
-  constructor(hpAdded: number, burnCancel: boolean, frozenCancel: boolean, action: IAction) {
-    this.pointsHealed = hpAdded;
-    this.isBurnedCancelled = burnCancel;
-    this.isFrosenCancelled = frozenCancel;
-    this.action = action;
+  constructor(statuses: IStatus[], reflect: IAction) {
+    this.statuses = statuses;
+    this.reflectiveAttack = reflect;
   }
 }
 

@@ -1,4 +1,4 @@
-import { Player, ActionResult, StateChange } from './player';
+import { Player, ActionResult, PassResult } from './player';
 
 export class ConsoleLogger {
   private isEnabled: boolean;
@@ -10,9 +10,15 @@ export class ConsoleLogger {
     this.isEnabled = enable;
   }
 
-  public actionLog(attacker: Player, input: ActionResult): void {
+  public actionLog(attacker: Player, input?: ActionResult): void {
     if (this.isEnabled) {
       const defender = this.player1 === attacker ? this.player2 : this.player1;
+      if (input === undefined) {
+        console.log('(%s) %s пропускает ход', attacker.constructor.name, attacker.name);
+        return;
+      }
+
+      // redo
       switch (input.action.constructor.name) {
         case 'Attack':
           console.log(
@@ -49,9 +55,6 @@ export class ConsoleLogger {
           if (input.action.name === 'frozen') {
             console.log('(%s) %s заморожен и не может двигаться', attacker.constructor.name, attacker.name);
           }
-
-        default:
-          break;
       }
     }
   }
@@ -88,9 +91,22 @@ export class ConsoleLogger {
     }
   }
 
-  public stateLog(player: Player, input: StateChange): void {
+  public stateLog(player: Player, input: PassResult): void {
     if (this.isEnabled) {
-      if (input.action.name === 'unfrozen') {
+      // redo, log doesn't know about statuses' real damage
+      for (let i = 0; i < input.statuses.length; i++) {
+        const element = input.statuses[i];
+        if (element.dmgPerTurn > 0) {
+          console.log(
+            '(%s) %s получает %d от статуса %s',
+            player.constructor.name,
+            player.name,
+            element.dmgPerTurn,
+            element.name,
+          );
+        }
+      }
+      if (input.statuses) {
         console.log('(%s) %s разморожен и готов атаковать', player.constructor.name, player.name);
       }
     }

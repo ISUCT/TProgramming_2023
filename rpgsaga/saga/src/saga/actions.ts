@@ -27,27 +27,14 @@ export class Attack extends Action {
   }
 }
 
-export class AbilityAttack extends Action {
+export class Skill extends Action {
   damage: number;
-  burnEffect: boolean;
-  freezeEffect: boolean;
+  status: IStatus | undefined;
 
-  constructor(name: string, type: ActionType, dmg: number, burn: boolean, freeze: boolean) {
+  constructor(name: string, type: ActionType, dmg: number, status?: IStatus) {
     super(name, type);
     this.damage = dmg;
-    this.burnEffect = burn;
-    this.freezeEffect = freeze;
-  }
-}
-
-export class Ability extends Action {
-  burnEffect: boolean;
-  freezeEffect: boolean;
-
-  constructor(name: string, type: ActionType, dmg: number, burn: boolean, freeze: boolean) {
-    super(name, type);
-    this.burnEffect = burn;
-    this.freezeEffect = freeze;
+    this.status = status;
   }
 }
 
