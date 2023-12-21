@@ -1,5 +1,13 @@
 {
-    "compilerOptions": {
-        "types": ["jest", "node"]
-    }
+
+	"compilerOptions": {
+		
+		"skipLibCheck" : true ,
+		"esModuleInterop" : true ,
+		
+		
+		"types" : ["jest", "node"]
+		
+	}
+
 }
