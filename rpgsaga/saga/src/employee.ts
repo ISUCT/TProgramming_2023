@@ -14,13 +14,20 @@ export class Employee extends Person {
 
     constructor(name: string, age: number, salary: number, position: string){
         super(name, age)
+        if (age < 18){
+            throw new Error('The Employee must of legal age')
+        }
+
+        if (salary < 0){
+            throw new Error('Salary must be non-negative')
+        }
         this.salary = salary
         this.aPosition = position
     }
 
     set asalary(salary: number){
         if (salary < 0){
-            throw new Error("Salary must be non-negative")
+            throw new Error('Salary must be non-negative')
         }
         this.salary = salary
         
@@ -30,9 +37,9 @@ export class Employee extends Person {
         this.aPosition = position
     }
 
-    set a_age(age: number){
+    set aage(age: number){
         if (age < 18){
-            throw new Error("The person must be of legal age")
+            throw new Error('The Employee must of legal age')
         }
         this.age = age
     }
