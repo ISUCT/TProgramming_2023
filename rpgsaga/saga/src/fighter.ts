@@ -1,7 +1,5 @@
 import { Hero , Hero_type } from "./hero";
 
-import { log_spell_attack } from "./log" ;
-
 
 
 export
@@ -53,7 +51,7 @@ Hero
 		);
 		
 		
-		log_spell_attack(
+		this.logger.log_spell_attack(
 			this
 			,
 			"Smash"

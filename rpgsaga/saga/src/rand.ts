@@ -6,6 +6,7 @@ import  {
 	Hero_type_class
 } from "./data" ;
 
+import { Logger } from "./logger";
 
 
 export function rand_range(
@@ -121,7 +122,8 @@ function rand_hero_type()
 };
 
 
-export function rand_hero()
+export function rand_hero
+( logger : Logger )
 {
 	var hero_type = rand_hero_type();
 	
@@ -134,6 +136,8 @@ export function rand_hero()
 				hp : rand_hero_hp( hero_type )
 				,
 				damage_range : rand_hero_damage_range( hero_type )
+				,
+				logger
 			}
 		)
 	);

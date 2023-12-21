@@ -1,4 +1,6 @@
-import { log_attack , log_attack_miss } from "./log";
+
+import { Logger } from "./logger" ;
+
 
 
 import { rand_range } from "./rand";
@@ -10,6 +12,7 @@ type Hero_config = {
 	hp : number ;
 	damage_range : [ number  , number ] ;
 	miss_chance_init : number ;
+	logger : Logger ;
 };
 
 export type Hero_type = (
@@ -178,6 +181,7 @@ Hero
 	
 	
 	
+	protected logger : Logger
 	
 	constructor( config : Hero_config )
 	{
@@ -190,6 +194,8 @@ Hero
 			damage_range
 			,
 			miss_chance_init
+			,
+			logger
 		} = config ;
 		
 		this.name = name ;
@@ -199,8 +205,10 @@ Hero
 		
 		this.damage_range = damage_range ;
 		
-		this.miss_chance_init = miss_chance_init
+		this.miss_chance_init = miss_chance_init;
 		this.miss_chance = this.miss_chance_init ;
+		
+		this.logger = logger ;
 	};
 	
 	
@@ -248,7 +256,7 @@ Hero
 		if( rnd < this.miss_chance )
 		{
 			
-			log_attack_miss(
+			this.logger.log_attack_miss(
 				this
 				,
 				target
@@ -264,8 +272,8 @@ Hero
 			var dmg_deal = (
 				target.perceive( this.damage )
 			);
-		
-			log_attack( this , target , dmg_deal );
+			
+			this.logger.log_attack( this , target , dmg_deal );
 			
 			
 			return "attack" ;

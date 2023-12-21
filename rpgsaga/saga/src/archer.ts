@@ -1,8 +1,6 @@
 
 import { Hero , Hero_type , Hero_act_effect } from "./hero";
 
-import { log_spell , log_act_effect } from "./log";
-
 
 
 export
@@ -63,7 +61,7 @@ Hero
 				);
 				
 				
-				log_act_effect(
+				this.logger.log_act_effect(
 					target
 					,
 					`loses ${ dmg_deal.toFixed(2) }hp`
@@ -81,7 +79,7 @@ Hero
 		);
 		
 		
-		log_spell(
+		this.logger.log_spell(
 			this
 			,
 			"Arson"

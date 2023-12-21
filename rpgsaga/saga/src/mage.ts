@@ -1,7 +1,6 @@
 
 import { Hero , Hero_type , Hero_attack_result } from "./hero";
 
-import { log_spell , log_act_effect } from "./log";
 
 
 
@@ -65,7 +64,7 @@ Hero
 			( target )=> {
 				
 				
-				log_act_effect(
+				this.logger.log_act_effect(
 					target
 					,
 					"misses an act"
@@ -102,7 +101,7 @@ Hero
 		);
 		
 		
-		log_spell(
+		this.logger.log_spell(
 			this
 			,
 			"Oblivious"

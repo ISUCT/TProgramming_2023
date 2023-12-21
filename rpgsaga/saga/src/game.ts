@@ -1,18 +1,7 @@
 import { Hero } from "./hero";
 import { Fighter } from "./fighter";
 
-
-import {
-	log_empty
-	,
-	log_round
-	,
-	log_versus_hp
-	,
-	log_round_winner
-	,
-	log_great_winner
-} from "./log" ;
+import { Logger } from "./logger" ;
 
 
 import { rand_hero , rand_arr_elem } from "./rand";
@@ -24,6 +13,9 @@ export
 class Game
 {
 
+	
+	private logger = new Logger ;
+	
 	
 	constructor( hero_count : number )
 	{
@@ -62,7 +54,7 @@ class Game
 		{
 			
 			
-			this.heroes[ i ] = rand_hero() ;
+			this.heroes[ i ] = rand_hero( this.logger ) ;
 			
 			
 		};
@@ -109,9 +101,9 @@ class Game
 			
 			
 			actor.act( target ) ;
-			log_versus_hp( hero_left , hero_right );
+			this.logger.log_versus_hp( hero_left , hero_right );
 			
-			log_empty();
+			this.logger.log_empty();
 			
 			
 			await wait( 3000 );
@@ -146,7 +138,7 @@ class Game
 	)
 	{
 		
-		log_round(
+		this.logger.log_round(
 			idx
 			,
 			hero_left
@@ -164,8 +156,8 @@ class Game
 		);
 		
 		
-		log_round_winner( fight_result.winner );
-		log_empty();
+		this.logger.log_round_winner( fight_result.winner );
+		this.logger.log_empty();
 		
 		
 		return (
@@ -243,7 +235,7 @@ class Game
 		
 		
 		var great_winner = this.heroes[ 0 ] ;
-		log_great_winner( great_winner );
+		this.logger.log_great_winner( great_winner );
 		
 		
 	};
