@@ -2,8 +2,7 @@ import { PlayerGenerator } from '../src/saga/playerGenerator';
 
 describe('Testing creating players', () => {
   it('should return as much players as we ordered', () => {
-    const gen = new PlayerGenerator();
-    const players = gen.createPlayers(4, 4, 4);
+    const players = PlayerGenerator.createPlayers(4, 4, 4);
     expect(players).toBeDefined();
     const nameList = {
       knight: 0,

@@ -16,11 +16,18 @@ export class Battle {
     let currentTurn = randomBool();
     let currentPlayer = this.opponents[currentTurn];
     while (this.opponents[0].health > 0 && this.opponents[1].health > 0) {
+      // first player acts
       const action = currentPlayer.act();
+      // log this action
       logger.actionLog(currentPlayer, action);
+      // reverse the players, now opponent is the main one
       currentTurn = currentTurn === 0 ? 1 : 0;
       currentPlayer = this.opponents[currentTurn];
+      // our new current player gets damage and reacts to statuses
       const res = currentPlayer.passTurn(action);
+      // if player was hit by attack they could reflect, pass it on opponent
+      this.opponents[currentTurn === 0 ? 1 : 0].simplePassTurn(res.reflectiveAttack);
+      // log status effects
       logger.stateLog(currentPlayer, res);
     }
     logger.endLog(this.opponents[0].health <= 0 ? this.opponents[0] : this.opponents[1]);

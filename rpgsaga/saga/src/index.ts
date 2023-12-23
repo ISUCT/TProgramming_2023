@@ -1,4 +1,4 @@
-import { Archer, Knight, Mage } from './saga/classes';
+import { PlayerGenerator } from './saga/playerGenerator';
 // import { Television } from './tv';
 // import { Channel } from './channel';
 import { Tournament } from './saga/tournaments';
@@ -23,9 +23,6 @@ import { Tournament } from './saga/tournaments';
 // console.log(tv.prevChannel());
 // console.log(tv.prevChannel());
 
-const p1 = new Knight(12, 4, 'Tatsuya');
-const p2 = new Mage(11, 2, 'May');
-const p3 = new Archer(13, 2, 'Robin');
-const p4 = new Mage(10, 3, 'Ann');
-const tournament = new Tournament([p1, p2, p3, p4], true);
+const players = PlayerGenerator.createPlayers(1, 1, 2);
+const tournament = new Tournament(players, true);
 tournament.startTournament();
