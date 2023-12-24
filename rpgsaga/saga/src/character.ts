@@ -1,11 +1,11 @@
 import { CharacterClass } from './characterClasses';
-import { StatusEffect } from './statusEffects/statusEffect';
+import { DoublyLinkedList } from './dataStructures/doublyLinkedList/doublyLinkedList';
 
 export abstract class Character {
   public name: string;
   public class: string;
 
-  public statusEffects: StatusEffect[] = [];
+  public statusEffects: DoublyLinkedList;
 
   public readonly maxHealthPoints: number;
   private _healthPoints: number;

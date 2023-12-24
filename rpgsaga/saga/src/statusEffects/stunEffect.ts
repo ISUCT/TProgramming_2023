@@ -1,8 +1,6 @@
 import { Character } from '../character';
 
-import { StatusEffect } from './statusEffect';
-
-export class FireEffect implements StatusEffect {
+export class StunEffect {
   private _target: Character;
   private _usesRemaining: number;
 
@@ -23,11 +21,10 @@ export class FireEffect implements StatusEffect {
   }
 
   constructor() {
-    this._usesRemaining = 3;
+    this._usesRemaining = 1;
   }
 
   public apply(): void {
-    this.target.healthPoints -= 5;
     this.usesRemaining -= 1;
   }
 

@@ -11,7 +11,8 @@ export abstract class Spell {
   }
 
   public cast(target: Character) {
+    target.healthPoints -= this.points;
     this.statusEffect.target = target;
-    target.statusEffects.push(this.statusEffect);
+    target.statusEffects.addLast(this.statusEffect);
   }
 }
