@@ -1,0 +1,17 @@
+export const pigIt = (a : string) : string =>  {
+    let splitword = a.split(" ");
+    let pigword = ""; 
+    for(let i = 0; i <splitword.length;i++){
+        let temp = "";
+        if (splitword[i][0]!="!" && splitword[i][0]!="." && splitword[i][0]!="?" && splitword[i][0]!=undefined){
+            temp = splitword[i][0] + "ay";
+            splitword[i] = splitword[i].slice(1)
+            splitword[i] += temp;
+        }
+        if (splitword[i][0]==undefined)
+         splitword[i]="";
+        pigword +=splitword[i]+" ";
+    }
+    pigword = pigword.slice(0, pigword.length-1);
+    return pigword;
+}

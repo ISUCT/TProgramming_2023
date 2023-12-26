@@ -1,0 +1,11 @@
+export const digitalRoot = (n:number):number => {
+    let chislo = 0;
+    while (n.toString().length>1){
+        chislo = 0;
+        for(let i = 0;i<n.toString().length;i++){
+            chislo+=Number(n.toString()[i])
+        }
+        n = chislo;
+    }
+    return n;
+  }

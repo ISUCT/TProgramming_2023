@@ -1,0 +1,17 @@
+1.export function duplicateEncode(word: string){
+    var stroka =""
+    word = word.toLowerCase()
+    for(let i = 0; i<word.length; i++){
+       for (let j =0; j<word.length;j++){
+            if (i==j)
+                continue
+            if (word[i]==word[j]){
+                stroka+=")"
+                break
+            }
+       }
+       if (stroka.length<=i)
+            stroka +="("
+    }
+    return stroka
+}

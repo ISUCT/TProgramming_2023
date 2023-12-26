@@ -1,0 +1,12 @@
+function deepCount(a ){
+  let ans = 0
+  for (let i of a){
+    ans++;
+    if (Array.isArray(i))
+     ans+= deepCount(i);}
+  return ans;
+}
+
+function ret(a){
+  return deepCount(a);
+}

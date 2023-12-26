@@ -1,0 +1,18 @@
+export const towerBuilder = (nFloors: number): string[] => {
+    let tower: string[];
+    tower = [];
+    let stroka ="";
+    let low = nFloors*2-1;
+    let highspace = (low-1)/2;
+    for(let i = 0; i < nFloors; i++){
+        stroka="";
+        while(stroka.length<highspace-i)
+            stroka+=" ";
+        while(stroka.length<highspace-i+1+2*i)
+            stroka+="*";
+        while(stroka.length<highspace-i+1+2*i+highspace-i)
+            stroka+=" ";
+        tower.push(stroka);
+    }
+    return tower
+  }

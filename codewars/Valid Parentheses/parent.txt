@@ -1,0 +1,18 @@
+function validParentheses(parens) {
+	let stack="";
+	for (let i of parens) {
+		if (i == "(" || stack.length == 0) {
+			stack+=i;
+		} else {
+			if (stack[stack.length-1] == "(") {
+				stack = stack.slice(0,stack.length-1);
+			} else {
+				stack+= i;
+			}
+		}
+	}
+  if(stack.length==0)
+	  return true;
+  else
+    return false;
+}

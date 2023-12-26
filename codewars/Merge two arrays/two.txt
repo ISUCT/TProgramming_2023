@@ -1,0 +1,14 @@
+function mergeArrays(a, b) {
+  let ans = [];
+  for(let i = 0; i <Math.max(a.length, b.length); i++){
+    if (a.length-1<i){
+      ans.push(b[i]);
+    } else if (b.length -1<i){
+      ans.push(a[i]);
+    } else{
+    ans.push(a[i]);
+    ans.push(b[i]);
+    }
+  }
+  return ans;
+}
