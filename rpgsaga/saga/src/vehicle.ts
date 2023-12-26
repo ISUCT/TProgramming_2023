@@ -1,9 +1,12 @@
+import { error } from "console";
+
 export abstract class Vehicle {
     public year: number;
     private kph: number;
 
     constructor(vyear: number, speed: number, public name?: string) {
-        this.year = vyear;
+        this.vyear = vyear;
+        
         this.speed = speed;
         this.name = name;
     }
@@ -16,6 +19,14 @@ export abstract class Vehicle {
     get speed(): number {
         return this.kph;
     }
+    
+    set vyear(vyear: number){
+        if(vyear<1950){
+            throw new Error("Too old car");
+        }
+        this.year = vyear; 
+    }
+
 
     abstract signal(sig: string): string;
 }
