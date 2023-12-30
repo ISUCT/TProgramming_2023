@@ -1,4 +1,5 @@
-import { Movie } from "../src/movie";
+
+import { Movie } from "../../src/old_files/movie";
 
 describe("Testing movie constructor", () => {
     it("Movie should be created", () => {

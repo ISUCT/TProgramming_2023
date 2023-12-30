@@ -1,4 +1,4 @@
-import { Book } from "../src/book";
+import { Book } from "../../src/old_files/book";
 
 describe("Testing movie constructor", () => {
     it("Book should be created", () => {

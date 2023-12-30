@@ -1,4 +1,4 @@
-import { Birthday } from "../src/birthday";
+import { Birthday } from "../../src/old_files/birthday";
 
 describe('Testing movie methods', () => {
     it("Birthdates are the same", () => {
