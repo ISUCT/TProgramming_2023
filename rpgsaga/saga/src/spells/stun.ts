@@ -4,6 +4,6 @@ import { Spell } from './spell';
 
 export class Stun extends Spell {
   constructor() {
-    super(0, new StunEffect());
+    super(0, new StunEffect(), 1);
   }
 }

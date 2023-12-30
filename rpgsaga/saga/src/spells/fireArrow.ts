@@ -4,6 +4,6 @@ import { Spell } from './spell';
 
 export class FireArrow extends Spell {
   constructor() {
-    super(3, new FireEffect());
+    super(3, new FireEffect(), 1);
   }
 }

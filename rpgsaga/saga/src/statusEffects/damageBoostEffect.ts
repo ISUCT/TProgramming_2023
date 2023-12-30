@@ -16,17 +16,19 @@ export class DamageBoostEffect {
     return this._usesRemaining;
   }
 
-  set usesRemaining(value: number) {
-    this._usesRemaining = value;
-  }
-
   constructor() {
     this._usesRemaining = 1;
   }
 
+  private canApply(): boolean {
+    return this._usesRemaining > 0;
+  }
+
   public apply(): void {
-    this.target.strengthModificator = 1.3;
-    this.usesRemaining -= 1;
+    if (this.canApply()) {
+      this.target.strengthModificator = 1.3;
+      this._usesRemaining -= 1;
+    }
   }
 
   public remove(): void {

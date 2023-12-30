@@ -18,17 +18,19 @@ export class FireEffect implements StatusEffect {
     return this._usesRemaining;
   }
 
-  set usesRemaining(value: number) {
-    this._usesRemaining = value;
-  }
-
   constructor() {
     this._usesRemaining = 3;
   }
 
+  private canApply(): boolean {
+    return this._usesRemaining > 0;
+  }
+
   public apply(): void {
-    this.target.healthPoints -= 5;
-    this.usesRemaining -= 1;
+    if (this.canApply()) {
+      this.target.healthPoints -= 5;
+      this._usesRemaining -= 1;
+    }
   }
 
   public remove(): void {

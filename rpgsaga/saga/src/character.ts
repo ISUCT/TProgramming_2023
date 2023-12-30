@@ -1,16 +1,22 @@
 import { CharacterClass } from './characterClasses';
 import { DoublyLinkedList } from './dataStructures/doublyLinkedList/doublyLinkedList';
+import { Spell } from './spells/spell';
 
 export abstract class Character {
   public name: string;
   public class: string;
 
-  public statusEffects: DoublyLinkedList;
+  public spell: Spell;
+  public statusEffects: DoublyLinkedList = new DoublyLinkedList();
 
-  public readonly maxHealthPoints: number;
+  private readonly _maxHealthPoints: number;
   private _healthPoints: number;
   private _strength: number;
   private _strengthModificator: number;
+
+  get maxHealthPoints(): number {
+    return this._maxHealthPoints;
+  }
 
   get strength() {
     return this._strength;
@@ -32,11 +38,13 @@ export abstract class Character {
     this._strengthModificator = value;
   }
 
-  constructor(name: string, characterClass: CharacterClass, healthPoints: number) {
+  constructor(name: string, characterClass: CharacterClass, healthPoints: number, spell: Spell) {
     this.name = name;
     this.class = characterClass;
     this.healthPoints = healthPoints;
-    this.maxHealthPoints = healthPoints;
+    this.spell = spell;
+
+    this._maxHealthPoints = healthPoints;
     this._strength = 5;
     this.strengthModificator = 1.0;
   }

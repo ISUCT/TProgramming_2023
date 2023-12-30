@@ -16,16 +16,18 @@ export class StunEffect {
     return this._usesRemaining;
   }
 
-  set usesRemaining(value: number) {
-    this._usesRemaining = value;
-  }
-
   constructor() {
     this._usesRemaining = 1;
   }
 
+  private canApply(): boolean {
+    return this._usesRemaining > 0;
+  }
+
   public apply(): void {
-    this.usesRemaining -= 1;
+    if (this.canApply()) {
+      this._usesRemaining -= 1;
+    }
   }
 
   public remove(): void {
