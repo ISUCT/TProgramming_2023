@@ -1,4 +1,4 @@
-import { Character } from '../character';
+import { Character } from '../characters/character';
 import { Archer } from '../characters/archer';
 import { randomIntFromInterval } from '../randomMath';
 

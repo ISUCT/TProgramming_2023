@@ -1,44 +1,11 @@
 import { ArrayItem } from './arrayItem';
-import { randomIntFromInterval } from './randomMath';
 
 export class Bina {
   public attack(attacker: ArrayItem, target: ArrayItem) {
-    if (this.hasAttackMissed()) {
-      console.log(
-        `${attacker.player.name} (${attacker.player.class}) [${attacker.player.healthPoints}/${attacker.player.maxHealthPoints}] has missed!`,
-      );
-    } else {
-      target.player.receiveDamage(attacker.player.getAttackPoints());
-      console.log(
-        `${attacker.player.name} (${attacker.player.class}) [${attacker.player.healthPoints}/${
-          attacker.player.maxHealthPoints
-        }] has dealt ${attacker.player.getAttackPoints()} damage to ${target.player.name} (${target.player.class}) [${
-          target.player.healthPoints
-        }/${target.player.maxHealthPoints}]!`,
-      );
-    }
-  }
+    target.player.receiveDamage(attacker.player.getAttackPoints());
 
-  public castSpell(attacker: ArrayItem, target: ArrayItem) {
-    if (this.hasSpellMissed()) {
-      console.log(
-        `${attacker.player.name} (${attacker.player.class}) [${attacker.player.healthPoints}/${attacker.player.maxHealthPoints}] has missed a spell!`,
-      );
-    } else {
-      console.log(
-        `${attacker.player.name} (${attacker.player.class}) [${attacker.player.healthPoints}/${attacker.player.maxHealthPoints}] has casted a spell!`,
-      );
-      attacker.player.spell.cast(target.player);
-    }
-  }
-
-  private hasAttackMissed(): boolean {
-    const randomNumber = randomIntFromInterval(1, 10);
-    return randomNumber <= 3 ? true : false;
-  }
-
-  private hasSpellMissed(): boolean {
-    const randomNumber = randomIntFromInterval(1, 10);
-    return randomNumber <= 1 ? true : false;
+    console.log(
+      `${attacker.player.name} (${attacker.player.class}) [${attacker.player.healthPoints}/${attacker.player.maxHealthPoints}] has dealt ${attacker.player.strength} damage to ${target.player.name} (${target.player.class}) [${target.player.healthPoints}/${target.player.maxHealthPoints}]!`,
+    );
   }
 }

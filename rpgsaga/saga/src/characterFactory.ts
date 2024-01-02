@@ -1,4 +1,4 @@
-import { Character } from './character';
+import { Character } from './characters/character';
 import { CharacterClass } from './characterClasses';
 import { CharacterGenerator } from './characterGenerators/characterGenerator';
 import { ArcherGenerator } from './characterGenerators/archerGenerator';

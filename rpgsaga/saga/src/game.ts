@@ -1,12 +1,11 @@
 import { cloneDeep } from 'lodash';
 
 import { Bina } from './bina';
-import { Character } from './character';
+import { Character } from './characters/character';
 import { CharacterClass } from './characterClasses';
 import { CharacterFactory } from './characterFactory';
-import { getRandomEnumValue, randomIntFromInterval } from './randomMath';
+import { getRandomEnumValue } from './randomMath';
 import { ArrayItem } from './arrayItem';
-import { SpellSystemManager } from './spellSystemManager';
 
 export class Game {
   private players: Character[] = [];
@@ -15,7 +14,6 @@ export class Game {
   private quantityOfPlayers: number;
 
   private bina: Bina = new Bina();
-  private spellSystemManager: SpellSystemManager = new SpellSystemManager();
 
   constructor(quantityOfPlayers: number) {
     this.quantityOfPlayers = quantityOfPlayers;
@@ -132,20 +130,7 @@ export class Game {
   }
 
   private playOneTurn(): number[] {
-    if (this.currentPlayers[0].player.isStunned) {
-      const { player } = this.currentPlayers[0];
-      console.log(`${player.name} (${player.class}) is stunned and couldn't make a move!`);
-    } else {
-      const changeToChooseAnAttack: number = randomIntFromInterval(1, 10);
-      if (changeToChooseAnAttack > 3 || !this.currentPlayers[0].player.canCastSpell()) {
-        this.bina.attack(this.currentPlayers[0], this.currentPlayers[1]);
-      } else {
-        this.bina.castSpell(this.currentPlayers[0], this.currentPlayers[1]);
-      }
-    }
-
-    // this.spellSystemManager.applyAllStatusEffects(this.currentPlayers[1].player);
-    // this.spellSystemManager.removeEndedStatusEffects(this.currentPlayers[1].player);
+    this.bina.attack(this.currentPlayers[0], this.currentPlayers[1]);
 
     this.swapCurrentPlayers();
 
@@ -153,6 +138,8 @@ export class Game {
   }
 
   private playOneRound(): void {
+    this.announceCurrentRoundPlayers();
+
     let deadBodyIndexes: number[] = null;
 
     for (; deadBodyIndexes === null; ) {
@@ -167,7 +154,6 @@ export class Game {
 
   public start(): void {
     for (; !this.isGameOver(); ) {
-      this.announceCurrentRoundPlayers();
       this.playOneRound();
       console.log('\n');
     }

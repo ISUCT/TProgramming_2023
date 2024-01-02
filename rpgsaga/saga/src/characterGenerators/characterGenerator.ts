@@ -1,4 +1,4 @@
-import { Character } from '../character';
+import { Character } from '../characters/character';
 import { getRandomArrayIndex } from '../randomMath';
 
 export abstract class CharacterGenerator {
