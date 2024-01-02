@@ -2,7 +2,6 @@ import { Skill } from './actions';
 import { Player } from './player';
 import { ActionType, Aff } from './affinities';
 import { Statuses } from './banks/statuses';
-import { Status } from './statuses';
 
 export class Knight extends Player {
   protected abilityList: Skill[] = [new Skill('Ferocious Strike', ActionType.Normal, this.strength * 1.5)];
@@ -19,7 +18,7 @@ export class Mage extends Player {
     new Skill('Dia', ActionType.Support, 5),
   ];
   constructor(public health: number, public strength: number, public name: string) {
-    super(health, strength, name, [Aff.Weak, Aff.Resist, Aff.Resist]);
+    super(health, strength, name, [Aff.Normal, Aff.Resist, Aff.Resist]);
   }
 }
 
