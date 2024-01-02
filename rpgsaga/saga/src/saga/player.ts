@@ -29,14 +29,15 @@ export abstract class Player {
     return new ActionResult(new Attack(this.strength));
   }
 
-  public ability(index: number): ActionResult {
+  public ability(index: number): ActionResult | undefined {
     const ability = this.abilityList[index];
-    // when no ability, return null
+    // when no ability, return undefined
     if (ability !== undefined) {
       if (ability.type === ActionType.Support) {
         this.applySupportSkill(ability);
+      } else {
+        return new ActionResult(ability);
       }
-      return new ActionResult(ability);
     } else {
       throw new Error(`Ability ${String(index)} doesnt exist`);
     }

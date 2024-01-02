@@ -1,4 +1,5 @@
 import { ActionType } from './affinities';
+import { Changer } from './changer';
 import { IStatus } from './statuses';
 
 export interface IAction {
@@ -6,6 +7,7 @@ export interface IAction {
   type: ActionType;
   damage?: number;
   status?: IStatus;
+  changer?: Changer;
 }
 
 abstract class Action {
