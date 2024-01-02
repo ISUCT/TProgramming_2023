@@ -1,4 +1,5 @@
 import { Character } from './character';
+import { DoublyLinkedListNode } from './dataStructures/doublyLinkedList/doublyLinkedListNode';
 
 export class SpellSystemManager {
   public removeEndedStatusEffects(player: Character) {
@@ -12,7 +13,7 @@ export class SpellSystemManager {
   }
 
   public applyAllStatusEffects(player: Character) {
-    let node = player.statusEffects.head;
+    let node: DoublyLinkedListNode = player.statusEffects.head;
     while (node !== null) {
       node.value.apply();
       node = node.next;

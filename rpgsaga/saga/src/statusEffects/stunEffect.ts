@@ -27,10 +27,11 @@ export class StunEffect {
   public apply(): void {
     if (this.canApply()) {
       this._usesRemaining -= 1;
+      this._target.isStunned = true;
     }
   }
 
   public remove(): void {
-    return;
+    this._target.isStunned = false;
   }
 }

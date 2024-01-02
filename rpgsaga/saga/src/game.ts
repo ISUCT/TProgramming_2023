@@ -4,8 +4,9 @@ import { Bina } from './bina';
 import { Character } from './character';
 import { CharacterClass } from './characterClasses';
 import { CharacterFactory } from './characterFactory';
-import { getRandomEnumValue } from './randomMath';
+import { getRandomEnumValue, randomIntFromInterval } from './randomMath';
 import { ArrayItem } from './arrayItem';
+import { SpellSystemManager } from './spellSystemManager';
 
 export class Game {
   private players: Character[] = [];
@@ -14,6 +15,7 @@ export class Game {
   private quantityOfPlayers: number;
 
   private bina: Bina = new Bina();
+  private spellSystemManager: SpellSystemManager = new SpellSystemManager();
 
   constructor(quantityOfPlayers: number) {
     this.quantityOfPlayers = quantityOfPlayers;
@@ -130,7 +132,20 @@ export class Game {
   }
 
   private playOneTurn(): number[] {
-    this.bina.attack(this.currentPlayers[0], this.currentPlayers[1]);
+    if (this.currentPlayers[0].player.isStunned) {
+      const { player } = this.currentPlayers[0];
+      console.log(`${player.name} (${player.class}) is stunned and couldn't make a move!`);
+    } else {
+      const changeToChooseAnAttack: number = randomIntFromInterval(1, 10);
+      if (changeToChooseAnAttack > 3 || !this.currentPlayers[0].player.canCastSpell()) {
+        this.bina.attack(this.currentPlayers[0], this.currentPlayers[1]);
+      } else {
+        this.bina.castSpell(this.currentPlayers[0], this.currentPlayers[1]);
+      }
+    }
+
+    // this.spellSystemManager.applyAllStatusEffects(this.currentPlayers[1].player);
+    // this.spellSystemManager.removeEndedStatusEffects(this.currentPlayers[1].player);
 
     this.swapCurrentPlayers();
 

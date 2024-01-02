@@ -1,7 +1,7 @@
 import { Character } from '../character';
 import { StatusEffect } from '../statusEffects/statusEffect';
 
-export abstract class Spell {
+export class Spell {
   protected points: number;
   protected statusEffect: StatusEffect;
   protected usesRemaining: number;
@@ -12,12 +12,12 @@ export abstract class Spell {
     this.usesRemaining = usesRemaining;
   }
 
-  private canCastASpell(): boolean {
+  public isCastable(): boolean {
     return this.usesRemaining > 0;
   }
 
   public cast(target: Character) {
-    if (this.canCastASpell()) {
+    if (this.isCastable()) {
       target.receiveDamage(this.points);
       this.statusEffect.target = target;
       target.statusEffects.addLast(this.statusEffect);

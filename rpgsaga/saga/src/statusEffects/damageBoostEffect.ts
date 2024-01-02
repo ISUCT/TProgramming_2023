@@ -32,6 +32,6 @@ export class DamageBoostEffect {
   }
 
   public remove(): void {
-    this.target.strengthModificator = 1.0;
+    this._target.strengthModificator = 1.0;
   }
 }

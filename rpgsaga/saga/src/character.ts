@@ -8,6 +8,7 @@ export abstract class Character {
 
   public spell: Spell;
   public statusEffects: DoublyLinkedList = new DoublyLinkedList();
+  public isStunned = false;
 
   private readonly _maxHealthPoints: number;
   private _healthPoints: number;
@@ -46,14 +47,18 @@ export abstract class Character {
 
     this._maxHealthPoints = healthPoints;
     this._strength = 5;
-    this.strengthModificator = 1.0;
+    this._strengthModificator = 1.0;
   }
 
   public getAttackPoints(): number {
-    return this.strength * this.strengthModificator;
+    return this._strength * this._strengthModificator;
   }
 
   public receiveDamage(points: number) {
     this.healthPoints -= points;
+  }
+
+  public canCastSpell(): boolean {
+    return this.spell.isCastable() ? true : false;
   }
 }

@@ -32,20 +32,16 @@ export class DoublyLinkedList {
 
   public addLast(value: StatusEffect) {
     if (this.isEmpty()) {
-      const tmp = new DoublyLinkedListNode();
+      const tmp = new DoublyLinkedListNode(value);
       this._head = tmp;
       this._tail = tmp;
       this.size++;
       return;
     } else {
-      const tmp = new DoublyLinkedListNode();
-      tmp.next = null;
+      const tmp = new DoublyLinkedListNode(value);
       tmp.prev = this._tail;
-      tmp.value = value;
-
       this._tail.next = tmp;
-
-      this._tail = tmp;
+      this._tail = this.tail.next;
       this.size++;
     }
   }
