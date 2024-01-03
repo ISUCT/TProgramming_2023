@@ -119,7 +119,7 @@ export class Game {
     }
   }
 
-  private isGameOver() {
+  private isGameOver(): boolean {
     return this.quantityOfPlayers <= 1 ? true : false;
   }
 
@@ -145,7 +145,7 @@ export class Game {
     }
   }
 
-  private initialiseCurrentPlayers() {
+  private initialiseCurrentPlayers(): void {
     this.currentPlayers = [new ArrayItem(cloneDeep(this.players[0]), 0), new ArrayItem(cloneDeep(this.players[1]), 1)];
   }
 

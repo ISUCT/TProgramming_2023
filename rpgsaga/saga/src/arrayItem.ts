@@ -1,11 +1,27 @@
 import { Character } from './character';
 
 export class ArrayItem {
-  public player: Character;
-  public index: number;
+  private _player: Character;
+  private _index: number;
+
+  get player() {
+    return this._player;
+  }
+
+  set player(value: Character) {
+    this._player = value;
+  }
+
+  get index() {
+    return this._index;
+  }
+
+  set index(value: number) {
+    this._index = value;
+  }
 
   constructor(player: Character, index: number) {
-    this.player = player;
-    this.index = index;
+    this._player = player;
+    this._index = index;
   }
 }
