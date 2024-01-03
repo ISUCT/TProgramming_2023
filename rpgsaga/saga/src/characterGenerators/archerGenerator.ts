@@ -1,5 +1,5 @@
-import { Character } from '../characters/character';
-import { Archer } from '../characters/archer';
+import { CharacterClass } from '../characterClasses';
+import { Character } from '../character';
 import { randomIntFromInterval } from '../randomMath';
 
 import { CharacterGenerator } from './characterGenerator';
@@ -38,8 +38,9 @@ export class ArcherGenerator extends CharacterGenerator {
   ];
 
   public createCharacter(): Character {
-    return new Archer(
+    return new Character(
       this.getRandomNameAndSurname(),
+      CharacterClass.archer,
       randomIntFromInterval(this.minHealthPoints, this.maxHealthPoints),
     );
   }

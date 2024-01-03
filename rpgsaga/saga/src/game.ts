@@ -1,7 +1,7 @@
 import { cloneDeep } from 'lodash';
 
 import { Bina } from './bina';
-import { Character } from './characters/character';
+import { Character } from './character';
 import { ArrayItem } from './arrayItem';
 import { CharacterFactory } from './characterFactory';
 
@@ -17,7 +17,6 @@ export class Game {
 
     const characterFactory: CharacterFactory = new CharacterFactory();
     this.players = characterFactory.generatePlayers(this.quantityOfPlayers);
-    this.currentPlayers = [new ArrayItem(cloneDeep(this.players[0]), 0), new ArrayItem(cloneDeep(this.players[1]), 1)];
   }
 
   private announceDeadBody(deadBody: Character): void {
@@ -47,10 +46,6 @@ export class Game {
     } else {
       return null;
     }
-  }
-
-  private canReplaceDeadPlayer(): boolean {
-    return this.newPlayerIndex < this.players.length;
   }
 
   private replaceDeadBodies(deadPlayerIndexes: number[]): void {
@@ -83,14 +78,6 @@ export class Game {
     }
   }
 
-  private announceWinner(winner: Character): void {
-    if (winner !== null) {
-      console.log(`The winner is ${winner.name} (${winner.class})!`);
-    } else {
-      console.log(`It's a draw!`);
-    }
-  }
-
   private swapCurrentPlayers(): void {
     const temp = this.currentPlayers[0];
     this.currentPlayers[0] = this.currentPlayers[1];
@@ -100,7 +87,7 @@ export class Game {
   private playOneTurn(): number[] {
     const bina: Bina = new Bina();
 
-    bina.attack(this.currentPlayers[0], this.currentPlayers[1]);
+    bina.attack(this.currentPlayers[0].player, this.currentPlayers[1].player);
 
     this.swapCurrentPlayers();
 
@@ -111,6 +98,10 @@ export class Game {
     const firstPlayer = this.currentPlayers[0].player;
     const secondPlayer = this.currentPlayers[1].player;
     console.log(`${firstPlayer.name} (${firstPlayer.class}) vs ${secondPlayer.name} (${secondPlayer.class})`);
+  }
+
+  private canReplaceDeadPlayer(): boolean {
+    return this.newPlayerIndex < this.players.length;
   }
 
   private playOneRound(): void {
@@ -146,7 +137,21 @@ export class Game {
     return null;
   }
 
+  private announceWinner(winner: Character): void {
+    if (winner !== null) {
+      console.log(`The winner is ${winner.name} (${winner.class})!`);
+    } else {
+      console.log(`It's a draw!`);
+    }
+  }
+
+  private initialiseCurrentPlayers() {
+    this.currentPlayers = [new ArrayItem(cloneDeep(this.players[0]), 0), new ArrayItem(cloneDeep(this.players[1]), 1)];
+  }
+
   public start(): void {
+    this.initialiseCurrentPlayers();
+
     for (; !this.isGameOver(); ) {
       this.playOneRound();
       console.log('\n');

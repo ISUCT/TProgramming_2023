@@ -1,14 +1,30 @@
-import { CharacterClass } from '../characterClasses';
+import { CharacterClass } from './characterClasses';
 
 export class Character {
-  public name: string;
-  public class: string;
+  private _name: string;
+  private _class: CharacterClass;
 
   private readonly _maxHealthPoints: number;
   private _healthPoints: number;
 
   private _strength: number;
   private _strengthModificator: number;
+
+  get name() {
+    return this._name;
+  }
+
+  set name(value: string) {
+    this._name = value;
+  }
+
+  get class() {
+    return this._class;
+  }
+
+  set class(value: CharacterClass) {
+    this._class = value;
+  }
 
   get maxHealthPoints(): number {
     return this._maxHealthPoints;
@@ -51,5 +67,9 @@ export class Character {
 
   public getAttackPoints(): number {
     return this._strength * this._strengthModificator;
+  }
+
+  public toString(): string {
+    return `${this._name} (${this._class}) [${this._healthPoints}/${this._maxHealthPoints}]`;
   }
 }

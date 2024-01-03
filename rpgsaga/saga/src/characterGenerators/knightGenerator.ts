@@ -1,5 +1,5 @@
-import { Character } from '../characters/character';
-import { Knight } from '../characters/knight';
+import { CharacterClass } from '../characterClasses';
+import { Character } from '../character';
 import { randomIntFromInterval } from '../randomMath';
 
 import { CharacterGenerator } from './characterGenerator';
@@ -38,8 +38,9 @@ export class KnightGenerator extends CharacterGenerator {
   ];
 
   public createCharacter(): Character {
-    return new Knight(
+    return new Character(
       this.getRandomNameAndSurname(),
+      CharacterClass.knight,
       randomIntFromInterval(this.minHealthPoints, this.maxHealthPoints),
     );
   }

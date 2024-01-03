@@ -1,4 +1,4 @@
-import { Character } from './characters/character';
+import { Character } from './character';
 
 export class ArrayItem {
   public player: Character;

@@ -1,15 +1,9 @@
-import { ArrayItem } from './arrayItem';
+import { Character } from './character';
 
 export class Bina {
-  public attack(attacker: ArrayItem, target: ArrayItem) {
-    target.player.receiveDamage(attacker.player.getAttackPoints());
+  public attack(attacker: Character, target: Character) {
+    target.receiveDamage(attacker.getAttackPoints());
 
-    console.log(
-      `${attacker.player.name} (${attacker.player.class}) [${attacker.player.healthPoints}/${
-        attacker.player.maxHealthPoints
-      }] has dealt ${attacker.player.getAttackPoints()} damage to ${target.player.name} (${target.player.class}) [${
-        target.player.healthPoints
-      }/${target.player.maxHealthPoints}]!`,
-    );
+    console.log(`${attacker.toString()} has dealt ${attacker.getAttackPoints()} damage to ${target.toString()}!`);
   }
 }

@@ -1,5 +1,5 @@
-import { Character } from '../characters/character';
-import { Mage } from '../characters/mage';
+import { CharacterClass } from '../characterClasses';
+import { Character } from '../character';
 import { randomIntFromInterval } from '../randomMath';
 
 import { CharacterGenerator } from './characterGenerator';
@@ -38,6 +38,10 @@ export class MageGenerator extends CharacterGenerator {
   ];
 
   public createCharacter(): Character {
-    return new Mage(this.getRandomNameAndSurname(), randomIntFromInterval(this.minHealthPoints, this.maxHealthPoints));
+    return new Character(
+      this.getRandomNameAndSurname(),
+      CharacterClass.mage,
+      randomIntFromInterval(this.minHealthPoints, this.maxHealthPoints),
+    );
   }
 }
