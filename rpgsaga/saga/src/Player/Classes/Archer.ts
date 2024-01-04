@@ -1,5 +1,6 @@
 import { Player } from "../Player";
 
 export class Archer extends Player{
-    className: "Лучник";
+    className: "Archer";
+    classAbilities: ["Strike"];
 }
