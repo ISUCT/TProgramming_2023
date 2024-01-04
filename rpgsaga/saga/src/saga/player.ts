@@ -8,12 +8,11 @@ export abstract class Player {
   readonly strength: number;
   readonly name: string;
 
-  protected statuses: IStatus[] = [];
-  protected isFrozenCounter = 0;
+  readonly statuses: IStatus[] = [];
 
   protected currentAttack = 0;
 
-  affinities: AffinityList;
+  readonly affinities: AffinityList;
 
   protected abilityList: Skill[] = [];
 
@@ -29,12 +28,13 @@ export abstract class Player {
     return new ActionResult(new Attack(this.strength));
   }
 
-  public ability(index: number): ActionResult | undefined {
+  public ability(index: number): ActionResult {
     const ability = this.abilityList[index];
     // when no ability, return undefined
     if (ability !== undefined) {
       if (ability.type === ActionType.Support) {
         this.applySupportSkill(ability);
+        return new ActionResult(new Skill('uses support', ActionType.Support, 0));
       } else {
         return new ActionResult(ability);
       }
@@ -106,6 +106,9 @@ export abstract class Player {
   protected applySupportSkill(input: IAction) {
     if (input.damage !== undefined) {
       this.health += input.damage;
+      if (this.health > this.maxHealth) {
+        this.health = this.maxHealth;
+      }
     }
   }
 
@@ -137,7 +140,7 @@ export abstract class Player {
         break;
       case Aff.Resist:
         // here's the damage amplifier for Resist
-        return [dmg * 0.8, currAff];
+        return [dmg * 0.4, currAff];
         break;
       case Aff.Weak:
         // here's the damage amplifier for Weak
