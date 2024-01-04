@@ -111,12 +111,12 @@ export abstract class Player {
       }
     }
     if (input.changer !== undefined) {
-      for (let i = 0; i < this.statuses.length; i++) {
-        const status = this.statuses[i];
-        for (let j = 0; j < input.changer.cancel.length; j++) {
-          const change = input.changer.cancel[j];
-          if (status === change) {
-            this.statuses.splice(i, 1);
+      for (let i = 0; i < input.changer.cancel.length; i++) {
+        const change = input.changer.cancel[i];
+        for (let j = 0; j < this.statuses.length; j++) {
+          const status = this.statuses[j];
+          if (status.name === change.name) {
+            this.statuses.splice(j, 1);
           }
         }
       }

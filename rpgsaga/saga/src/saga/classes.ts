@@ -15,9 +15,9 @@ export class Mage extends Player {
   public isEnemyFrozen = false;
 
   protected abilityList: Skill[] = [
-    new Skill('Ice Freeze', ActionType.Ice, 0, Statuses.freeze),
+    new Skill('Ice Freeze', ActionType.Ice, 0, { ...Statuses.freeze }),
     new Skill('Dia', ActionType.Support, 5),
-    new Skill('Dekunda', ActionType.Support, 0, undefined, new Changer([Statuses.burn, Statuses.freeze])),
+    new Skill('Dekunda', ActionType.Support, 0, undefined, new Changer([{ ...Statuses.burn }, { ...Statuses.freeze }])),
   ];
   constructor(public health: number, public strength: number, public name: string) {
     super(health, strength, name, [Aff.Normal, Aff.Resist, Aff.Resist]);
@@ -26,7 +26,7 @@ export class Mage extends Player {
 
 export class Archer extends Player {
   public isEnemyBurns = false;
-  protected abilityList: Skill[] = [new Skill('Fire Arrow', ActionType.Fire, 0, Statuses.burn)];
+  protected abilityList: Skill[] = [new Skill('Fire Arrow', ActionType.Fire, 0, { ...Statuses.burn })];
   constructor(public health: number, public strength: number, public name: string) {
     super(health, strength, name, [Aff.Normal]);
   }

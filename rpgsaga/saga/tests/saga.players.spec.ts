@@ -1,10 +1,10 @@
 import { createPlayer } from '../src/saga/playerFactory';
 import { PlayerGenerator } from '../src/saga/playerGenerator';
-import { Statuses } from '../src/saga/banks/statuses';
 import { Skill } from '../src/saga/actions';
 import { ActionResult, Player } from '../src/saga/player';
 import { ActionType, Aff } from '../src/saga/affinities';
 import { Changer } from '../src/saga/changer';
+import { Statuses } from '../src/saga/banks/statuses';
 
 describe('Testing creating players', () => {
   it('should return as much players as we ordered', () => {
@@ -65,7 +65,13 @@ describe('Testing players actions', () => {
     class Tester extends Player {
       protected abilityList: Skill[] = [
         new Skill('Ferocious Strike', ActionType.Normal, this.strength * 1.5),
-        new Skill('Dekunda', ActionType.Support, 0, undefined, new Changer([Statuses.burn, Statuses.freeze])),
+        new Skill(
+          'Dekunda',
+          ActionType.Support,
+          0,
+          undefined,
+          new Changer([{ ...Statuses.burn }, { ...Statuses.freeze }]),
+        ),
       ];
       constructor(public health: number, public strength: number, public name: string) {
         super(health, strength, name, [Aff.Normal, Aff.Normal, Aff.Normal]);
@@ -95,7 +101,7 @@ describe('testing player responding', () => {
   });
   it('should respond to active statuses', () => {
     const player = createPlayer('Tester', 6, 5, 'Knight');
-    player.passTurn(new ActionResult(new Skill('apply statuses', ActionType.Fire, 0, Statuses.burn)));
+    player.passTurn(new ActionResult(new Skill('apply statuses', ActionType.Fire, 0, { ...Statuses.burn })));
     player.passTurn(); // burn, turnCounter = 3-1 = 2
     expect(player.health).toEqual(player.maxHealth - 2);
     player.passTurn(); // burn, turnCounter = 2-1 = 1
