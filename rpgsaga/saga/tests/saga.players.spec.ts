@@ -62,7 +62,7 @@ describe('Testing players actions', () => {
 describe('testing player responding', () => {
   it('should respond to attack with normal affinity', () => {
     const player = createPlayer('Tester', 2, 5, 'Knight');
-    player.passTurn(player.attack());
+    player.passTurn(new ActionResult(new Skill('test', ActionType.Fire, player.strength)));
     expect(player.health).toEqual(player.maxHealth - player.strength);
   });
   it('should respond to attack with status ', () => {

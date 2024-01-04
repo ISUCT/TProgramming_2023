@@ -18,7 +18,6 @@ export class ConsoleLogger {
         return;
       }
 
-      // redo
       switch (input.action.constructor.name) {
         case 'Attack':
           console.log(
@@ -30,31 +29,30 @@ export class ConsoleLogger {
             defender.name,
           );
           break;
-        case 'AbilityAttack':
-          console.log(
-            '(%s) %s использует (%s) и наносит урон %d противнику (%s) %s',
-            attacker.constructor.name,
-            attacker.name,
-            input.action.name,
-            input.damage,
-            defender.constructor.name,
-            defender.name,
-          );
-          break;
-        case 'Ability':
-          console.log(
-            '(%s) %s использует (%s) на противнике (%s) %s',
-            attacker.constructor.name,
-            attacker.name,
-            input.action.name,
-            defender.constructor.name,
-            defender.name,
-          );
-          break;
-        case 'State':
-          if (input.action.name === 'frozen') {
-            console.log('(%s) %s заморожен и не может двигаться', attacker.constructor.name, attacker.name);
+        case 'Skill':
+          if (input.action.damage !== undefined && input.action.damage > 0) {
+            console.log(
+              '(%s) %s использует (%s) и наносит урон %d противнику (%s) %s',
+              attacker.constructor.name,
+              attacker.name,
+              input.action.name,
+              input.damage,
+              defender.constructor.name,
+              defender.name,
+            );
           }
+          if (input.action.status !== undefined) {
+            console.log(
+              '(%s) %s использует (%s) и накладывает статус %s на противника (%s) %s',
+              attacker.constructor.name,
+              attacker.name,
+              input.action.name,
+              input.status?.name,
+              defender.constructor.name,
+              defender.name,
+            );
+          }
+          break;
       }
     }
   }
@@ -106,9 +104,9 @@ export class ConsoleLogger {
           );
         }
       }
-      if (input.statuses) {
-        console.log('(%s) %s разморожен и готов атаковать', player.constructor.name, player.name);
-      }
+      // if (input.statuses) {
+      //  console.log('(%s) %s разморожен и готов атаковать', player.constructor.name, player.name);
+      // }
     }
   }
 }

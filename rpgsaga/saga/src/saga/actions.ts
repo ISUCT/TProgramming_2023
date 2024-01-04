@@ -39,9 +39,3 @@ export class Skill extends Action {
     this.status = status;
   }
 }
-
-export class State extends Action {
-  constructor(name: string) {
-    super(name, ActionType.Support);
-  }
-}
