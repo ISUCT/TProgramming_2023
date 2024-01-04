@@ -30,5 +30,7 @@ jobs:
 
       # Finally, run our tests
       - name: Run the tests
-        cd ./rpgsaga/saga
-        run: npm test
+
+        run: |
+          cd ./rpgsaga/saga
+          npm test
