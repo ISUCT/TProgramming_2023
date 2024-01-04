@@ -4,11 +4,14 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup node
+        uses: actions/setup-node@v3
         with:
-          node-version: "12"
+          node-version: 18.16.x
+          cache: yarn
+          cache-dependency-path: ./rpgsaga/saga/yarn.lock
 
       # Speed up subsequent runs with caching
       - name: Cache node modules
@@ -26,11 +29,13 @@ jobs:
 
       # Install required deps for action
       - name: Install Dependencies
-        run: npm install
-
+        run: |
+          yarn install --immutable --immutable-cache --check-cache
+          yarn add jest
+          
       # Finally, run our tests
       - name: Run the tests
 
         run: |
           cd ./rpgsaga/saga
-          npm test
+          yarn run test
