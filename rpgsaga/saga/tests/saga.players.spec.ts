@@ -1,10 +1,15 @@
 import { createPlayer } from '../src/saga/playerFactory';
 import { PlayerGenerator } from '../src/saga/playerGenerator';
-import { Statuses } from '../src/saga/banks/statuses';
 import { Skill } from '../src/saga/actions';
 import { ActionResult, Player } from '../src/saga/player';
 import { ActionType, Aff } from '../src/saga/affinities';
 import { Changer } from '../src/saga/changer';
+import { Status } from '../src/saga/statuses';
+
+export const Statuses = {
+  burn: new Status('Burn', ActionType.Fire, 2, 3, false),
+  freeze: new Status('Freeze', ActionType.Ice, 0, 1, true),
+};
 
 describe('Testing creating players', () => {
   it('should return as much players as we ordered', () => {
