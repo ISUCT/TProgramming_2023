@@ -1,12 +1,9 @@
 {
-    "compilerOptions": {
-        "target": "ES6",
-        "types": ["jest", "node"],
-        "strict": true,
-        "esModuleInterop": true
-    },
-    "exclude": [
-        "node_modules",
-        "typings"
-      ]
+  "compilerOptions": {
+    "target": "ES2016",
+    "types": ["jest", "node"],
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "exclude": ["node_modules", "typings"]
 }

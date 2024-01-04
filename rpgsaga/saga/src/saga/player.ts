@@ -110,6 +110,17 @@ export abstract class Player {
         this.health = this.maxHealth;
       }
     }
+    // if (input.changer !== undefined) {
+    //   for (let i = 0; i < this.statuses.length; i++) {
+    //     const status = this.statuses[i];
+    //     for (let j = 0; j < input.changer.cancel.length; j++) {
+    //       const change = input.changer.cancel[j];
+    //       if (status === change) {
+    //         this.statuses.splice(i, 1);
+    //       }
+    //     }
+    //   }
+    // }
   }
 
   protected calcDamage(dmg: number, dmgType: ActionType): [number, Aff] {

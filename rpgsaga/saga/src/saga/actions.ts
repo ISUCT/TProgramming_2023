@@ -31,11 +31,13 @@ export class Attack extends Action {
 
 export class Skill extends Action {
   damage: number;
-  status: IStatus | undefined;
+  status?: IStatus;
+  changer?: Changer;
 
-  constructor(name: string, type: ActionType, dmg: number, status?: IStatus) {
+  constructor(name: string, type: ActionType, dmg: number, status?: IStatus, changer?: Changer) {
     super(name, type);
     this.damage = dmg;
     this.status = status;
+    this.changer = changer;
   }
 }

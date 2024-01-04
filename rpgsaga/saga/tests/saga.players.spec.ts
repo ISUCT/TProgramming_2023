@@ -4,6 +4,7 @@ import { Statuses } from '../src/saga/banks/statuses';
 import { Skill } from '../src/saga/actions';
 import { ActionResult, Player } from '../src/saga/player';
 import { ActionType, Aff } from '../src/saga/affinities';
+import { Changer } from '../src/saga/changer';
 
 describe('Testing creating players', () => {
   it('should return as much players as we ordered', () => {
@@ -56,6 +57,27 @@ describe('Testing players actions', () => {
     player.passTurn(player.attack());
     player.ability(1);
     expect(player.health).toEqual(player.maxHealth);
+  });
+  it('should cancel active statuses when using Dekunda spell', () => {
+    const mage = createPlayer('Tester', 5, 4, 'Mage');
+    const archer = createPlayer('Tester1', 5, 5, 'Archer');
+
+    class Tester extends Player {
+      protected abilityList: Skill[] = [
+        new Skill('Ferocious Strike', ActionType.Normal, this.strength * 1.5),
+        new Skill('Dekunda', ActionType.Support, 0, undefined, new Changer([Statuses.burn, Statuses.freeze])),
+      ];
+      constructor(public health: number, public strength: number, public name: string) {
+        super(health, strength, name, [Aff.Normal, Aff.Normal, Aff.Normal]);
+      }
+    }
+
+    const tester = new Tester(5, 5, 'Tester2');
+    tester.passTurn(archer.ability(0));
+    tester.passTurn(mage.ability(0));
+    expect(tester.statuses.length).toEqual(2);
+    tester.ability(1);
+    expect(tester.statuses.length).toEqual(0);
   });
 });
 

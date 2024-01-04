@@ -1,3 +1,4 @@
+import { Statuses } from './saga/banks/statuses';
 import { PlayerGenerator } from './saga/playerGenerator';
 // import { Television } from './tv';
 // import { Channel } from './channel';
@@ -26,3 +27,6 @@ import { Tournament } from './saga/tournaments';
 const players = PlayerGenerator.createPlayers(1, 1, 2);
 const tournament = new Tournament(players, true);
 tournament.startTournament();
+
+const status = Statuses.burn;
+console.log(status);

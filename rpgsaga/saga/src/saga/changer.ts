@@ -1,7 +1,9 @@
-export class Changer {
-  public cancel: string[];
+import { Status } from './statuses';
 
-  constructor(cancel: string[]) {
+export class Changer {
+  public cancel: Status[];
+
+  constructor(cancel: Status[]) {
     this.cancel = cancel;
   }
 }
