@@ -28,7 +28,7 @@ jobs:
       - name: Install Dependencies
         run: |
           yarn install --immutable --immutable-cache --check-cache
-          yarn install jest
+          yarn add jest
           
       # Finally, run our tests
       - name: Run the tests
