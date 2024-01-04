@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="526acb65-41b1-417e-9ce2-b96826a86a3a" name="Changes" comment="fix errors">
+      <change afterPath="$PROJECT_DIR$/rpgsaga/saga/tests/testArcher.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rpgsaga/saga/tests/testDragonHero.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rpgsaga/saga/tests/testLogger.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rpgsaga/saga/tests/testMagicianHero.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rpgsaga/saga/tests/testStartGame.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rpgsaga/saga/tests/testWarriorHero.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpgsaga/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/rpgsaga/.eslintrc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpgsaga/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/rpgsaga/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpgsaga/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/rpgsaga/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpgsaga/saga/src/constants/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rpgsaga/saga/src/constants/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpgsaga/saga/src/heroes/archerHero.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rpgsaga/saga/src/heroes/archerHero.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpgsaga/saga/src/heroes/basicHero.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rpgsaga/saga/src/heroes/basicHero.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpgsaga/saga/src/heroes/dragonHero.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rpgsaga/saga/src/heroes/dragonHero.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpgsaga/saga/src/heroes/magicianHero.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rpgsaga/saga/src/heroes/magicianHero.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpgsaga/saga/src/heroes/warriorHero.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rpgsaga/saga/src/heroes/warriorHero.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpgsaga/saga/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rpgsaga/saga/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpgsaga/saga/src/logger/logger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rpgsaga/saga/src/logger/logger.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpgsaga/saga/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rpgsaga/saga/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpgsaga/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/rpgsaga/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpgsaga/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/rpgsaga/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2W8ELiZfdd51PFofpmzyL53jBCD" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Tsyganov__Vladislav__Vasilevich&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;21.1.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.10.5&quot;,
+    &quot;js.last.introduce.type&quot;: &quot;CONST&quot;,
+    &quot;last_opened_file_path&quot;: &quot;G:/Vus/инфа/TProgramming_2023/rpgsaga/saga&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs.jest.jest_package&quot;: &quot;G:/Vus/инфа/TProgramming_2023/rpgsaga/node_modules/jest&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;prettier.import.notification.dismissed&quot;: &quot;true&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;G:\\Vus\\инфа\\TProgramming_2023\\rpgsaga\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;G:\\Vus\\инфа\\TProgramming_2023\\rpgsaga\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\Vus\инфа\TProgramming_2023\rpgsaga\saga" />
+      <recent name="G:\Vus\инфа\TProgramming_2023\rpgsaga\fox" />
+      <recent name="G:\Vus\инфа\TProgramming_2023\codewars" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\Vus\инфа\TProgramming_2023\rpgsaga" />
+      <recent name="G:\Vus\инфа\TProgramming_2023\rpgsaga\fox" />
+      <recent name="G:\Vus\инфа\TProgramming_2023\rpgsaga\saga\src\logger" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="526acb65-41b1-417e-9ce2-b96826a86a3a" name="Changes" comment="" />
+      <created>1696105752635</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1696105752635</updated>
+      <workItem from="1696105754443" duration="620000" />
+      <workItem from="1696106475601" duration="369000" />
+      <workItem from="1696106861932" duration="7796000" />
+      <workItem from="1696166702329" duration="35000" />
+      <workItem from="1696167505062" duration="297000" />
+      <workItem from="1700858924139" duration="6077000" />
+      <workItem from="1701427136943" duration="8000" />
+      <workItem from="1703613715625" duration="2390000" />
+      <workItem from="1703687601279" duration="148000" />
+      <workItem from="1703857177598" duration="4819000" />
+      <workItem from="1703883682366" duration="7870000" />
+      <workItem from="1703928066782" duration="2733000" />
+      <workItem from="1704018664563" duration="4797000" />
+      <workItem from="1704039566996" duration="356000" />
+      <workItem from="1704039980354" duration="184000" />
+      <workItem from="1704040184720" duration="1326000" />
+      <workItem from="1704202131712" duration="317000" />
+      <workItem from="1704202463397" duration="787000" />
+      <workItem from="1704203276563" duration="25231000" />
+      <workItem from="1704285446812" duration="15249000" />
+      <workItem from="1704316042716" duration="385000" />
+      <workItem from="1704382132167" duration="13403000" />
+      <workItem from="1704399920482" duration="650000" />
+    </task>
+    <task id="LOCAL-00001" summary="CodeWars yse">
+      <option name="closed" value="true" />
+      <created>1696107070983</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1696107070983</updated>
+    </task>
+    <task id="LOCAL-00002" summary="CodeWars yse">
+      <option name="closed" value="true" />
+      <created>1696107114008</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1696107114008</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fix errors">
+      <option name="closed" value="true" />
+      <created>1700865070426</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1700865070426</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="CodeWars yse" />
+    <MESSAGE value="fix errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix errors" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="js.build_tools.npm">
+        <watch expression="this.heroes" language="TypeScript" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>

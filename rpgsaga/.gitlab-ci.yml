@@ -4,7 +4,7 @@ lint_saga:
     - docker
   stage: lint_saga
   script:
-    - cd ./rpgsaga/saga
+    - cd ./rpgsaga/fox
     - npm ci
     - npm run lint
   rules:
@@ -18,7 +18,7 @@ test_saga:
     - docker
   stage: lint_saga
   script:
-    - cd ./rpgsaga/saga
+    - cd ./rpgsaga/fox
     - npm ci
     - npm run test
   rules:
