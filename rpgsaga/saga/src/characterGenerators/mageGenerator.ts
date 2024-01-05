@@ -1,6 +1,7 @@
 import { CharacterClass } from '../characterClasses';
 import { Character } from '../character';
 import { randomIntFromInterval } from '../randomMath';
+import { Stun } from '../spell/stun';
 
 import { CharacterGenerator } from './characterGenerator';
 
@@ -42,6 +43,7 @@ export class MageGenerator extends CharacterGenerator {
       this.getRandomNameAndSurname(),
       CharacterClass.mage,
       randomIntFromInterval(this.minHealthPoints, this.maxHealthPoints),
+      new Stun(),
     );
   }
 }

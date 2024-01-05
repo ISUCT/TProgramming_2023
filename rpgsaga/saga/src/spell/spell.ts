@@ -1,10 +1,12 @@
 import { Character } from '../character';
+import { Message } from '../message';
 import { StatusEffect } from '../statusEffect/statusEffect';
 
 export abstract class Spell {
   private _castsRemaining: number;
   private _statusEffect: StatusEffect;
   private _damagePoints: number;
+  private _name: string;
 
   get castsRemaining() {
     return this._castsRemaining;
@@ -18,20 +20,18 @@ export abstract class Spell {
     return this._statusEffect;
   }
 
-  set statusEffect(value: StatusEffect) {
-    this._statusEffect = value;
-  }
-
   get damagePoints() {
     return this._damagePoints;
   }
 
-  set damagePoints(value: number) {
-    this._damagePoints = value;
+  get name() {
+    return this._name;
   }
 
-  constructor(castsRemaining: number, statusEffect?: StatusEffect) {
+  constructor(name: string, castsRemaining: number, damagePoints: number, statusEffect?: StatusEffect) {
+    this._name = name;
     this._castsRemaining = castsRemaining;
+    this._damagePoints = damagePoints;
     this._statusEffect = null;
 
     if (typeof statusEffect !== undefined) {
@@ -39,13 +39,17 @@ export abstract class Spell {
     }
   }
 
-  protected isCastable(): boolean {
-    if (this._castsRemaining <= 0) {
-      return false;
+  public isCastable(): boolean {
+    if (this._castsRemaining > 0) {
+      return true;
     }
 
-    return true;
+    return false;
   }
 
-  public abstract cast(target: Character): boolean;
+  public abstract cast(message: Message): boolean;
+
+  public toString(): string {
+    return `${this._name} (${this._castsRemaining} casts remaining)`;
+  }
 }

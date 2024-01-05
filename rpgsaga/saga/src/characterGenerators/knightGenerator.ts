@@ -1,6 +1,7 @@
 import { CharacterClass } from '../characterClasses';
 import { Character } from '../character';
 import { randomIntFromInterval } from '../randomMath';
+import { KnightAttack } from '../spell/knightAttack';
 
 import { CharacterGenerator } from './characterGenerator';
 
@@ -42,6 +43,7 @@ export class KnightGenerator extends CharacterGenerator {
       this.getRandomNameAndSurname(),
       CharacterClass.knight,
       randomIntFromInterval(this.minHealthPoints, this.maxHealthPoints),
+      new KnightAttack(),
     );
   }
 }

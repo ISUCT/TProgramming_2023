@@ -1,4 +1,6 @@
 import { CharacterClass } from './characterClasses';
+import { DoublyLinkedList } from './doublyLinkedList/doublyLinkedList';
+import { Spell } from './spell/spell';
 
 export class Character {
   private _name: string;
@@ -9,6 +11,11 @@ export class Character {
 
   private _strength: number;
   private _strengthModificator: number;
+
+  private _spell: Spell;
+  private _statusEffects: DoublyLinkedList = new DoublyLinkedList();
+
+  private _isStunned: boolean;
 
   get name() {
     return this._name;
@@ -50,7 +57,23 @@ export class Character {
     this._strengthModificator = value;
   }
 
-  constructor(name: string, characterClass: CharacterClass, healthPoints: number) {
+  get spell() {
+    return this._spell;
+  }
+
+  get isStunned() {
+    return this._isStunned;
+  }
+
+  set isStunned(value: boolean) {
+    this._isStunned = value;
+  }
+
+  get statusEffects() {
+    return this._statusEffects;
+  }
+
+  constructor(name: string, characterClass: CharacterClass, healthPoints: number, spell: Spell) {
     this.name = name;
     this.class = characterClass;
 
@@ -59,6 +82,10 @@ export class Character {
 
     this._strength = 5;
     this._strengthModificator = 1.0;
+
+    this._spell = spell;
+
+    this._isStunned = false;
   }
 
   public receiveDamage(points: number) {

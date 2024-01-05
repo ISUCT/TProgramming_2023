@@ -5,6 +5,9 @@ import { Character } from './character';
 import { ArrayItem } from './arrayItem';
 import { CharacterFactory } from './characterFactory';
 import { Message } from './message';
+import { randomIntFromInterval } from './randomMath';
+import { AttackType } from './attackType';
+import { StatusEffectManager } from './statusEffectManager';
 
 export class Game {
   private players: Character[] = [];
@@ -85,15 +88,40 @@ export class Game {
     this.currentPlayers[1] = temp;
   }
 
+  private chooseAnAttackType(): AttackType {
+    const randomNumber = randomIntFromInterval(1, 10);
+    if (randomNumber <= 3) {
+      return AttackType.spell;
+    }
+
+    return AttackType.attack;
+  }
+
   private playOneTurn(): number[] {
     const bina: Bina = new Bina();
+    const statusEffectManager = new StatusEffectManager();
 
     const attacker: Character = this.currentPlayers[0].player;
     const target: Character = this.currentPlayers[1].player;
 
-    const message: Message = new Message(attacker.toString(), target, target.toString(), attacker.getAttackPoints());
+    const message: Message = new Message(
+      attacker.toString(),
+      target,
+      target.toString(),
+      attacker.getAttackPoints(),
+      attacker.spell,
+    );
 
-    bina.performAttack(message);
+    bina.receiveMessage(message);
+
+    if (this.chooseAnAttackType() === AttackType.attack) {
+      bina.performAttack();
+    } else {
+      bina.performSpell();
+    }
+
+    statusEffectManager.applyAllStatusEffects(attacker);
+    statusEffectManager.removeEndedStatusEffects(attacker);
 
     this.swapCurrentPlayers();
 
