@@ -20,53 +20,16 @@ describe('Knight Battle', () => {
         ]);
     });
 
-    it('should simulate the first scenario', () => {
+    it('should simulate the first scenarios', () => {
         const logMock = jest.spyOn(console, 'log');
         game.play();
-        const correctLog = logMock.mock.calls[0][0] == '(Рыцарь) cnight1 [Здоровье: 1, Сила: 1] <<VS>> (Рыцарь) player_name [Здоровье: 1, Сила: 1]'
-        // expect(logMock.mock.calls).toEqual([
-        //     ['(Рыцарь) cnight1 [Здоровье: 1, Сила: 1] <<VS>> (Рыцарь) player_name [Здоровье: 1, Сила: 1]'],
-        //     ['Первым ходит ИГРОК 1'],
-        //     ['(Рыцарь) cnight1 наносит урон 1 противнику (Рыцарь) player_name'],
-        //     ['(Рыцарь) cnight1 погибает']
-        // ]);
-        // expect(logMock).toHaveBeenCalled();
+        const correctLog = logMock.mock.calls[0][0] == '(Рыцарь) cnight1 [Здоровье: 1, Сила: 1] <<VS>> (Рыцарь) player_name [Здоровье: 1, Сила: 1]' &&
+            (logMock.mock.calls[1][0] == 'Первым ходит ИГРОК 1' || logMock.mock.calls[1][0] == 'Первым ходит ИГРОК 2') &&
+            (logMock.mock.calls[2][0] == '(Рыцарь) cnight1 наносит урон 1 противнику (Рыцарь) player_name' ||
+                logMock.mock.calls[2][0] == '(Рыцарь) player_name наносит урон 1 противнику (Рыцарь) cnight1' ||
+                logMock.mock.calls[2][0] == '(Рыцарь) cnight1 использует (Удар возмездия) и наносит урон 1 противнику (Рыцарь) player_name' ||
+                logMock.mock.calls[2][0] == '(Рыцарь) player_name использует (Удар возмездия) и наносит урон 1 противнику (Рыцарь) cnight1') &&
+            (logMock.mock.calls[3][0] == '(Рыцарь) cnight1 погибает' || logMock.mock.calls[3][0] == '(Рыцарь) player_name погибает');
         expect(correctLog).toBe(true);
     });
-
-    // it('should simulate the second scenario', () => {
-    //     const logMock = jest.spyOn(console, 'log');
-    //     game.players[0].ability1 = () => 1;
-    //     game.play();
-    //     expect(logMock.mock.calls).toEqual([
-    //         ['(Рыцарь) cnight1 [Здоровье: 1, Сила: 1] <<VS>> (Рыцарь) player_name [Здоровье: 1, Сила: 1]'],
-    //         ['Первым ходит ИГРОК 1'],
-    //         ['(Рыцарь) cnight1 использует (Удар возмездия) и наносит урон 1 противнику (Рыцарь) player_name'],
-    //         ['(Рыцарь) cnight1 погибает']
-    //     ]);
-    // });
-
-    // it('should simulate the third scenario', () => {
-    //     const logMock = jest.spyOn(console, 'log');
-    //     game.players[1].ability1 = () => 1;
-    //     game.play();
-    //     expect(logMock.mock.calls).toEqual([
-    //         ['(Рыцарь) cnight1 [Здоровье: 1, Сила: 1] <<VS>> (Рыцарь) player_name [Здоровье: 1, Сила: 1]'],
-    //         ['Первым ходит ИГРОК 2'],
-    //         ['(Рыцарь) player_name использует (Удар возмездия) и наносит урон 1 противнику (Рыцарь) cnight1'],
-    //         ['(Рыцарь) cnight1 погибает']
-    //     ]);
-    // });
-
-    // it('should simulate the fourth scenario', () => {
-    //     const logMock = jest.spyOn(console, 'log');
-    //     game.players[1].attack = () => 1;
-    //     game.play();
-    //     expect(logMock.mock.calls).toEqual([
-    //         ['(Рыцарь) cnight1 [Здоровье: 1, Сила: 1] <<VS>> (Рыцарь) player_name [Здоровье: 1, Сила: 1]'],
-    //         ['Первым ходит ИГРОК 2'],
-    //         ['(Рыцарь) player_name наносит урон 1 противнику (Рыцарь) cnight1'],
-    //         ['(Рыцарь) cnight1 погибает']
-    //     ]);
-    // });
 });
