@@ -4,6 +4,7 @@ import { Bina } from './bina';
 import { Character } from './character';
 import { ArrayItem } from './arrayItem';
 import { CharacterFactory } from './characterFactory';
+import { Message } from './message';
 
 export class Game {
   private players: Character[] = [];
@@ -87,7 +88,12 @@ export class Game {
   private playOneTurn(): number[] {
     const bina: Bina = new Bina();
 
-    bina.attack(this.currentPlayers[0].player, this.currentPlayers[1].player);
+    const attacker: Character = this.currentPlayers[0].player;
+    const target: Character = this.currentPlayers[1].player;
+
+    const message: Message = new Message(attacker.toString(), target, target.toString(), attacker.getAttackPoints());
+
+    bina.performAttack(message);
 
     this.swapCurrentPlayers();
 

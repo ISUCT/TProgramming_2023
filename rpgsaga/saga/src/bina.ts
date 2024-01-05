@@ -1,9 +1,9 @@
-import { Character } from './character';
+import { Message } from './message';
 
 export class Bina {
-  public attack(attacker: Character, target: Character) {
-    target.receiveDamage(attacker.getAttackPoints());
+  public performAttack(message: Message) {
+    message.target.receiveDamage(message.damagePoints);
 
-    console.log(`${attacker.toString()} has dealt ${attacker.getAttackPoints()} damage to ${target.toString()}!`);
+    console.log(`${message.attackerInfo} has dealt ${message.damagePoints} damage to ${message.targetInfo}!`);
   }
 }
