@@ -9,7 +9,16 @@ export class FireArrowEffect extends StatusEffect {
 
   public apply(target: Character): boolean {
     if (this.canApply()) {
+      this.usesRemaining -= 1;
+
+      console.log(
+        `${target.toString()} has received 2 damage from the Fire Arrow Effect! (${
+          this.usesRemaining
+        } turns remaining)`,
+      );
+
       target.receiveDamage(2);
+
       return true;
     }
 

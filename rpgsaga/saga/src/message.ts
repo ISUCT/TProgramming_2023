@@ -2,6 +2,7 @@ import { Character } from './character';
 import { Spell } from './spell/spell';
 
 export class Message {
+  private _attacker: Character;
   private _attackerInfo: string;
   private _target: Character;
   private _targetInfo: string;
@@ -58,7 +59,15 @@ export class Message {
     this._spellInfo = value;
   }
 
-  constructor(attackerInfo: string, target: Character, targetInfo: string, damagePoints?: number, spell?: Spell) {
+  constructor(
+    attacker: Character,
+    attackerInfo: string,
+    target: Character,
+    targetInfo: string,
+    damagePoints?: number,
+    spell?: Spell,
+  ) {
+    this._attacker = attacker;
     this._attackerInfo = attackerInfo;
     this._target = target;
     this._targetInfo = targetInfo;

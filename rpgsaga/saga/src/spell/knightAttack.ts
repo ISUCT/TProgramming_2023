@@ -4,7 +4,7 @@ import { Spell } from './spell';
 
 export class KnightAttack extends Spell {
   constructor() {
-    super('Mighty Slash', 3, 0, null);
+    super('Mighty Slash', 2, 0, null);
   }
 
   public cast(message: Message): boolean {

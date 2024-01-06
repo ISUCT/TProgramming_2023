@@ -46,8 +46,8 @@ export class Bina {
         }
       }
     } else {
-      this.message.spell.statusEffect.refresh();
-      this.message.target.statusEffects.addLast(this.message.spell.statusEffect);
+      statusEffect.refresh();
+      this.message.target.statusEffects.addLast(statusEffect);
     }
   }
 }

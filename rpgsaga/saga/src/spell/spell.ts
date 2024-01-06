@@ -1,4 +1,3 @@
-import { Character } from '../character';
 import { Message } from '../message';
 import { StatusEffect } from '../statusEffect/statusEffect';
 

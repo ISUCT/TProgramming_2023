@@ -56,6 +56,9 @@ export class DoublyLinkedList {
     if (this._head === null) {
       tmp.prev = null;
       this._head = tmp;
+
+      this.size += 1;
+
       return;
     }
 
@@ -66,6 +69,8 @@ export class DoublyLinkedList {
     node.next = tmp;
 
     tmp.prev = node;
+
+    this.size += 1;
   }
 
   public remove(value: StatusEffect) {

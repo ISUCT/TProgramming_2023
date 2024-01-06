@@ -9,8 +9,12 @@ export class StunEffect extends StatusEffect {
 
   public apply(target: Character): boolean {
     if (this.canApply()) {
-      target.isStunned = true;
       this.usesRemaining -= 1;
+
+      console.log(`${target.toString()} is now stunned! (${this.usesRemaining} turns remaining)`);
+
+      target.isStunned = true;
+
       return true;
     }
 

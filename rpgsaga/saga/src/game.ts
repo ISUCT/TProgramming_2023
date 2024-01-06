@@ -105,12 +105,16 @@ export class Game {
     const target: Character = this.currentPlayers[1].player;
 
     const message: Message = new Message(
+      attacker,
       attacker.toString(),
       target,
       target.toString(),
       attacker.getAttackPoints(),
       attacker.spell,
     );
+
+    statusEffectManager.removeEndedStatusEffects(attacker);
+    statusEffectManager.applyAllStatusEffects(attacker);
 
     bina.receiveMessage(message);
 
@@ -120,12 +124,7 @@ export class Game {
       } else {
         bina.performSpell();
       }
-    } else {
-      console.log(`${attacker.toString()} is stunned!`);
     }
-
-    statusEffectManager.applyAllStatusEffects(attacker);
-    statusEffectManager.removeEndedStatusEffects(attacker);
 
     this.swapCurrentPlayers();
 
