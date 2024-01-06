@@ -12,12 +12,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "prompt-sync": "^4.2.0"
   },
   "devDependencies": {
     "@types/jest": "^27.0.3",
     "@types/lodash": "^4.14.202",
     "@types/node": "^16.11.0",
+    "@types/prompt-sync": "^4.2.3",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "eslint": "^7.28.0",
