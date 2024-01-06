@@ -1,16 +1,32 @@
-import { Phone } from './phone';
+import { Statuses } from './saga/banks/statuses';
+import { PlayerGenerator } from './saga/playerGenerator';
+// import { Television } from './tv';
+// import { Channel } from './channel';
+import { Tournament } from './saga/tournaments';
 
-const first = new Phone('+7900-000 000 (123)', 1990, 'Телефон 1');
-first.year = 1998;
+// const channels: Array<Channel> = [
+//   new Channel('Первый канал'),
+//   new Channel('Россия 1'),
+//   new Channel('ТВЦ'),
+//   new Channel('2х2'),
+//   new Channel('Cartoon Network'),
+// ];
 
-first.year = -1998;
-first.call('12345');
-first.endCall();
+// const tv = new Television('Sony', 'BH-200', 'SVD2349874324XD', channels);
 
-const second = new Phone('+799900000', -5);
-// second.name = 'Телефон 2';
-console.log(second.year);
-second.call('12345');
-second.endCall();
+// console.log(tv.printTV());
 
-console.log(first, second, Phone.phoneCount);
+// tv.currentChannel = 2;
+// console.log(tv.printTV());
+
+// console.log(tv.prevChannel());
+// console.log(tv.prevChannel());
+// console.log(tv.prevChannel());
+// console.log(tv.prevChannel());
+
+const players = PlayerGenerator.createPlayers(1, 1, 2, true);
+const tournament = new Tournament(players, true);
+tournament.startTournament();
+
+const status = Statuses.burn;
+console.log(status);
