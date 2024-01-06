@@ -8,7 +8,7 @@ import { Statuses } from '../src/saga/banks/statuses';
 
 describe('Testing creating players', () => {
   it('should return as much players as we ordered', () => {
-    const players = PlayerGenerator.createPlayers(4, 4, 4);
+    const players = PlayerGenerator.createPlayers(4, 4, 4, true);
     expect(players).toBeDefined();
     const nameList = {
       knight: 0,

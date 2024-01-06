@@ -24,7 +24,7 @@ import { Tournament } from './saga/tournaments';
 // console.log(tv.prevChannel());
 // console.log(tv.prevChannel());
 
-const players = PlayerGenerator.createPlayers(1, 1, 2);
+const players = PlayerGenerator.createPlayers(1, 1, 2, true);
 const tournament = new Tournament(players, true);
 tournament.startTournament();
 

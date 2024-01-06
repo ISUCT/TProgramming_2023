@@ -91,7 +91,10 @@ export class ConsoleLogger {
 
   public stateLog(player: Player, input: PassResult): void {
     if (this.isEnabled) {
-      // redo, log doesn't know about statuses' real damage
+      if (input.editedDmg !== 0) {
+        console.log('(%s) %s получает %d урона', player.constructor.name, player.name, input.editedDmg);
+      }
+
       for (let i = 0; i < input.statuses.length; i++) {
         const element = input.statuses[i];
         if (element.dmgPerTurn > 0) {
@@ -104,9 +107,6 @@ export class ConsoleLogger {
           );
         }
       }
-      // if (input.statuses) {
-      //  console.log('(%s) %s разморожен и готов атаковать', player.constructor.name, player.name);
-      // }
     }
   }
 }

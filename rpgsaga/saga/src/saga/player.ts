@@ -62,9 +62,10 @@ export abstract class Player {
 
   public passTurn(input?: ActionResult): PassResult {
     const reflect = new Skill('reflect', ActionType.Normal, 0);
+    let attackDmg = [0, Aff.Normal];
 
     if (input !== undefined) {
-      const attackDmg = this.calcDamage(input.damage, input.action.type);
+      attackDmg = this.calcDamage(input.damage, input.action.type);
       if (attackDmg[1] === Aff.Reflect) {
         reflect.damage = attackDmg[0];
       } else {
@@ -92,7 +93,7 @@ export abstract class Player {
       }
     }
 
-    return new PassResult(this.statuses, reflect);
+    return new PassResult(attackDmg[0], this.statuses, reflect);
   }
 
   public simplePassTurn(input?: IAction) {
@@ -184,10 +185,12 @@ export class ActionResult {
 }
 
 export class PassResult {
+  editedDmg: number;
   statuses: IStatus[];
   reflectiveAttack: IAction;
 
-  constructor(statuses: IStatus[], reflect: IAction) {
+  constructor(editedDamage: number, statuses: IStatus[], reflect: IAction) {
+    this.editedDmg = editedDamage;
     this.statuses = statuses;
     this.reflectiveAttack = reflect;
   }

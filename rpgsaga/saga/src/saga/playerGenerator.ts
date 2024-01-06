@@ -7,7 +7,7 @@ export class PlayerGenerator {
   private static nameBank = names;
   private static statsBank = stats;
 
-  public static createPlayers(knights: number, archers: number, mages: number): Player[] {
+  public static createPlayers(knights: number, archers: number, mages: number, shuffle: boolean): Player[] {
     const result = [];
     for (let i = 0; i < knights; i++) {
       result.push(this.generate('knight'));
@@ -17,6 +17,9 @@ export class PlayerGenerator {
     }
     for (let i = 0; i < mages; i++) {
       result.push(this.generate('mage'));
+    }
+    if (shuffle) {
+      shufflePlayers(result);
     }
     return result;
   }
@@ -52,4 +55,21 @@ export class PlayerGenerator {
 
 function randomIntFromInterval(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function shufflePlayers(array: Array<Player>): Array<Player> {
+  let currentIndex = array.length;
+  let randomIndex: number;
+
+  // While there remain elements to shuffle.
+  while (currentIndex > 0) {
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
 }
