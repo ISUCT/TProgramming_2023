@@ -20,6 +20,7 @@ export class Bina {
 
   public performSpell() {
     const isSuccessful = this.message.spell.cast(this.message);
+
     if (isSuccessful) {
       console.log(
         `${this.message.attackerInfo} has casted a spell ${this.message.spell.toString()} on ${

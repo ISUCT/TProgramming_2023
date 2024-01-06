@@ -47,25 +47,25 @@ export class DoublyLinkedList {
   }
 
   public addLast(value: StatusEffect) {
-    if (this.isEmpty()) {
-      const tmp = new DoublyLinkedListNode(value);
+    const tmp = new DoublyLinkedListNode(value);
 
+    let node: DoublyLinkedListNode = this._head;
+
+    tmp.next = null;
+
+    if (this._head === null) {
+      tmp.prev = null;
       this._head = tmp;
-      this._tail = tmp;
-
-      this.size++;
       return;
-    } else {
-      const tmp = new DoublyLinkedListNode(value);
-
-      tmp.next = null;
-      tmp.prev = this.tail;
-
-      this._tail.next = tmp;
-
-      this._tail = tmp;
-      this.size++;
     }
+
+    while (node.next !== null) {
+      node = node.next;
+    }
+
+    node.next = tmp;
+
+    tmp.prev = node;
   }
 
   public remove(value: StatusEffect) {

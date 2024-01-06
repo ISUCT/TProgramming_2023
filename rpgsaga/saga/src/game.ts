@@ -114,10 +114,14 @@ export class Game {
 
     bina.receiveMessage(message);
 
-    if (this.chooseAnAttackType() === AttackType.attack) {
-      bina.performAttack();
+    if (!attacker.isStunned) {
+      if (this.chooseAnAttackType() === AttackType.attack) {
+        bina.performAttack();
+      } else {
+        bina.performSpell();
+      }
     } else {
-      bina.performSpell();
+      console.log(`${attacker.toString()} is stunned!`);
     }
 
     statusEffectManager.applyAllStatusEffects(attacker);

@@ -16,6 +16,7 @@ export class StatusEffectManager {
 
     while (node !== null) {
       if (!node.value.canApply()) {
+        node.value.remove(target);
         target.statusEffects.remove(node.value);
       }
 

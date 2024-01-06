@@ -10,6 +10,7 @@ export class StunEffect extends StatusEffect {
   public apply(target: Character): boolean {
     if (this.canApply()) {
       target.isStunned = true;
+      this.usesRemaining -= 1;
       return true;
     }
 
