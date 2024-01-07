@@ -16,9 +16,12 @@ export class Game {
   private _quantityOfPlayers: number;
 
   constructor(quantityOfPlayers: number) {
+    if (quantityOfPlayers === 1) {
+      throw Error('Quantity of players should be greater than 1');
+    }
+
     this._quantityOfPlayers = quantityOfPlayers;
     this._newPlayerIndex = 2;
-
     const characterFactory: CharacterFactory = new CharacterFactory();
     this._players = characterFactory.generatePlayers(this._quantityOfPlayers);
   }
