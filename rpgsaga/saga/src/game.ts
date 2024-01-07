@@ -10,17 +10,17 @@ import { AttackType } from './attackType';
 import { StatusEffectManager } from './statusEffectManager';
 
 export class Game {
-  private players: Character[] = [];
-  private currentPlayers: ArrayItem[] = [];
-  private newPlayerIndex: number;
-  private quantityOfPlayers: number;
+  private _players: Character[] = [];
+  private _currentPlayers: ArrayItem[] = [];
+  private _newPlayerIndex: number;
+  private _quantityOfPlayers: number;
 
   constructor(quantityOfPlayers: number) {
-    this.quantityOfPlayers = quantityOfPlayers;
-    this.newPlayerIndex = 2;
+    this._quantityOfPlayers = quantityOfPlayers;
+    this._newPlayerIndex = 2;
 
     const characterFactory: CharacterFactory = new CharacterFactory();
-    this.players = characterFactory.generatePlayers(this.quantityOfPlayers);
+    this._players = characterFactory.generatePlayers(this._quantityOfPlayers);
   }
 
   private announceDeadBody(deadBody: Character): void {
@@ -34,11 +34,11 @@ export class Game {
   private findDeadBodies(): number[] {
     const deadBodiesIndexes: number[] = [];
 
-    for (let i = 0; i < this.currentPlayers.length; i++) {
-      const currectPlayer = this.currentPlayers[i].player;
+    for (let i = 0; i < this._currentPlayers.length; i++) {
+      const currectPlayer = this._currentPlayers[i].player;
 
       if (this.isPlayerDead(currectPlayer)) {
-        this.quantityOfPlayers -= 1;
+        this._quantityOfPlayers -= 1;
         deadBodiesIndexes.push(i);
 
         this.announceDeadBody(currectPlayer);
@@ -55,20 +55,20 @@ export class Game {
   private replaceDeadBodies(deadPlayerIndexes: number[]): void {
     for (let i = 0; i < deadPlayerIndexes.length; i++) {
       const deadPlayerIndex: number = deadPlayerIndexes[i];
-      if (this.isPlayerDead(this.currentPlayers[deadPlayerIndex].player)) {
-        this.currentPlayers[deadPlayerIndex] = new ArrayItem(
-          cloneDeep(this.players[this.newPlayerIndex]),
-          this.newPlayerIndex,
+      if (this.isPlayerDead(this._currentPlayers[deadPlayerIndex].player)) {
+        this._currentPlayers[deadPlayerIndex] = new ArrayItem(
+          cloneDeep(this._players[this._newPlayerIndex]),
+          this._newPlayerIndex,
         );
-        this.newPlayerIndex += 1;
+        this._newPlayerIndex += 1;
       }
     }
   }
 
   private countDeadPlayers(): number {
     let counter = 0;
-    for (let i = 0; i < this.currentPlayers.length; i++) {
-      if (this.isPlayerDead(this.currentPlayers[i].player)) {
+    for (let i = 0; i < this._currentPlayers.length; i++) {
+      if (this.isPlayerDead(this._currentPlayers[i].player)) {
         counter += 1;
       }
     }
@@ -77,15 +77,15 @@ export class Game {
   }
 
   private restoreCurrentPlayers(): void {
-    for (let i = 0; i < this.currentPlayers.length; i++) {
-      this.currentPlayers[i].player = cloneDeep(this.players[this.currentPlayers[i].index]);
+    for (let i = 0; i < this._currentPlayers.length; i++) {
+      this._currentPlayers[i].player = cloneDeep(this._players[this._currentPlayers[i].index]);
     }
   }
 
   private swapCurrentPlayers(): void {
-    const temp = this.currentPlayers[0];
-    this.currentPlayers[0] = this.currentPlayers[1];
-    this.currentPlayers[1] = temp;
+    const temp = this._currentPlayers[0];
+    this._currentPlayers[0] = this._currentPlayers[1];
+    this._currentPlayers[1] = temp;
   }
 
   private chooseAnAttackType(): AttackType {
@@ -101,8 +101,8 @@ export class Game {
     const bina: Bina = new Bina();
     const statusEffectManager = new StatusEffectManager();
 
-    const attacker: Character = this.currentPlayers[0].player;
-    const target: Character = this.currentPlayers[1].player;
+    const attacker: Character = this._currentPlayers[0].player;
+    const target: Character = this._currentPlayers[1].player;
 
     const message: Message = new Message(
       attacker,
@@ -132,13 +132,13 @@ export class Game {
   }
 
   private announceCurrentRoundPlayers(): void {
-    const firstPlayer = this.currentPlayers[0].player;
-    const secondPlayer = this.currentPlayers[1].player;
+    const firstPlayer = this._currentPlayers[0].player;
+    const secondPlayer = this._currentPlayers[1].player;
     console.log(`${firstPlayer.name} (${firstPlayer.class}) vs ${secondPlayer.name} (${secondPlayer.class})`);
   }
 
   private canReplaceDeadPlayer(): boolean {
-    return this.newPlayerIndex < this.players.length;
+    return this._newPlayerIndex < this._players.length;
   }
 
   private playOneRound(): void {
@@ -157,14 +157,14 @@ export class Game {
   }
 
   private isGameOver(): boolean {
-    return this.quantityOfPlayers <= 1 ? true : false;
+    return this._quantityOfPlayers <= 1 ? true : false;
   }
 
   private findWinner(): Character {
     const deadPlayersCount: number = this.countDeadPlayers();
     if (deadPlayersCount === 1) {
-      for (let i = 0; i < this.currentPlayers.length; i++) {
-        const currentPlayer = this.currentPlayers[i].player;
+      for (let i = 0; i < this._currentPlayers.length; i++) {
+        const currentPlayer = this._currentPlayers[i].player;
         if (!this.isPlayerDead(currentPlayer)) {
           return currentPlayer;
         }
@@ -183,7 +183,10 @@ export class Game {
   }
 
   private initialiseCurrentPlayers(): void {
-    this.currentPlayers = [new ArrayItem(cloneDeep(this.players[0]), 0), new ArrayItem(cloneDeep(this.players[1]), 1)];
+    this._currentPlayers = [
+      new ArrayItem(cloneDeep(this._players[0]), 0),
+      new ArrayItem(cloneDeep(this._players[1]), 1),
+    ];
   }
 
   public start(): void {

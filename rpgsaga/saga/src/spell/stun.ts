@@ -8,9 +8,9 @@ export class Stun extends Spell {
     super('Stun', 2, 0, new StunEffect());
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public cast(message: Message): boolean {
     if (this.isCastable()) {
+      message.target.receiveDamage(this.damagePoints);
       this.castsRemaining -= 1;
       return true;
     }

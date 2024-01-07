@@ -4,35 +4,35 @@ import { Message } from './message';
 import { StatusEffect } from './statusEffect/statusEffect';
 
 export class Bina {
-  private message: Message;
+  private _message: Message;
 
   public receiveMessage(message: Message) {
-    this.message = message;
+    this._message = message;
   }
 
   public performAttack() {
-    this.message.target.receiveDamage(this.message.damagePoints);
+    this._message.target.receiveDamage(this._message.damagePoints);
 
     console.log(
-      `${this.message.attackerInfo} has dealt ${this.message.damagePoints} damage to ${this.message.targetInfo}!`,
+      `${this._message.attackerInfo} has dealt ${this._message.damagePoints} damage to ${this._message.targetInfo}!`,
     );
   }
 
   public performSpell() {
-    const isSuccessful = this.message.spell.cast(this.message);
+    const isSuccessful = this._message.spell.cast(this._message);
 
     if (isSuccessful) {
       console.log(
-        `${this.message.attackerInfo} has casted a spell ${this.message.spell.toString()} on ${
-          this.message.targetInfo
+        `${this._message.attackerInfo} has casted a spell ${this._message.spell.toString()} on ${
+          this._message.targetInfo
         }!`,
       );
 
-      if (this.message.spell.statusEffect !== null) {
-        this.sendStatusEffect(this.message.target, this.message.spell.statusEffect);
+      if (this._message.spell.statusEffect !== null) {
+        this.sendStatusEffect(this._message.target, this._message.spell.statusEffect);
       }
     } else {
-      console.log(`${this.message.attackerInfo} has failed to cast a spell and skipped a turn!`);
+      console.log(`${this._message.attackerInfo} has failed to cast a spell and skipped a turn!`);
     }
   }
 
@@ -47,7 +47,7 @@ export class Bina {
       }
     } else {
       statusEffect.refresh();
-      this.message.target.statusEffects.addLast(statusEffect);
+      this._message.target.statusEffects.addLast(statusEffect);
     }
   }
 }

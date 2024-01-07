@@ -7,21 +7,21 @@ import { MageGenerator } from './characterGenerators/mageGenerator';
 import { getRandomEnumValue } from './randomMath';
 
 export class CharacterFactory {
-  private factory: CharacterGenerator;
+  private _factory: CharacterGenerator;
 
   private set(characterClass: CharacterClass) {
     if (characterClass === CharacterClass.archer) {
-      this.factory = new ArcherGenerator();
+      this._factory = new ArcherGenerator();
     } else if (characterClass === CharacterClass.knight) {
-      this.factory = new KnightGenerator();
+      this._factory = new KnightGenerator();
     } else if (characterClass === CharacterClass.mage) {
-      this.factory = new MageGenerator();
+      this._factory = new MageGenerator();
     }
   }
 
   private getCharacter(characterClass: CharacterClass): Character {
     this.set(characterClass);
-    return this.factory.createCharacter();
+    return this._factory.createCharacter();
   }
 
   public generatePlayers(quantityOfPlayers: number): Character[] {

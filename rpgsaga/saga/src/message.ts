@@ -19,6 +19,14 @@ export class Message {
     this._damagePoints = value;
   }
 
+  get attacker() {
+    return this._attacker;
+  }
+
+  set attacker(value: Character) {
+    this._attacker = value;
+  }
+
   get attackerInfo() {
     return this._attackerInfo;
   }

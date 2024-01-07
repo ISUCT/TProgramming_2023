@@ -6,7 +6,7 @@ export class DoublyLinkedList {
   private _head: DoublyLinkedListNode;
   private _tail: DoublyLinkedListNode;
 
-  private size: number;
+  private _size: number;
 
   get head() {
     return this._head;
@@ -19,15 +19,15 @@ export class DoublyLinkedList {
   constructor() {
     this._head = null;
     this._tail = null;
-    this.size = 0;
+    this._size = 0;
   }
 
   public length(): number {
-    return this.size;
+    return this._size;
   }
 
   public isEmpty(): boolean {
-    return this.size <= 0;
+    return this._size <= 0;
   }
 
   public contains(value: StatusEffect): boolean {
@@ -57,7 +57,7 @@ export class DoublyLinkedList {
       tmp.prev = null;
       this._head = tmp;
 
-      this.size += 1;
+      this._size += 1;
 
       return;
     }
@@ -70,7 +70,7 @@ export class DoublyLinkedList {
 
     tmp.prev = node;
 
-    this.size += 1;
+    this._size += 1;
   }
 
   public remove(value: StatusEffect) {
@@ -94,7 +94,7 @@ export class DoublyLinkedList {
           this._tail = tmp.prev;
         }
 
-        this.size--;
+        this._size--;
 
         return;
       }

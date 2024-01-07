@@ -41,14 +41,6 @@ export class Character {
     return this._healthPoints;
   }
 
-  set healthPoints(value: number) {
-    this._healthPoints = value;
-  }
-
-  get strength() {
-    return this._strength;
-  }
-
   get strengthModificatior() {
     return this._strengthModificator;
   }
@@ -78,7 +70,7 @@ export class Character {
     this.class = characterClass;
 
     this._maxHealthPoints = healthPoints;
-    this.healthPoints = this._maxHealthPoints;
+    this._healthPoints = this._maxHealthPoints;
 
     this._strength = 5;
     this._strengthModificator = 1.0;
@@ -89,7 +81,7 @@ export class Character {
   }
 
   public receiveDamage(points: number) {
-    this.healthPoints -= points;
+    this._healthPoints -= points;
   }
 
   public getAttackPoints(): number {

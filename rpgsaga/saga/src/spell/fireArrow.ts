@@ -12,7 +12,6 @@ export class FireArrow extends Spell {
     if (this.isCastable()) {
       message.target.receiveDamage(this.damagePoints);
       this.castsRemaining -= 1;
-
       return true;
     }
 
