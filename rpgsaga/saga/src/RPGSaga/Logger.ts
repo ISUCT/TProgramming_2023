@@ -20,10 +20,10 @@ export class Logger {
           console.log(`${firstP} наносит урон ${playerAction[1]} противнику ${secondP}`);
           break;
         case "Удар возмездия":
-          console.log(`${firstP} применяет (${playerAction[0]}) и наносит урон ${playerAction[1]} противнику ${secondP}`);
+          console.log(`${firstP} применяет (${playerAction[0]}) и наносит урон ${playerAction[1]} по противнику ${secondP}`);
           break;
         case "Огненная стрела":
-          console.log(`${firstP} применяет (${playerAction[0]}) по противнику ${secondP}`);
+          console.log(`${firstP} применяет (${playerAction[0]}) и наносит урон ${playerAction[1]} по противнику ${secondP} `);
           break;
         case "Заворожение":
           console.log(`${firstP} применяет (${playerAction[0]}) по противнику ${secondP}`);
