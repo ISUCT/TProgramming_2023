@@ -1,5 +1,5 @@
 import { Character } from './character';
-import { Spell } from './spell/spell';
+import { Spell } from './spell_system/spell/spell';
 
 export class Message {
   private _attacker: Character;

@@ -1,7 +1,7 @@
 import { Character } from './character';
 import { DoublyLinkedListNode } from './doublyLinkedList/doublyLinkedListNode';
 import { Message } from './message';
-import { StatusEffect } from './statusEffect/statusEffect';
+import { StatusEffect } from './spell_system/statusEffect/statusEffect';
 
 export class Bina {
   private _message: Message;

@@ -1,5 +1,5 @@
-import { Character } from './character';
-import { DoublyLinkedListNode } from './doublyLinkedList/doublyLinkedListNode';
+import { Character } from '../character';
+import { DoublyLinkedListNode } from '../doublyLinkedList/doublyLinkedListNode';
 
 export class StatusEffectManager {
   public applyAllStatusEffects(target: Character) {

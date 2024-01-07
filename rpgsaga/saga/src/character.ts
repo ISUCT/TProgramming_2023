@@ -1,6 +1,6 @@
 import { CharacterClass } from './characterClasses';
 import { DoublyLinkedList } from './doublyLinkedList/doublyLinkedList';
-import { Spell } from './spell/spell';
+import { Spell } from './spell_system/spell/spell';
 
 export class Character {
   private _name: string;

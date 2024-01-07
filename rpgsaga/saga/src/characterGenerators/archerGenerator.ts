@@ -1,7 +1,7 @@
 import { CharacterClass } from '../characterClasses';
 import { Character } from '../character';
 import { randomIntFromInterval } from '../randomMath';
-import { FireArrow } from '../spell/fireArrow';
+import { FireArrow } from '../spell_system/spell/fireArrow';
 
 import { CharacterGenerator } from './characterGenerator';
 

@@ -1,4 +1,4 @@
-import { Message } from '../message';
+import { Message } from '../../message';
 import { StatusEffect } from '../statusEffect/statusEffect';
 
 export abstract class Spell {

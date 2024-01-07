@@ -1,11 +1,11 @@
-import { Message } from '../message';
-import { StunEffect } from '../statusEffect/stunEffect';
+import { Message } from '../../message';
+import { FireArrowEffect } from '../statusEffect/fireArrowEffect';
 
 import { Spell } from './spell';
 
-export class Stun extends Spell {
+export class FireArrow extends Spell {
   constructor() {
-    super('Stun', 2, 0, new StunEffect());
+    super('FireArrow', 2, 7, new FireArrowEffect());
   }
 
   public cast(message: Message): boolean {

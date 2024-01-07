@@ -7,7 +7,7 @@ import { CharacterFactory } from './characterFactory';
 import { Message } from './message';
 import { randomIntFromInterval } from './randomMath';
 import { AttackType } from './attackType';
-import { StatusEffectManager } from './statusEffectManager';
+import { StatusEffectManager } from './spell_system/statusEffectManager';
 
 export class Game {
   private _players: Character[] = [];

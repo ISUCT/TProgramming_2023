@@ -1,4 +1,4 @@
-import { StatusEffect } from '../statusEffect/statusEffect';
+import { StatusEffect } from '../spell_system/statusEffect/statusEffect';
 
 import { DoublyLinkedListNode } from './doublyLinkedListNode';
 
