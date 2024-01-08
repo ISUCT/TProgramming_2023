@@ -5,15 +5,17 @@ import { Character } from './character';
 import { ArrayItem } from './arrayItem';
 import { CharacterFactory } from './characterFactory';
 import { Message } from './message';
-import { randomIntFromInterval } from './randomMath';
 import { AttackType } from './attackType';
 import { StatusEffectManager } from './spell_system/statusEffectManager';
+import { GameUtility } from './gameUtility';
 
 export class Game {
   private _players: Character[] = [];
   private _currentPlayers: ArrayItem[] = [];
   private _newPlayerIndex: number;
   private _quantityOfPlayers: number;
+
+  private _utility = new GameUtility();
 
   constructor(quantityOfPlayers: number) {
     if (quantityOfPlayers === 1) {
@@ -26,82 +28,10 @@ export class Game {
     this._players = characterFactory.generatePlayers(this._quantityOfPlayers);
   }
 
-  private announceDeadBody(deadBody: Character): void {
-    console.log(`${deadBody.name} (${deadBody.class}) has died!`);
-  }
-
-  private isPlayerDead(player: Character): boolean {
-    return player.healthPoints <= 0 ? true : false;
-  }
-
-  private findDeadBodies(): number[] {
-    const deadBodiesIndexes: number[] = [];
-
-    for (let i = 0; i < this._currentPlayers.length; i++) {
-      const currectPlayer = this._currentPlayers[i].player;
-
-      if (this.isPlayerDead(currectPlayer)) {
-        this._quantityOfPlayers -= 1;
-        deadBodiesIndexes.push(i);
-
-        this.announceDeadBody(currectPlayer);
-      }
-    }
-
-    if (deadBodiesIndexes.length > 0) {
-      return deadBodiesIndexes;
-    } else {
-      return null;
-    }
-  }
-
-  private replaceDeadBodies(deadPlayerIndexes: number[]): void {
-    for (let i = 0; i < deadPlayerIndexes.length; i++) {
-      const deadPlayerIndex: number = deadPlayerIndexes[i];
-      if (this.isPlayerDead(this._currentPlayers[deadPlayerIndex].player)) {
-        this._currentPlayers[deadPlayerIndex] = new ArrayItem(
-          cloneDeep(this._players[this._newPlayerIndex]),
-          this._newPlayerIndex,
-        );
-        this._newPlayerIndex += 1;
-      }
-    }
-  }
-
-  private countDeadPlayers(): number {
-    let counter = 0;
-    for (let i = 0; i < this._currentPlayers.length; i++) {
-      if (this.isPlayerDead(this._currentPlayers[i].player)) {
-        counter += 1;
-      }
-    }
-
-    return counter;
-  }
-
-  private restoreCurrentPlayers(): void {
-    for (let i = 0; i < this._currentPlayers.length; i++) {
-      this._currentPlayers[i].player = cloneDeep(this._players[this._currentPlayers[i].index]);
-    }
-  }
-
   private swapCurrentPlayers(): void {
     const temp = this._currentPlayers[0];
     this._currentPlayers[0] = this._currentPlayers[1];
     this._currentPlayers[1] = temp;
-  }
-
-  private chooseAnAttackType(isSpellAvailable: boolean): AttackType {
-    if (!isSpellAvailable) {
-      return AttackType.attack;
-    }
-
-    const randomNumber = randomIntFromInterval(1, 10);
-    if (randomNumber <= 3) {
-      return AttackType.spell;
-    } else {
-      return AttackType.attack;
-    }
   }
 
   private playOneTurn(): number[] {
@@ -126,7 +56,7 @@ export class Game {
     bina.receiveMessage(message);
 
     if (!attacker.isStunned) {
-      if (this.chooseAnAttackType(attacker.spell.canExecute()) === AttackType.attack) {
+      if (this._utility.chooseAnAttackType(attacker.spell.canExecute()) === AttackType.attack) {
         bina.performAttack();
       } else {
         bina.performSpell();
@@ -135,7 +65,12 @@ export class Game {
 
     this.swapCurrentPlayers();
 
-    return this.findDeadBodies();
+    const deadBodies = this._utility.findDeadBodies(this._currentPlayers);
+    if (deadBodies !== null) {
+      this._quantityOfPlayers -= deadBodies.length;
+    }
+
+    return deadBodies;
   }
 
   private announceCurrentRoundPlayers(): void {
@@ -158,34 +93,14 @@ export class Game {
     }
 
     if (this.canReplaceDeadPlayer()) {
-      this.replaceDeadBodies(deadBodyIndexes);
-      this.restoreCurrentPlayers();
-    }
-  }
+      this._newPlayerIndex = this._utility.replaceDeadBodies(
+        this._players,
+        this._currentPlayers,
+        this._newPlayerIndex,
+        deadBodyIndexes,
+      );
 
-  private isGameOver(): boolean {
-    return this._quantityOfPlayers <= 1 ? true : false;
-  }
-
-  private findWinner(): Character {
-    const deadPlayersCount: number = this.countDeadPlayers();
-    if (deadPlayersCount === 1) {
-      for (let i = 0; i < this._currentPlayers.length; i++) {
-        const currentPlayer = this._currentPlayers[i].player;
-        if (!this.isPlayerDead(currentPlayer)) {
-          return currentPlayer;
-        }
-      }
-    }
-
-    return null;
-  }
-
-  private announceWinner(winner: Character): void {
-    if (winner !== null) {
-      console.log(`The winner is ${winner.name} (${winner.class})!`);
-    } else {
-      console.log(`It's a draw!`);
+      this._utility.restoreCurrentPlayers(this._currentPlayers, this._players);
     }
   }
 
@@ -196,6 +111,18 @@ export class Game {
     ];
   }
 
+  private isGameOver(): boolean {
+    return this._quantityOfPlayers <= 1 ? true : false;
+  }
+
+  private announceWinner(winner: Character): void {
+    if (winner !== null) {
+      console.log(`The winner is ${winner.name} (${winner.class})!`);
+    } else {
+      console.log(`It's a draw!`);
+    }
+  }
+
   public start(): void {
     this.initialiseCurrentPlayers();
 
@@ -204,7 +131,7 @@ export class Game {
       console.log('\n');
     }
 
-    const winner: Character = this.findWinner();
+    const winner: Character = this._utility.findWinner(this._currentPlayers);
     this.announceWinner(winner);
   }
 }
