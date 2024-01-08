@@ -1,6 +1,6 @@
-import { Strike } from "./Ability/Strike/Strike";
-import { Knight } from "./Player/Classes/Knight";
-import { RandomBool, RandomNumber } from "./Random";
+import { Strike } from "../Ability/Strike/Strike";
+import { Knight } from "../Player/Classes/Knight";
+import { randomBool, randomNumber } from "../Random/Random";
 
 export class Battle{
     Player0: Knight;
@@ -11,7 +11,7 @@ export class Battle{
     }
     start(){
         let opponents = [this.Player0, this.Player1]
-        let currentPlayer = RandomBool();
+        let currentPlayer = randomBool();
         console.log(this.Player0);
         console.log(this.Player1);
         while(opponents[0].hp>0 && opponents[1].hp>0){

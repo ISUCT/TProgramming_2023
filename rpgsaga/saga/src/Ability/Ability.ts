@@ -3,6 +3,7 @@ export enum abilityType{
     HEAL,
 }
 export interface Ability{
+    id: number;
     name: string; 
     type: abilityType;
     power: number;
