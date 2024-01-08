@@ -1,36 +1,29 @@
-import { Message } from '../../message';
-import { StatusEffect } from '../statusEffect/statusEffect';
+import { Character } from '../../character';
+import { IStatusEffect } from '../statusEffect/IStatusEffect';
 
-export abstract class Spell {
-  private _castsRemaining: number;
-  private _statusEffect: StatusEffect;
-  private _damagePoints: number;
+import { IActiveEffect } from './IActiveEffect';
+import { ISpell } from './ISpell';
+
+export class Spell implements ISpell {
   private _name: string;
+  private _activeEffect: IActiveEffect;
+  private _statusEffect: IStatusEffect;
 
-  get castsRemaining() {
-    return this._castsRemaining;
+  get name() {
+    return this._name;
   }
 
-  set castsRemaining(value: number) {
-    this._castsRemaining = value;
+  get cast() {
+    return this._activeEffect;
   }
 
   get statusEffect() {
     return this._statusEffect;
   }
 
-  get damagePoints() {
-    return this._damagePoints;
-  }
-
-  get name() {
-    return this._name;
-  }
-
-  constructor(name: string, castsRemaining: number, damagePoints: number, statusEffect?: StatusEffect) {
+  constructor(name: string, cast: IActiveEffect, statusEffect?: IStatusEffect) {
     this._name = name;
-    this._castsRemaining = castsRemaining;
-    this._damagePoints = damagePoints;
+    this._activeEffect = cast;
     this._statusEffect = null;
 
     if (typeof statusEffect !== undefined) {
@@ -38,17 +31,36 @@ export abstract class Spell {
     }
   }
 
-  public isCastable(): boolean {
-    if (this._castsRemaining > 0) {
+  public canExecute(): boolean {
+    if (this._activeEffect.canCast()) {
       return true;
     }
 
     return false;
   }
 
-  public abstract cast(message: Message): boolean;
+  public execute(target: Character): boolean {
+    const isCastedSuccessfully = this._activeEffect.cast(target);
+    return isCastedSuccessfully;
+  }
 
   public toString(): string {
-    return `${this._name} (${this._castsRemaining} casts remaining)`;
+    return `${this._name} (${this._activeEffect.toString()})`;
+  }
+
+  public hasStatusEffect(): boolean {
+    if (this._statusEffect !== null) {
+      return true;
+    }
+
+    return false;
+  }
+
+  public sendStatusEffect(): IStatusEffect {
+    if (this.hasStatusEffect()) {
+      return this._statusEffect;
+    }
+
+    return null;
   }
 }

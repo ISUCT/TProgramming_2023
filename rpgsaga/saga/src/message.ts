@@ -1,5 +1,5 @@
 import { Character } from './character';
-import { Spell } from './spell_system/spell/spell';
+import { ISpell } from './spell_system/spell/ISpell';
 
 export class Message {
   private _attacker: Character;
@@ -9,62 +9,34 @@ export class Message {
   private _damagePoints: number;
 
   private _spellInfo: string;
-  private _spell: Spell;
+  private _spell: ISpell;
 
   get damagePoints() {
     return this._damagePoints;
-  }
-
-  set damagePoints(value: number) {
-    this._damagePoints = value;
   }
 
   get attacker() {
     return this._attacker;
   }
 
-  set attacker(value: Character) {
-    this._attacker = value;
-  }
-
   get attackerInfo() {
     return this._attackerInfo;
-  }
-
-  set attackerInfo(value: string) {
-    this._attackerInfo = value;
   }
 
   get target() {
     return this._target;
   }
 
-  set target(value: Character) {
-    this._target = value;
-  }
-
   get targetInfo() {
     return this._targetInfo;
-  }
-
-  set targetInfo(value: string) {
-    this._targetInfo = value;
   }
 
   get spell() {
     return this._spell;
   }
 
-  set spell(value: Spell) {
-    this._spell = value;
-  }
-
   get spellInfo() {
     return this._spellInfo;
-  }
-
-  set spellInfo(value: string) {
-    this._spellInfo = value;
   }
 
   constructor(
@@ -73,7 +45,7 @@ export class Message {
     target: Character,
     targetInfo: string,
     damagePoints?: number,
-    spell?: Spell,
+    spell?: ISpell,
   ) {
     this._attacker = attacker;
     this._attackerInfo = attackerInfo;

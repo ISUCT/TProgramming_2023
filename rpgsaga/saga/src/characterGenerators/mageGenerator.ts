@@ -2,6 +2,8 @@ import { CharacterClass } from '../characterClasses';
 import { Character } from '../character';
 import { randomIntFromInterval } from '../randomMath';
 import { Stun } from '../spell_system/spell/stun';
+import { Spell } from '../spell_system/spell/spell';
+import { StunEffect } from '../spell_system/statusEffect/stunEffect';
 
 import { CharacterGeneratorHelper } from './characterGeneratorHelper';
 import { ICharacterGenerator } from './ICharacterGenerator';
@@ -54,7 +56,7 @@ export class MageGenerator implements ICharacterGenerator {
       helper.getRandomNameAndSurname(this._nameList, this._surnameList),
       CharacterClass.mage,
       randomIntFromInterval(this._minHealthPoints, this._maxHealthPoints),
-      new Stun(),
+      new Spell('Freeze', new Stun(2, 0), new StunEffect('Stun', 1)),
     );
   }
 }

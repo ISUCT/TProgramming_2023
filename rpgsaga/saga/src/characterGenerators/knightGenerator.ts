@@ -2,6 +2,7 @@ import { CharacterClass } from '../characterClasses';
 import { Character } from '../character';
 import { randomIntFromInterval } from '../randomMath';
 import { KnightAttack } from '../spell_system/spell/knightAttack';
+import { Spell } from '../spell_system/spell/spell';
 
 import { CharacterGeneratorHelper } from './characterGeneratorHelper';
 import { ICharacterGenerator } from './ICharacterGenerator';
@@ -54,7 +55,7 @@ export class KnightGenerator implements ICharacterGenerator {
       helper.getRandomNameAndSurname(this._nameList, this._surnameList),
       CharacterClass.knight,
       randomIntFromInterval(this._minHealthPoints, this._maxHealthPoints),
-      new KnightAttack(),
+      new Spell('Mighty Slash', new KnightAttack(2, 5), null),
     );
   }
 }

@@ -1,17 +1,34 @@
-import { Message } from '../../message';
-import { FireArrowEffect } from '../statusEffect/fireArrowEffect';
+import { Character } from '../../character';
 
-import { Spell } from './spell';
+import { IActiveEffect } from './IActiveEffect';
+import { CastHelper } from './castHelper';
 
-export class FireArrow extends Spell {
-  constructor() {
-    super('FireArrow', 2, 7, new FireArrowEffect());
+export class FireArrow implements IActiveEffect {
+  private _castsRemaining: number;
+  private _damagePoints: number;
+
+  constructor(castsRemaining: number, damagePoints: number) {
+    this._castsRemaining = castsRemaining;
+    this._damagePoints = damagePoints;
   }
 
-  public cast(message: Message): boolean {
-    if (this.isCastable()) {
-      message.target.receiveDamage(this.damagePoints);
-      this.castsRemaining -= 1;
+  public cast(target: Character): boolean {
+    const castHelper = new CastHelper();
+    if (castHelper.isCastable(this._castsRemaining)) {
+      target.receiveDamage(this._damagePoints);
+      this._castsRemaining -= 1;
+      return true;
+    }
+
+    return false;
+  }
+
+  public toString(): string {
+    return `${this._castsRemaining} casts remaining`;
+  }
+
+  public canCast(): boolean {
+    if (this._castsRemaining > 0) {
       return true;
     }
 

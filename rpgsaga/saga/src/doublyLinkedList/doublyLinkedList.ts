@@ -1,4 +1,4 @@
-import { StatusEffect } from '../spell_system/statusEffect/statusEffect';
+import { IStatusEffect } from '../spell_system/statusEffect/IStatusEffect';
 
 import { DoublyLinkedListNode } from './doublyLinkedListNode';
 
@@ -30,14 +30,14 @@ export class DoublyLinkedList {
     return this._size <= 0;
   }
 
-  public contains(value: StatusEffect): boolean {
+  public contains(value: IStatusEffect): boolean {
     if (this.isEmpty()) {
       return false;
     }
 
     let tmp = this.head;
     while (tmp !== null) {
-      if (tmp.value.name === value.name) {
+      if (tmp.value.toString() === value.toString()) {
         return true;
       }
       tmp = tmp.next;
@@ -46,7 +46,7 @@ export class DoublyLinkedList {
     return false;
   }
 
-  public addLast(value: StatusEffect) {
+  public addLast(value: IStatusEffect) {
     const tmp = new DoublyLinkedListNode(value);
 
     let node: DoublyLinkedListNode = this._head;
@@ -73,7 +73,7 @@ export class DoublyLinkedList {
     this._size += 1;
   }
 
-  public remove(value: StatusEffect) {
+  public remove(value: IStatusEffect) {
     if (this.isEmpty()) {
       return;
     }
@@ -81,7 +81,7 @@ export class DoublyLinkedList {
     let tmp = this._head;
 
     while (tmp !== null) {
-      if (tmp.value.name === value.name) {
+      if (tmp.value.toString() === value.toString()) {
         if (tmp.prev !== null) {
           tmp.prev.next = tmp.next;
         } else {

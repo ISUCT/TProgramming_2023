@@ -1,17 +1,27 @@
 import { Character } from '../../character';
 
-import { StatusEffect } from './statusEffect';
+import { IStatusEffect } from './IStatusEffect';
 
-export class StunEffect extends StatusEffect {
-  constructor() {
-    super('Stun', 1);
+export class StunEffect implements IStatusEffect {
+  private _name: string;
+  private _initialUsesRemaining: number;
+  private _usesRemaining: number;
+
+  get name() {
+    return this._name;
   }
 
-  public apply(target: Character): boolean {
-    if (this.canApply()) {
-      this.usesRemaining -= 1;
+  constructor(name: string, usesAvailable: number) {
+    this._name = name;
+    this._initialUsesRemaining = usesAvailable;
+    this._usesRemaining = this._initialUsesRemaining;
+  }
 
-      console.log(`${target.toString()} is now stunned! (${this.usesRemaining} turns remaining)`);
+  public apply(target: Character) {
+    if (this.canApply()) {
+      this._usesRemaining -= 1;
+
+      console.log(`${target.toString()} is now stunned! (${this._usesRemaining} turns remaining)`);
 
       target.isStunned = true;
 
@@ -23,5 +33,21 @@ export class StunEffect extends StatusEffect {
 
   public remove(target: Character) {
     target.isStunned = false;
+  }
+
+  public refresh() {
+    this._usesRemaining = this._initialUsesRemaining;
+  }
+
+  public canApply(): boolean {
+    if (this._usesRemaining > 0) {
+      return true;
+    }
+
+    return false;
+  }
+
+  public toString() {
+    return this._name;
   }
 }

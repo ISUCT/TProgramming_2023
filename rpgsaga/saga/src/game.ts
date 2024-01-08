@@ -91,13 +91,17 @@ export class Game {
     this._currentPlayers[1] = temp;
   }
 
-  private chooseAnAttackType(): AttackType {
+  private chooseAnAttackType(isSpellAvailable: boolean): AttackType {
+    if (!isSpellAvailable) {
+      return AttackType.attack;
+    }
+
     const randomNumber = randomIntFromInterval(1, 10);
     if (randomNumber <= 3) {
       return AttackType.spell;
+    } else {
+      return AttackType.attack;
     }
-
-    return AttackType.attack;
   }
 
   private playOneTurn(): number[] {
@@ -122,7 +126,7 @@ export class Game {
     bina.receiveMessage(message);
 
     if (!attacker.isStunned) {
-      if (this.chooseAnAttackType() === AttackType.attack) {
+      if (this.chooseAnAttackType(attacker.spell.canExecute()) === AttackType.attack) {
         bina.performAttack();
       } else {
         bina.performSpell();

@@ -1,7 +1,7 @@
 import { Character } from './character';
 import { DoublyLinkedListNode } from './doublyLinkedList/doublyLinkedListNode';
 import { Message } from './message';
-import { StatusEffect } from './spell_system/statusEffect/statusEffect';
+import { IStatusEffect } from './spell_system/statusEffect/IStatusEffect';
 
 export class Bina {
   private _message: Message;
@@ -19,7 +19,7 @@ export class Bina {
   }
 
   public performSpell() {
-    const isSuccessful = this._message.spell.cast(this._message);
+    const isSuccessful = this._message.spell.execute(this._message.target);
 
     if (isSuccessful) {
       console.log(
@@ -28,26 +28,26 @@ export class Bina {
         }!`,
       );
 
-      if (this._message.spell.statusEffect !== null) {
-        this.sendStatusEffect(this._message.target, this._message.spell.statusEffect);
+      if (this._message.spell.hasStatusEffect()) {
+        this.sendStatusEffect(this._message.target, this._message.spell.sendStatusEffect());
       }
     } else {
-      console.log(`${this._message.attackerInfo} has failed to cast a spell and skipped a turn!`);
+      console.log(`${this._message.attackerInfo} has failed to cast a spell!`);
     }
   }
 
-  public sendStatusEffect(target: Character, statusEffect: StatusEffect) {
+  public sendStatusEffect(target: Character, statusEffect: IStatusEffect) {
     if (target.statusEffects.contains(statusEffect)) {
       const node: DoublyLinkedListNode = target.statusEffects.head;
       while (node !== null) {
-        if (node.value.name === statusEffect.name) {
+        if (node.value.toString() === statusEffect.toString()) {
           node.value.refresh();
           return;
         }
       }
     } else {
       statusEffect.refresh();
-      this._message.target.statusEffects.addLast(statusEffect);
+      target.statusEffects.addLast(statusEffect);
     }
   }
 }

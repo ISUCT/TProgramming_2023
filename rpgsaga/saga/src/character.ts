@@ -1,6 +1,6 @@
 import { CharacterClass } from './characterClasses';
 import { DoublyLinkedList } from './doublyLinkedList/doublyLinkedList';
-import { Spell } from './spell_system/spell/spell';
+import { ISpell } from './spell_system/spell/ISpell';
 
 export class Character {
   private _name: string;
@@ -12,7 +12,7 @@ export class Character {
   private _strength: number;
   private _strengthModificator: number;
 
-  private _spell: Spell;
+  private _spell: ISpell;
   private _statusEffects: DoublyLinkedList = new DoublyLinkedList();
 
   private _isStunned: boolean;
@@ -65,7 +65,7 @@ export class Character {
     return this._statusEffects;
   }
 
-  constructor(name: string, characterClass: CharacterClass, healthPoints: number, spell: Spell) {
+  constructor(name: string, characterClass: CharacterClass, healthPoints: number, spell: ISpell) {
     this.name = name;
     this.class = characterClass;
 
