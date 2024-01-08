@@ -1,17 +1,20 @@
-export class Player{
+import { Ability } from "../Ability/Ability";
+
+export abstract class Player{
     private _name: string;
-    private _atk: number;
+    private _dmg: number;
     private _hp: number;
-    constructor(name: string, atk: number, hp: number){
+    readonly abilities: Ability[];
+    constructor(name: string, dmg: number, hp: number){
         this._name = name;
-        this._atk = atk;
+        this._dmg = dmg;
         this._hp = hp;
     }
     public get name(){
         return this._name
     }
     public get dmg(){
-        return this._atk
+        return this._dmg
     }
     public get hp(){
         return this._hp

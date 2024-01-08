@@ -1,8 +1,6 @@
-import { abilityType } from "../Ability/Ability";
-import { Strike } from "../Ability/Strike/Strike";
 import { Player } from "../Player/Player";
-import { randomBool } from "../Sources/Random";
-import { PlayerGenerator } from "./PlayerGenerator";
+import { randomBool, randomNumber } from "../Sources/Random";
+import { Logger } from "./Logger";
 
 export class Battle{
     private Player0: Player;
@@ -13,20 +11,17 @@ export class Battle{
     }
     start(){
         let opponents = [this.Player0, this.Player1]
-        let currentPlayer = randomBool();
-        let winner;
-        console.log(this.Player0);
-        console.log(this.Player1);
+        let currentPlayerId = randomBool();
+        let winner: Player;
+        let LoggerBattle = new Logger(this.Player0, this.Player1)
+        LoggerBattle.startBattle();
         while(opponents[0].hp>0 && opponents[1].hp>0){
-            let currentAbility = new Strike("Удар", abilityType.ATTACK, 1, true);
-            currentPlayer = currentPlayer === 0 ? 1 : 0;
-            opponents[currentPlayer].takeAbilityOnSelf(currentAbility.type, currentAbility.power);
-            console.log("");
-            console.log(this.Player0);
-            console.log(this.Player1);
+            let currentAbility = opponents[currentPlayerId].abilities[randomNumber(0, opponents[currentPlayerId].abilities.length-1)];
+            currentPlayerId = currentPlayerId === 0 ? 1 : 0;
+            opponents[currentPlayerId].takeAbilityOnSelf(currentAbility.type, currentAbility.power);
+            LoggerBattle.attack(currentPlayerId, currentAbility.name, currentAbility.power);
         }
         winner = this.Player0.hp === 0 ? this.Player1 : this.Player0;
         return winner;
     }
-} 
-//сделать генератор, переделать баттл под генератор
+}

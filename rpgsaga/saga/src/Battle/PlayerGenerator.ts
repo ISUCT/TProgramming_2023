@@ -1,6 +1,4 @@
-import { Archer } from "../Player/Classes/Archer";
-import { Knight } from "../Player/Classes/Knight";
-import { Mage } from "../Player/Classes/Mage";
+import { Archer, Knight, Mage } from "../Player/Classes/Classes";
 import { Player } from "../Player/Player";
 import { randomNumber } from "../Sources/Random";
 import { Names } from "../Sources/Names";
