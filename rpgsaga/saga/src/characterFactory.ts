@@ -19,7 +19,7 @@ export class CharacterFactory {
     }
   }
 
-  private getCharacter(characterClass: CharacterClass): Character {
+  public getCharacter(characterClass: CharacterClass): Character {
     this.set(characterClass);
     return this._factory.createCharacter();
   }

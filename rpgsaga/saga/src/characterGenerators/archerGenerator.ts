@@ -6,37 +6,39 @@ import { FireArrow } from '../spell_system/spell/fireArrow';
 import { CharacterGenerator } from './characterGenerator';
 
 export class ArcherGenerator extends CharacterGenerator {
-  readonly minHealthPoints: number = 90;
-  readonly maxHealthPoints: number = 110;
+  constructor() {
+    const nameList: string[] = [
+      'Lareth',
+      'Theron',
+      'Theron',
+      'Lyria',
+      'Galen',
+      'Elysia',
+      'Caelan',
+      'Talia',
+      'Sylas',
+      'Merida',
+      'Thalindra',
+      'Naelan',
+    ];
 
-  protected nameList: string[] = [
-    'Lareth',
-    'Theron',
-    'Theron',
-    'Lyria',
-    'Galen',
-    'Elysia',
-    'Caelan',
-    'Talia',
-    'Sylas',
-    'Merida',
-    'Thalindra',
-    'Naelan',
-  ];
-  protected surnameList: string[] = [
-    'Windstrider',
-    'Hawkeye',
-    'Swiftshot',
-    'Longbow',
-    'Arrowheart',
-    'Fletchertongue',
-    'Shadowquiver',
-    'Ironwood',
-    'Nightshade',
-    'Stormrider',
-    'Moonshadow',
-    'Firesight',
-  ];
+    const surnameList: string[] = [
+      'Windstrider',
+      'Hawkeye',
+      'Swiftshot',
+      'Longbow',
+      'Arrowheart',
+      'Fletchertongue',
+      'Shadowquiver',
+      'Ironwood',
+      'Nightshade',
+      'Stormrider',
+      'Moonshadow',
+      'Firesight',
+    ];
+
+    super(90, 110, nameList, surnameList);
+  }
 
   public createCharacter(): Character {
     return new Character(

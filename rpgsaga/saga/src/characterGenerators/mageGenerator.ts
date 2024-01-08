@@ -6,37 +6,39 @@ import { Stun } from '../spell_system/spell/stun';
 import { CharacterGenerator } from './characterGenerator';
 
 export class MageGenerator extends CharacterGenerator {
-  readonly minHealthPoints: number = 80;
-  readonly maxHealthPoints: number = 90;
+  constructor() {
+    const nameList: string[] = [
+      'Thalindra',
+      'Malachar',
+      'Isolde',
+      'Elowen',
+      'Sylas',
+      'Lirael',
+      'Alaric',
+      'Seraphina',
+      'Cedric',
+      'Vivienne',
+      'Galadriel',
+      'Orion',
+    ];
 
-  protected nameList: string[] = [
-    'Thalindra',
-    'Malachar',
-    'Isolde',
-    'Elowen',
-    'Sylas',
-    'Lirael',
-    'Alaric',
-    'Seraphina',
-    'Cedric',
-    'Vivienne',
-    'Galadriel',
-    'Orion',
-  ];
-  protected surnameList: string[] = [
-    'Spellweaver',
-    'Arcaneborn',
-    'Starfall',
-    'Frostfire',
-    'Shadowcaster',
-    'Stormcaller',
-    'Emberflame',
-    'Moonshaper',
-    'Runebinder',
-    'Frostwhisper',
-    'Voidseer',
-    'Flameforge',
-  ];
+    const surnameList: string[] = [
+      'Spellweaver',
+      'Arcaneborn',
+      'Starfall',
+      'Frostfire',
+      'Shadowcaster',
+      'Stormcaller',
+      'Emberflame',
+      'Moonshaper',
+      'Runebinder',
+      'Frostwhisper',
+      'Voidseer',
+      'Flameforge',
+    ];
+
+    super(80, 90, nameList, surnameList);
+  }
 
   public createCharacter(): Character {
     return new Character(

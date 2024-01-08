@@ -1,4 +1,4 @@
-import { CharacterClass } from './characterClasses';
+// import { CharacterClass } from './characterClasses';
 
 // Function to generate a random value from [min; max]
 export function randomIntFromInterval(min: number, max: number): number {
@@ -9,7 +9,7 @@ export function getRandomArrayIndex(arrayLength: number) {
   return randomIntFromInterval(0, arrayLength - 1);
 }
 
-export function getRandomEnumValue(enumeration): CharacterClass {
+export function getRandomEnumValue<Type>(enumeration): Type {
   const values = Object.keys(enumeration);
   const enumKey = values[Math.floor(Math.random() * values.length)];
   return enumeration[enumKey];
