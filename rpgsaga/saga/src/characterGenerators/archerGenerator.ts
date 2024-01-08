@@ -3,11 +3,18 @@ import { Character } from '../character';
 import { randomIntFromInterval } from '../randomMath';
 import { FireArrow } from '../spell_system/spell/fireArrow';
 
-import { CharacterGenerator } from './characterGenerator';
+import { CharacterGeneratorHelper } from './characterGeneratorHelper';
+import { ICharacterGenerator } from './ICharacterGenerator';
 
-export class ArcherGenerator extends CharacterGenerator {
+export class ArcherGenerator implements ICharacterGenerator {
+  private readonly _minHealthPoints: number;
+  private readonly _maxHealthPoints: number;
+
+  private _nameList: string[];
+  private _surnameList: string[];
+
   constructor() {
-    const nameList: string[] = [
+    this._nameList = [
       'Lareth',
       'Theron',
       'Theron',
@@ -22,7 +29,7 @@ export class ArcherGenerator extends CharacterGenerator {
       'Naelan',
     ];
 
-    const surnameList: string[] = [
+    this._surnameList = [
       'Windstrider',
       'Hawkeye',
       'Swiftshot',
@@ -37,14 +44,16 @@ export class ArcherGenerator extends CharacterGenerator {
       'Firesight',
     ];
 
-    super(90, 110, nameList, surnameList);
+    this._minHealthPoints = 90;
+    this._maxHealthPoints = 110;
   }
 
   public createCharacter(): Character {
+    const helper = new CharacterGeneratorHelper();
     return new Character(
-      this.getRandomNameAndSurname(),
+      helper.getRandomNameAndSurname(this._nameList, this._surnameList),
       CharacterClass.archer,
-      randomIntFromInterval(this.minHealthPoints, this.maxHealthPoints),
+      randomIntFromInterval(this._minHealthPoints, this._maxHealthPoints),
       new FireArrow(),
     );
   }

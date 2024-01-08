@@ -3,11 +3,18 @@ import { Character } from '../character';
 import { randomIntFromInterval } from '../randomMath';
 import { Stun } from '../spell_system/spell/stun';
 
-import { CharacterGenerator } from './characterGenerator';
+import { CharacterGeneratorHelper } from './characterGeneratorHelper';
+import { ICharacterGenerator } from './ICharacterGenerator';
 
-export class MageGenerator extends CharacterGenerator {
+export class MageGenerator implements ICharacterGenerator {
+  private readonly _minHealthPoints: number;
+  private readonly _maxHealthPoints: number;
+
+  private _nameList: string[];
+  private _surnameList: string[];
+
   constructor() {
-    const nameList: string[] = [
+    this._nameList = [
       'Thalindra',
       'Malachar',
       'Isolde',
@@ -22,7 +29,7 @@ export class MageGenerator extends CharacterGenerator {
       'Orion',
     ];
 
-    const surnameList: string[] = [
+    this._surnameList = [
       'Spellweaver',
       'Arcaneborn',
       'Starfall',
@@ -37,14 +44,16 @@ export class MageGenerator extends CharacterGenerator {
       'Flameforge',
     ];
 
-    super(80, 90, nameList, surnameList);
+    this._minHealthPoints = 80;
+    this._maxHealthPoints = 90;
   }
 
   public createCharacter(): Character {
+    const helper = new CharacterGeneratorHelper();
     return new Character(
-      this.getRandomNameAndSurname(),
+      helper.getRandomNameAndSurname(this._nameList, this._surnameList),
       CharacterClass.mage,
-      randomIntFromInterval(this.minHealthPoints, this.maxHealthPoints),
+      randomIntFromInterval(this._minHealthPoints, this._maxHealthPoints),
       new Stun(),
     );
   }

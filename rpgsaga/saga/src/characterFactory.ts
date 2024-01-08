@@ -1,13 +1,13 @@
 import { Character } from './character';
 import { CharacterClass } from './characterClasses';
-import { CharacterGenerator } from './characterGenerators/characterGenerator';
+import { ICharacterGenerator } from './characterGenerators/ICharacterGenerator';
 import { ArcherGenerator } from './characterGenerators/archerGenerator';
 import { KnightGenerator } from './characterGenerators/knightGenerator';
 import { MageGenerator } from './characterGenerators/mageGenerator';
 import { getRandomEnumValue } from './randomMath';
 
 export class CharacterFactory {
-  private _factory: CharacterGenerator;
+  private _factory: ICharacterGenerator;
 
   private set(characterClass: CharacterClass) {
     if (characterClass === CharacterClass.archer) {

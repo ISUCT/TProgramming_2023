@@ -3,11 +3,18 @@ import { Character } from '../character';
 import { randomIntFromInterval } from '../randomMath';
 import { KnightAttack } from '../spell_system/spell/knightAttack';
 
-import { CharacterGenerator } from './characterGenerator';
+import { CharacterGeneratorHelper } from './characterGeneratorHelper';
+import { ICharacterGenerator } from './ICharacterGenerator';
 
-export class KnightGenerator extends CharacterGenerator {
+export class KnightGenerator implements ICharacterGenerator {
+  private readonly _minHealthPoints: number;
+  private readonly _maxHealthPoints: number;
+
+  private _nameList: string[];
+  private _surnameList: string[];
+
   constructor() {
-    const nameList: string[] = [
+    this._nameList = [
       'Seraphina',
       'Elara',
       'Thorian',
@@ -22,7 +29,7 @@ export class KnightGenerator extends CharacterGenerator {
       'Lysander',
     ];
 
-    const surnameList: string[] = [
+    this._surnameList = [
       'Stormblade',
       'the Brave',
       'Swiftstrike',
@@ -37,14 +44,16 @@ export class KnightGenerator extends CharacterGenerator {
       'Thunderclap',
     ];
 
-    super(110, 120, nameList, surnameList);
+    this._minHealthPoints = 110;
+    this._maxHealthPoints = 120;
   }
 
   public createCharacter(): Character {
+    const helper = new CharacterGeneratorHelper();
     return new Character(
-      this.getRandomNameAndSurname(),
+      helper.getRandomNameAndSurname(this._nameList, this._surnameList),
       CharacterClass.knight,
-      randomIntFromInterval(this.minHealthPoints, this.maxHealthPoints),
+      randomIntFromInterval(this._minHealthPoints, this._maxHealthPoints),
       new KnightAttack(),
     );
   }
