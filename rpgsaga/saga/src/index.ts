@@ -1,16 +1,41 @@
-import { Phone } from './phone';
+class Employee{
 
-const first = new Phone('+7900-000 000 (123)', 1990, 'Телефон 1');
-first.year = 1998;
+    private data: Date;
+    private name: string;
+    private age: number;
 
-first.year = -1998;
-first.call('12345');
-first.endCall();
+    setData(data: Date): void{
+        this.data = data;
+    }
 
-const second = new Phone('+799900000', -5);
-// second.name = 'Телефон 2';
-console.log(second.year);
-second.call('12345');
-second.endCall();
+    hiring(name: string, age: number): void{
+        this.data = new Date();
+        this.name = name;
+        this.age = age;
+    }
 
-console.log(first, second, Phone.phoneCount);
+    getData(): Date{
+        return this.data;
+    }
+
+    constructor(name: string, age: number); 
+
+    constructor(name: string, age: number, data?: Date) {
+        if (data) {
+            this.name = name;
+            this.age = age;
+            this.data = data;
+        }
+        else {
+            this.hiring(name, age);
+        }
+    }
+
+
+}
+
+const employee = new Employee('Tom', 37);
+
+const data = new Date();
+employee.setData(data);
+console.log(employee.getData());
