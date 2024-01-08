@@ -1,4 +1,4 @@
-import { CharacterGeneratorHelper } from '../src/characterGenerators/characterGeneratorHelper';
+import { CharacterGeneratorHelper } from '../../src/characterGenerators/characterGeneratorHelper';
 
 describe('Test getRandomNameAndSurname', () => {
   it('Should return a defined string variable', () => {
