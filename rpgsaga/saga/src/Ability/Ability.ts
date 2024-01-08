@@ -1,5 +1,5 @@
 export enum abilityType{
-    DAMAGE, 
+    ATTACK, 
     HEAL,
 }
 export interface Ability{

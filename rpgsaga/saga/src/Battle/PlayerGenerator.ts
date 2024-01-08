@@ -2,7 +2,7 @@ import { Archer } from "../Player/Classes/Archer";
 import { Knight } from "../Player/Classes/Knight";
 import { Mage } from "../Player/Classes/Mage";
 import { Player } from "../Player/Player";
-import { randomNumber } from "../Random/Random";
+import { randomNumber } from "../Sources/Random";
 import { Names } from "../Sources/Names";
 import { randomStatsEdges } from "../Sources/RandomStats";
 

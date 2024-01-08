@@ -1,17 +1,17 @@
 export class Player{
     private _name: string;
-    private _dmg: number;
+    private _atk: number;
     private _hp: number;
-    constructor(name: string, dmg: number, hp: number){
+    constructor(name: string, atk: number, hp: number){
         this._name = name;
-        this._dmg = dmg;
+        this._atk = atk;
         this._hp = hp;
     }
     public get name(){
         return this._name
     }
     public get dmg(){
-        return this._dmg
+        return this._atk
     }
     public get hp(){
         return this._hp
