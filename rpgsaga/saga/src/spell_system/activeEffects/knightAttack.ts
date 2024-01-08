@@ -1,7 +1,7 @@
 import { Character } from '../../character';
 
-import { IActiveEffect } from './IActiveEffect';
 import { CastHelper } from './castHelper';
+import { IActiveEffect } from './IActiveEffect';
 
 export class KnightAttack implements IActiveEffect {
   private _castsRemaining: number;

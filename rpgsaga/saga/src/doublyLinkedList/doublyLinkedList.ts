@@ -16,6 +16,10 @@ export class DoublyLinkedList {
     return this._tail;
   }
 
+  get size() {
+    return this._size;
+  }
+
   constructor() {
     this._head = null;
     this._tail = null;
@@ -67,6 +71,8 @@ export class DoublyLinkedList {
     }
 
     node.next = tmp;
+
+    this._tail = node.next;
 
     tmp.prev = node;
 

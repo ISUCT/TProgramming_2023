@@ -1,7 +1,7 @@
 import { CharacterClass } from '../characterClasses';
 import { Character } from '../character';
 import { randomIntFromInterval } from '../randomMath';
-import { Stun } from '../spell_system/spell/stun';
+import { Stun } from '../spell_system/activeEffects/stun';
 import { Spell } from '../spell_system/spell/spell';
 import { StunEffect } from '../spell_system/statusEffect/stunEffect';
 

@@ -1,7 +1,7 @@
 import { Character } from '../../character';
 import { IStatusEffect } from '../statusEffect/IStatusEffect';
+import { IActiveEffect } from '../activeEffects/IActiveEffect';
 
-import { IActiveEffect } from './IActiveEffect';
 import { ISpell } from './ISpell';
 
 export class Spell implements ISpell {
@@ -19,6 +19,10 @@ export class Spell implements ISpell {
 
   get statusEffect() {
     return this._statusEffect;
+  }
+
+  get activeEffect() {
+    return this._activeEffect;
   }
 
   constructor(name: string, cast: IActiveEffect, statusEffect?: IStatusEffect) {

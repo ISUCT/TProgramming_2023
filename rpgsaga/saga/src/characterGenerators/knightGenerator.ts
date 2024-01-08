@@ -1,7 +1,7 @@
 import { CharacterClass } from '../characterClasses';
 import { Character } from '../character';
 import { randomIntFromInterval } from '../randomMath';
-import { KnightAttack } from '../spell_system/spell/knightAttack';
+import { KnightAttack } from '../spell_system/activeEffects/knightAttack';
 import { Spell } from '../spell_system/spell/spell';
 
 import { CharacterGeneratorHelper } from './characterGeneratorHelper';

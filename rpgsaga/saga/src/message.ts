@@ -44,8 +44,8 @@ export class Message {
     attackerInfo: string,
     target: Character,
     targetInfo: string,
-    damagePoints?: number,
-    spell?: ISpell,
+    damagePoints: number,
+    spell: ISpell,
   ) {
     this._attacker = attacker;
     this._attackerInfo = attackerInfo;
