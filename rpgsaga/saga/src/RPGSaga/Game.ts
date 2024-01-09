@@ -7,7 +7,7 @@ import { Random } from './Random';
 
 export class Game {
     static Start(): void {
-        const p_number: number = 4;
+        const p_number: number = 2;
         const playerList: Player[] = Game.PLayerListGenerator(p_number);
         Game.PlayGame(playerList);
     }
@@ -35,35 +35,35 @@ export class Game {
 
     private static PlayFight(fightMembers: [Player, Player]): Player {
         for (let i = 0; true; i++) {
-            let playerStatus = fightMembers[i % 2].checkStatus(); // 0 либо 1 , т.е он вывод массив с 2 значениями: наложенный статус и урон от этого статуса
-            //   console.log(playerStatus, fightMembers[i % 2]);
+            let playerStatus = fightMembers[i % 2].checkStatus(); // реализация чередования игроков(0 и 1), playerStatus - содержит в себе массив с 2 значениями: наложенный статус и урон от этого статуса
+              console.log(playerStatus, fightMembers[i % 2], fightMembers[(i+1) % 2]);
             Logger.WriteStatusAbility(fightMembers[i % 2], playerStatus);
-            let checkDeath: boolean = fightMembers[i % 2].getDamage(playerStatus[1]); // получаем статсут игрока жив/мертв оттналоженного статуса
+            let checkDeath: boolean = fightMembers[i % 2].getDamage(playerStatus[1]); // получаем статсут игрока жив/мертв от наложенного статуса
             if (checkDeath) {
                 // выполняется в случае True
-                Logger.WriteDeath(fightMembers[i % 2]);
+                Logger.WriteDeath(fightMembers[i % 2], fightMembers[(i + 1) % 2]);
                 fightMembers[i % 2].update();
                 fightMembers[(i + 1) % 2].update();
                 return fightMembers[(i + 1) % 2];
             }
 
-            if (playerStatus[0] === 'Заворожение') { // то же самое для огненной стрелы?
+            if (playerStatus[0] === 'Заворожение') {
                 continue;
-            }
+                }
 
-            const playerAction: [string, number] = Game.PlayerDoAction(fightMembers[i % 2]); // игрок выбирает между абилкой и обычной атакой
-            Logger.WriteAction(fightMembers[i % 2], fightMembers[(i + 1) % 2], playerAction); // выводится действие первого игрока по второму
-            checkDeath = fightMembers[(i + 1) % 2].getDamage(playerAction[1]); // получаем статсут игрока жив/мертв от полученного урона
-            //   playerAction[0] !== "" ? fightMembers[(i + 1) % 2].getStatus(playerAction[0]) : playerStatus;
-            fightMembers[(i + 1) % 2].getDebuff(playerAction[0]);
-            if (checkDeath) {
-                Logger.WriteDeath(fightMembers[(i + 1) % 2]);
-                fightMembers[i % 2].update();
-                fightMembers[(i + 1) % 2].update();
-                return fightMembers[i % 2];
+                const playerAction: [string, number] = Game.PlayerDoAction(fightMembers[i % 2]); // playerAction - содержит в себе выбор игрока: абилка/обычная атака
+                checkDeath = fightMembers[(i + 1) % 2].getDamage(playerAction[1]); // получаем статсут игрока жив/мертв от полученного урона
+                Logger.WriteAction(fightMembers[i % 2],fightMembers[(i + 1) % 2],  playerAction); // выводится действие первого игрока по второму
+                fightMembers[(i + 1) % 2].setDebuff(playerAction[0]);
+
+                if (checkDeath) {
+                    Logger.WriteDeath(fightMembers[(i + 1) % 2], fightMembers[i % 2]);
+                    fightMembers[i % 2].update();
+                    fightMembers[(i + 1) % 2].update();
+                    return fightMembers[i % 2];
+                }
             }
         }
-    }
 
     private static PlayerDoAction(inputP: Player): [string, number] {
         const rnd: number = Random(0, 2);
@@ -102,6 +102,3 @@ export class Game {
         return playerList;
     }
 }
-
-
-// установить количество использовние после применения огненной стрелы,т.е сколько она будет действовать еще ходов

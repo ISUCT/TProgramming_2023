@@ -1,5 +1,5 @@
 export abstract class Player {
-    public debuffs: string; // наложенный статус на противника
+    public debuffs: string; // статус налложенный на противника
 
     constructor(
         public maxHealth: number,
@@ -8,6 +8,7 @@ export abstract class Player {
         public abilityName: string,
         public maxAbilityUsages: number,
 
+
     ) {
         this.maxHealth = maxHealth;
         this.currentHealth = maxHealth;
@@ -15,6 +16,7 @@ export abstract class Player {
         this.name = name;
         this.abilityName = abilityName;
         this.maxAbilityUsages = maxAbilityUsages;
+
     }
 
     public currentHealth: number;
@@ -32,34 +34,36 @@ export abstract class Player {
         return this.checkDeath();
     }
 
-    public getDebuff(debuffName: string): void {
+
+    public setDebuff(debuffName: string): string {
         this.debuffs = debuffName;
+        return this.debuffs
     }
 
 
-  public checkStatus(): [string, number] {
-    switch (this.debuffs) {
-        case 'Огненная стрела':
-        return ['Огненная стрела', 10.0];
-        case 'Заворожение':
-        return ['Заворожение', 0.0];
-        default:
-            return [' ', 0.0];
+    public checkStatus(): [string, number] {
+        switch (this.debuffs) {
+            case 'Огненная стрела':
+                return ['Огненная стрела', 3.0]; // периодический урон от абилки
+            case 'Заворожение':
+                return ['Заворожение', 0.0];
+            default:
+                return [' ', 0.0];
+        }
     }
-}
 
-  public checkDeath(): boolean {
-    if (this.currentHealth <= 0) {
-        return true;
-    } else {
-        return false;
+    public checkDeath(): boolean {
+        if (this.currentHealth <= 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
-}
 
-  public update(): void {
-    this.abilityLeft = this.maxAbilityUsages;
-    this.currentHealth = this.maxHealth;
-    this.debuffs = "";
-}
+    public update(): void {
+        this.abilityLeft = this.maxAbilityUsages;
+        this.currentHealth = this.maxHealth;
+        this.debuffs = "";
+    }
 }
 

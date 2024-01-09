@@ -42,8 +42,10 @@ export class Logger {
       }
     }
 
-    public static WriteDeath(inputP: Player): void {
-      console.log(`${inputP} погибает`);
+
+    public static WriteDeath(firstP: Player, secondP: Player): void {
+    console.log();
+      console.log(`${firstP} погибает`);
       console.log();
     }
   }

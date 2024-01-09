@@ -2,8 +2,9 @@ import { Player } from "../Player";
 
 
 export class Archer extends Player {
+
     constructor(health: number, strength: number, name: string) {
-        super(health, strength, name, "Огненная стрела", 3);
+        super(health, strength, name, "Огненная стрела", 2);
     }
 
     public toString(): string {
@@ -11,7 +12,6 @@ export class Archer extends Player {
     }
 
     public ability(): [string, number] {
-        // console.log(this.abilityLeft);
         if (this.abilityLeft > 0) {
             this.abilityLeft--;
             return [this.abilityName, 5.0]; // название абилки и урон от неё
@@ -19,5 +19,6 @@ export class Archer extends Player {
             return this.attack();
         }
     }
-}
 
+
+}

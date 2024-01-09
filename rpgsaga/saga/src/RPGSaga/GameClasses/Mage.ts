@@ -2,8 +2,10 @@ import { Player } from "../Player";
 
 
 export class Mage extends Player {
+    timeOfAction: number = 1;
+
     constructor(health: number, strength: number, name: string) {
-      super(health, strength, name, "Заворожение", 3);
+      super(health, strength, name, "Заворожение", 2); 
     }
 
     public toString(): string {
@@ -11,13 +13,14 @@ export class Mage extends Player {
     }
 
     public ability(): [string, number] {
-        // console.log(this.abilityLeft);
       if (this.abilityLeft > 0) {
         this.abilityLeft--;
-        return [this.abilityName, 0.0];
+        return [this.abilityName, 0.0]; // название абилки и урон от неё
       } else {
         return this.attack();
       }
     }
+
+
 }
 
