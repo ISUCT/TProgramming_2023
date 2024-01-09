@@ -1,4 +1,3 @@
-
 import { Movie } from "../../src/old_files/movie";
 
 describe("Testing movie constructor", () => {
