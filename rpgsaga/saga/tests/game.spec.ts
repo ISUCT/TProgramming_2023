@@ -20,7 +20,7 @@ describe('Knight Battle', () => {
         ]);
     });
 
-    it('should simulate the first scenarios', () => {
+    it('should simulate the first game scenarios', () => {
         const logMock = jest.spyOn(console, 'log');
         game.play();
         const correctLog = logMock.mock.calls[0][0] == '(Рыцарь) cnight1 [Здоровье: 1, Сила: 1] <<VS>> (Рыцарь) player_name [Здоровье: 1, Сила: 1]' &&

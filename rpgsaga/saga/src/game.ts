@@ -146,7 +146,7 @@ export class LoggingGame {
     }
 
     gameOver() {
-        if (this.players[1].health < 0) {
+        if (this.players[1].health <= 0) {
             console.log(`(${this.players[1].className}) ${this.players[1].name} погибает`);
         } else {
             console.log(`(${this.players[0].className}) ${this.players[0].name} погибает`);
