@@ -1,5 +1,5 @@
 import { Player } from '../../Player/player';
-
+import { Status } from "../../Player/Ability";
 export enum Warrior_Shape {
   Juggernaut = 'Juggernaut',
   Marauder = 'Marauder',
@@ -19,9 +19,12 @@ export class Warrior extends Player {
     this._hp = hp;
     this._healthpool = hp;
   }
+  ability(){
+    return ['ability', 4, 6, Status.Bleed]
+  }
 
   attack() {
-    return this._power;
+    return ['damage',this._power];
   }
   
   public toString(): string {

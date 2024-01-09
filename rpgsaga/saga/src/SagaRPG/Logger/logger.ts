@@ -17,6 +17,13 @@ export class Logger{
         console.log(`${looser} dead`);
       }
       static WriteAction(firstplayer, secondplayer, MoveAction){
-        console.log((`${firstplayer} deal ${MoveAction} damage to enemy ${secondplayer}`));
+        if (MoveAction[0] == 'damage') {
+            console.log((`${firstplayer} deal ${MoveAction[1]} damage to enemy ${secondplayer}`));
+        }else{
+            console.log((`${firstplayer} imposed ${MoveAction[3]} on ${secondplayer}`));
+        } 
+      }
+      static WriteDagameFromAbility(player){
+        console.log(`${player} get ${player.CheckStatus()[2]} damage from enemy's ability`)
       }
 }

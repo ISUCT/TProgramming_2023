@@ -1,5 +1,5 @@
 import { Player } from '../../Player/player';
-
+import { Status } from "../../Player/Ability";
 export enum Mage_Shape {
   Inquisitor = 'Inquisitor',
   Forbidden = 'Forbidden',
@@ -20,8 +20,12 @@ export class Mage extends Player {
     this._healthpool = hp;
   }
 
+  ability(){
+    return ['ability', 0, 2, Status.Freeze]
+  }
+
   attack() {
-    return this._power;
+    return ['damage',this._power];
   }
   
   public toString(): string {

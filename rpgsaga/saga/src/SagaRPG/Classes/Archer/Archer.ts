@@ -1,5 +1,5 @@
 import { Player } from '../../Player/player';
-
+import { Status } from "../../Player/Ability";
 export enum Archer_Shape {
   Hunter = 'Hunter',
   Raider = 'Raider',
@@ -19,9 +19,11 @@ export class Archer extends Player {
     this._hp = hp;
     this._healthpool = hp;
   }
-
+  ability(){
+    return ['ability', 7, 3, Status.Ignite]
+  }
   attack() {
-    return this._power;
+    return ['damage',this._power];
   }
   
   public toString(): string {
