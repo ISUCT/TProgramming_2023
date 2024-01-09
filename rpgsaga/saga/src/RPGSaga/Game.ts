@@ -12,7 +12,7 @@ export class Game {
         Game.PlayGame(playerList);
     }
 
-    private static PlayGame(playerList: Player[]): void {
+    public static PlayGame(playerList: Player[]): void {
         for (let i = 1; playerList.length !== 1; i++) {
             Logger.WriteRound(i);
             Game.PlayRound(playerList);
@@ -21,7 +21,7 @@ export class Game {
         Logger.WriteWinner(playerList[0]);
     }
 
-    private static PlayRound(playerList: Player[]): void {
+    public static PlayRound(playerList: Player[]): void {
         for (let i = 0; i < playerList.length / 2; i++) {
             const fightMembers: [Player, Player] = [playerList[i * 2], playerList[i * 2 + 1]];
             Logger.WriteFight(fightMembers);
@@ -33,14 +33,13 @@ export class Game {
         }
     }
 
-    private static PlayFight(fightMembers: [Player, Player]): Player {
+    public static PlayFight(fightMembers: [Player, Player]): Player {
         for (let i = 0; true; i++) {
             let playerStatus = fightMembers[i % 2].checkStatus(); // реализация чередования игроков(0 и 1), playerStatus - содержит в себе массив с 2 значениями: наложенный статус и урон от этого статуса
-              console.log(playerStatus, fightMembers[i % 2], fightMembers[(i+1) % 2]);
+            //console.log(playerStatus, fightMembers[i % 2], fightMembers[(i+1) % 2]);
             Logger.WriteStatusAbility(fightMembers[i % 2], playerStatus);
             let checkDeath: boolean = fightMembers[i % 2].getDamage(playerStatus[1]); // получаем статсут игрока жив/мертв от наложенного статуса
             if (checkDeath) {
-                // выполняется в случае True
                 Logger.WriteDeath(fightMembers[i % 2], fightMembers[(i + 1) % 2]);
                 fightMembers[i % 2].update();
                 fightMembers[(i + 1) % 2].update();
@@ -65,7 +64,7 @@ export class Game {
             }
         }
 
-    private static PlayerDoAction(inputP: Player): [string, number] {
+    public static PlayerDoAction(inputP: Player): [string, number] {
         const rnd: number = Random(0, 2);
         switch (rnd) {
             case 0:
@@ -76,7 +75,7 @@ export class Game {
     }
 
 
-    private static PLayerListGenerator(count: number): Player[] {
+    public static PLayerListGenerator(count: number): Player[] {
         let playerList: Player[] = [];
         let names = ['Itachi', 'Sasuke', 'Naruto', 'Kakashi', 'Jiraiya', 'Orochimaru', 'Gaara', 'Shikamaru', 'Neji'];
         let types_of_members = ['Wizard', 'Archer', 'Knight'];

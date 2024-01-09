@@ -1,5 +1,5 @@
 export abstract class Player {
-    public debuffs: string; // статус налложенный на противника
+    public debuffs: string; // статус наложенный на противника
 
     constructor(
         public maxHealth: number,
@@ -46,7 +46,7 @@ export abstract class Player {
             case 'Огненная стрела':
                 return ['Огненная стрела', 3.0]; // периодический урон от абилки
             case 'Заворожение':
-                return ['Заворожение', 0.0];
+                return ['Заворожение', 0.0]; // периодический урон от абилки
             default:
                 return [' ', 0.0];
         }
