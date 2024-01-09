@@ -5,6 +5,6 @@ export interface ISpell {
   canExecute(): boolean;
   execute(target: Character): boolean;
   hasStatusEffect(): boolean;
-  sendStatusEffect(): IStatusEffect;
+  getStatusEffect(): IStatusEffect;
   toString(): string;
 }

@@ -12,6 +12,22 @@ describe('Testing DoublyLinkedList constructor', () => {
   });
 });
 
+describe('Testing isEmpty method', () => {
+  it('Should result in true if linked list is empty', () => {
+    const linkedList = new DoublyLinkedList();
+
+    expect(linkedList.isEmpty()).toBe(true);
+  });
+  it('Should result in false if linked list is not empty', () => {
+    const linkedList = new DoublyLinkedList();
+
+    linkedList.addLast(new FireArrowEffect('Burning', 3));
+
+    expect(linkedList.size).toBe(1);
+    expect(linkedList.isEmpty()).toBe(false);
+  });
+});
+
 describe('Testing addLast method', () => {
   it('Should add an element into the empty doubly linked list', () => {
     const linkedList = new DoublyLinkedList();
@@ -62,13 +78,11 @@ describe('Testing contains method', () => {
 });
 
 describe('Testing remove method', () => {
-  it('Should work without errors if linked list is empty', () => {
+  it('Should result in false if linked list is empty', () => {
     const linkedList = new DoublyLinkedList();
     const statusEffect: IStatusEffect = new FireArrowEffect('Blue Fire', 1);
 
-    expect(() => {
-      linkedList.remove(statusEffect);
-    }).not.toThrow();
+    expect(linkedList.remove(statusEffect)).toBe(false);
   });
 
   it('Should remove an element from non-empty linked list', () => {
@@ -79,9 +93,22 @@ describe('Testing remove method', () => {
     linkedList.addLast(statusEffect);
     linkedList.addLast(anotherStatusEffect);
 
-    linkedList.remove(statusEffect);
+    const isRemoved = linkedList.remove(statusEffect);
 
+    expect(isRemoved).toBe(true);
     expect(linkedList.size).toBe(1);
     expect(linkedList.head.value).toBe(anotherStatusEffect);
+  });
+  it('Should result in false if element is not in the linked list', () => {
+    const linkedList = new DoublyLinkedList();
+    const statusEffect: IStatusEffect = new FireArrowEffect('Blue Fire', 1);
+    const anotherStatusEffect: IStatusEffect = new FireArrowEffect('Burning', 3);
+
+    linkedList.addLast(statusEffect);
+
+    const isRemoved = linkedList.remove(anotherStatusEffect);
+
+    expect(isRemoved).toBe(false);
+    expect(linkedList.size).toBe(1);
   });
 });

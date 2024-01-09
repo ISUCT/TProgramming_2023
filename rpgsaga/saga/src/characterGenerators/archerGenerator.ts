@@ -1,6 +1,5 @@
 import { CharacterClass } from '../characterClasses';
 import { Character } from '../character';
-import { randomIntFromInterval } from '../randomMath';
 import { FireArrow } from '../spell_system/activeEffects/fireArrow';
 import { Spell } from '../spell_system/spell/spell';
 import { FireArrowEffect } from '../spell_system/statusEffect/fireArrowEffect';
@@ -50,12 +49,12 @@ export class ArcherGenerator implements ICharacterGenerator {
     this._maxHealthPoints = 110;
   }
 
-  public createCharacter(): Character {
+  public createCharacter(randomNumberGenerator: (min: number, max: number) => number): Character {
     const helper = new CharacterGeneratorHelper();
     return new Character(
-      helper.getRandomNameAndSurname(this._nameList, this._surnameList),
+      helper.getRandomNameAndSurname(this._nameList, this._surnameList, randomNumberGenerator),
       CharacterClass.archer,
-      randomIntFromInterval(this._minHealthPoints, this._maxHealthPoints),
+      randomNumberGenerator(this._minHealthPoints, this._maxHealthPoints),
       new Spell('Fire Arrow', new FireArrow(2, 7), new FireArrowEffect('Burning', 3)),
     );
   }

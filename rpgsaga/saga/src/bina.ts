@@ -6,6 +6,10 @@ import { IStatusEffect } from './spell_system/statusEffect/IStatusEffect';
 export class Bina {
   private _message: Message;
 
+  get message() {
+    return this._message;
+  }
+
   public receiveMessage(message: Message) {
     this._message = message;
   }
@@ -18,7 +22,7 @@ export class Bina {
     );
   }
 
-  public performSpell() {
+  public performSpell(): boolean {
     const isSuccessful = this._message.spell.execute(this._message.target);
 
     if (isSuccessful) {
@@ -29,14 +33,16 @@ export class Bina {
       );
 
       if (this._message.spell.hasStatusEffect()) {
-        this.sendStatusEffect(this._message.target, this._message.spell.sendStatusEffect());
+        this.sendStatusEffect(this._message.target, this._message.spell.getStatusEffect());
       }
+      return true;
     } else {
       console.log(`${this._message.attackerInfo} has failed to cast a spell!`);
+      return false;
     }
   }
 
-  public sendStatusEffect(target: Character, statusEffect: IStatusEffect) {
+  private sendStatusEffect(target: Character, statusEffect: IStatusEffect) {
     if (target.statusEffects.contains(statusEffect)) {
       const node: DoublyLinkedListNode = target.statusEffects.head;
       while (node !== null) {

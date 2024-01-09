@@ -1,6 +1,5 @@
 import { Character } from '../../character';
 
-import { CastHelper } from './castHelper';
 import { IActiveEffect } from './IActiveEffect';
 
 export class FireArrow implements IActiveEffect {
@@ -13,8 +12,7 @@ export class FireArrow implements IActiveEffect {
   }
 
   public cast(target: Character): boolean {
-    const castHelper = new CastHelper();
-    if (castHelper.isCastable(this._castsRemaining)) {
+    if (this.canCast()) {
       target.receiveDamage(this._damagePoints);
       this._castsRemaining -= 1;
       return true;

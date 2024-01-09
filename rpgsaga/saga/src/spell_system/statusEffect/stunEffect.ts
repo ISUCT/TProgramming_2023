@@ -17,7 +17,7 @@ export class StunEffect implements IStatusEffect {
     this._usesRemaining = this._initialUsesRemaining;
   }
 
-  public apply(target: Character) {
+  public apply(target: Character): boolean {
     if (this.canApply()) {
       this._usesRemaining -= 1;
 

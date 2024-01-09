@@ -3,7 +3,6 @@ import { cloneDeep } from 'lodash';
 import { ArrayItem } from './arrayItem';
 import { Character } from './character';
 import { AttackType } from './attackType';
-import { randomIntFromInterval } from './randomMath';
 
 export class GameUtility {
   private announceDeadBody(deadBody: Character): void {
@@ -46,7 +45,10 @@ export class GameUtility {
       const deadPlayerIndex: number = deadPlayerIndexes[i];
 
       if (this.isPlayerDead(currentPlayers[deadPlayerIndex].player)) {
-        currentPlayers[deadPlayerIndex] = new ArrayItem(cloneDeep(players[newPlayerIndex]), newPlayerIndex);
+        currentPlayers[deadPlayerIndex] = new ArrayItem(
+          cloneDeep(players[updatedNewPlayerIndex]),
+          updatedNewPlayerIndex,
+        );
 
         updatedNewPlayerIndex += 1;
       }
@@ -86,12 +88,15 @@ export class GameUtility {
     return null;
   }
 
-  public chooseAnAttackType(isSpellAvailable: boolean): AttackType {
+  public chooseAnAttackType(
+    isSpellAvailable: boolean,
+    randomNumberGenerator: (min: number, max: number) => number,
+  ): AttackType {
     if (!isSpellAvailable) {
       return AttackType.attack;
     }
 
-    const randomNumber = randomIntFromInterval(1, 10);
+    const randomNumber = randomNumberGenerator(1, 10);
     if (randomNumber <= 3) {
       return AttackType.spell;
     } else {

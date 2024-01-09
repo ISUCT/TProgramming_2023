@@ -8,6 +8,7 @@ import { Message } from './message';
 import { AttackType } from './attackType';
 import { StatusEffectManager } from './spell_system/statusEffectManager';
 import { GameUtility } from './gameUtility';
+import { randomIntFromInterval } from './randomMath';
 
 export class Game {
   private _players: Character[] = [];
@@ -16,16 +17,26 @@ export class Game {
   private _quantityOfPlayers: number;
 
   private _utility = new GameUtility();
+  private _randomNumberGenerator: (min: number, max: number) => number;
 
-  constructor(quantityOfPlayers: number) {
-    if (quantityOfPlayers === 1) {
+  public winner: Character;
+
+  constructor(quantityOfPlayers: number, randomNumberGenerator?: (min: number, max: number) => number) {
+    if (quantityOfPlayers <= 1) {
       throw Error('Quantity of players should be greater than 1');
     }
 
     this._quantityOfPlayers = quantityOfPlayers;
     this._newPlayerIndex = 2;
+
+    if (typeof randomNumberGenerator !== 'undefined') {
+      this._randomNumberGenerator = randomNumberGenerator;
+    } else {
+      this._randomNumberGenerator = randomIntFromInterval;
+    }
+
     const characterFactory: CharacterFactory = new CharacterFactory();
-    this._players = characterFactory.generatePlayers(this._quantityOfPlayers);
+    this._players = characterFactory.generatePlayers(this._quantityOfPlayers, this._randomNumberGenerator);
   }
 
   private swapCurrentPlayers(): void {
@@ -56,7 +67,9 @@ export class Game {
     bina.receiveMessage(message);
 
     if (!attacker.isStunned) {
-      if (this._utility.chooseAnAttackType(attacker.spell.canExecute()) === AttackType.attack) {
+      if (
+        this._utility.chooseAnAttackType(attacker.spell.canExecute(), this._randomNumberGenerator) === AttackType.attack
+      ) {
         bina.performAttack();
       } else {
         bina.performSpell();
@@ -131,7 +144,7 @@ export class Game {
       console.log('\n');
     }
 
-    const winner: Character = this._utility.findWinner(this._currentPlayers);
-    this.announceWinner(winner);
+    this.winner = this._utility.findWinner(this._currentPlayers);
+    this.announceWinner(this.winner);
   }
 }

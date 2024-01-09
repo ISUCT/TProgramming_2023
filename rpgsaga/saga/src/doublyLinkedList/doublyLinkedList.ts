@@ -79,9 +79,9 @@ export class DoublyLinkedList {
     this._size += 1;
   }
 
-  public remove(value: IStatusEffect) {
+  public remove(value: IStatusEffect): boolean {
     if (this.isEmpty()) {
-      return;
+      return false;
     }
 
     let tmp = this._head;
@@ -102,10 +102,12 @@ export class DoublyLinkedList {
 
         this._size--;
 
-        return;
+        return true;
       }
 
       tmp = tmp.next;
     }
+
+    return false;
   }
 }

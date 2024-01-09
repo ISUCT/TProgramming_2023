@@ -1,5 +1,5 @@
 import { Character } from '../character';
 
 export interface ICharacterGenerator {
-  createCharacter(): Character;
+  createCharacter(randomNumberGenerator: (min: number, max: number) => number): Character;
 }

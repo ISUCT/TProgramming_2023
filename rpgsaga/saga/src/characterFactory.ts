@@ -19,16 +19,22 @@ export class CharacterFactory {
     }
   }
 
-  public getCharacter(characterClass: CharacterClass): Character {
+  public getCharacter(
+    characterClass: CharacterClass,
+    randomNumberGenerator: (min: number, max: number) => number,
+  ): Character {
     this.set(characterClass);
-    return this._factory.createCharacter();
+    return this._factory.createCharacter(randomNumberGenerator);
   }
 
-  public generatePlayers(quantityOfPlayers: number): Character[] {
+  public generatePlayers(
+    quantityOfPlayers: number,
+    randomNumberGenerator: (min: number, max: number) => number,
+  ): Character[] {
     const players: Character[] = [];
 
     for (let i = 0; i < quantityOfPlayers; i++) {
-      const character = this.getCharacter(getRandomEnumValue(CharacterClass));
+      const character = this.getCharacter(getRandomEnumValue(CharacterClass), randomNumberGenerator);
       players.push(character);
     }
 

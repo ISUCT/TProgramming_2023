@@ -13,10 +13,6 @@ export class Spell implements ISpell {
     return this._name;
   }
 
-  get cast() {
-    return this._activeEffect;
-  }
-
   get statusEffect() {
     return this._statusEffect;
   }
@@ -25,9 +21,9 @@ export class Spell implements ISpell {
     return this._activeEffect;
   }
 
-  constructor(name: string, cast: IActiveEffect, statusEffect?: IStatusEffect) {
+  constructor(name: string, activeEffect: IActiveEffect, statusEffect?: IStatusEffect) {
     this._name = name;
-    this._activeEffect = cast;
+    this._activeEffect = activeEffect;
     this._statusEffect = null;
 
     if (typeof statusEffect !== undefined) {
@@ -60,7 +56,7 @@ export class Spell implements ISpell {
     return false;
   }
 
-  public sendStatusEffect(): IStatusEffect {
+  public getStatusEffect(): IStatusEffect {
     if (this.hasStatusEffect()) {
       return this._statusEffect;
     }

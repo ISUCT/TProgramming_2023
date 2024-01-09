@@ -38,7 +38,7 @@ describe('Testing execute method', () => {
     const dummyTarget = new Character('Lilian', CharacterClass.mage, 100, spell);
     expect(spell.execute(dummyTarget)).toBe(true);
   });
-  it('Should result in true if spell has not been casted', () => {
+  it('Should result in false if spell has not been casted', () => {
     const spell = new Spell('Fire arrow', new FireArrow(0, 7), new FireArrowEffect('Burning', 3));
     const dummyTarget = new Character('Lilian', CharacterClass.mage, 100, spell);
     expect(spell.execute(dummyTarget)).toBe(false);

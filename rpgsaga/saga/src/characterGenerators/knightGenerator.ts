@@ -1,6 +1,5 @@
 import { CharacterClass } from '../characterClasses';
 import { Character } from '../character';
-import { randomIntFromInterval } from '../randomMath';
 import { KnightAttack } from '../spell_system/activeEffects/knightAttack';
 import { Spell } from '../spell_system/spell/spell';
 
@@ -49,12 +48,12 @@ export class KnightGenerator implements ICharacterGenerator {
     this._maxHealthPoints = 120;
   }
 
-  public createCharacter(): Character {
+  public createCharacter(randomNumberGenerator: (min: number, max: number) => number): Character {
     const helper = new CharacterGeneratorHelper();
     return new Character(
-      helper.getRandomNameAndSurname(this._nameList, this._surnameList),
+      helper.getRandomNameAndSurname(this._nameList, this._surnameList, randomNumberGenerator),
       CharacterClass.knight,
-      randomIntFromInterval(this._minHealthPoints, this._maxHealthPoints),
+      randomNumberGenerator(this._minHealthPoints, this._maxHealthPoints),
       new Spell('Mighty Slash', new KnightAttack(2, 5), null),
     );
   }
