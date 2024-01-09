@@ -1,3 +1,4 @@
+import { Freeze, None } from "../Ability/Effect";
 import { Player } from "../Player/Player";
 import { randomBool, randomNumber } from "../Sources/Random";
 import { Logger } from "./Logger";
@@ -10,18 +11,26 @@ export class Battle{
         this.Player1 = player1;
     }
     start(){
-        let opponents = [this.Player0, this.Player1]
-        let currentPlayerId = randomBool();
         let winner: Player;
-        let LoggerBattle = new Logger(this.Player0, this.Player1)
+        let opponents = [this.Player0, this.Player1];
+        let currentPlayerId = randomBool();
+        let LoggerBattle = new Logger(this.Player0, this.Player1);
         LoggerBattle.startBattle();
         while(opponents[0].hp>0 && opponents[1].hp>0){
             let currentAbility = opponents[currentPlayerId].abilities[randomNumber(0, opponents[currentPlayerId].abilities.length-1)];
+            let attackerId = currentPlayerId;
             currentPlayerId = currentPlayerId === 0 ? 1 : 0;
-            opponents[currentPlayerId].takeAbilityOnSelf(currentAbility.type, currentAbility.power);
-            LoggerBattle.attack(currentPlayerId, currentAbility.name, currentAbility.power);
+
+            LoggerBattle.attack(currentPlayerId, currentAbility);
+
+            opponents[currentPlayerId].takeAbilityOnSelf(currentAbility, opponents[attackerId].dmg);
+            if(opponents[currentPlayerId].isStunned() && opponents[currentPlayerId].effect.duration>0){
+                opponents[currentPlayerId].effect.duration--;
+                currentPlayerId = currentPlayerId === 0 ? 1 : 0;
+                //opponents[currentPlayerId].takeAbilityOnSelf(currentAbility.type, currentAbility.power, {...currentAbility.effect[0]});
+            }
         }
-        winner = this.Player0.hp === 0 ? this.Player1 : this.Player0;
+        winner = this.Player0.hp <= 0 ? this.Player1 : this.Player0;
         return winner;
     }
 }

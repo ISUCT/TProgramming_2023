@@ -1,3 +1,4 @@
+import { Ability } from "../Ability/Ability";
 import { Player } from "../Player/Player";
 
 export class Logger{
@@ -10,13 +11,15 @@ export class Logger{
     startBattle(){
         console.log("Opponents of this battle is (", this.Player0.constructor.name, ")", this.Player0.name, "and (", this.Player1.constructor.name, ")", this.Player1.name);
     }
-    attack(currentPlayerId: number, nameOfCurrentAbility: string, powerOfCurrentAbility: number){
+    attack(currentPlayerId: number, currentAbility: Ability){
         switch(currentPlayerId){
             case 0:{
-                console.log("(", this.Player1.constructor.name, ")", this.Player1.name, "uses", nameOfCurrentAbility, "on (", this.Player0.constructor.name, ")", this.Player0.name, "and causes", powerOfCurrentAbility, "damage.");
+                console.log("(", this.Player1.constructor.name, ")", "[", this.Player1.effect.name, "]", "{ HP:", this.Player1.hp, "}", this.Player1.name, "uses", currentAbility.name, "on (", this.Player0.constructor.name, ")", "[", this.Player0.effect.name, "]", "{ HP:", this.Player0.hp, "}", this.Player0.name, "and causes", currentAbility.power, "damage with effect", currentAbility.effect.name);
+                break;
             }
             case 1:{
-                console.log("(", this.Player0.constructor.name, ")", this.Player0.name, "uses", nameOfCurrentAbility, "on (", this.Player1.constructor.name, ")", this.Player1.name, "and causes", powerOfCurrentAbility, "damage.");
+                console.log("(", this.Player0.constructor.name, ")", "[", this.Player0.effect.name, "]", "{ HP:", this.Player0.hp, "}", this.Player0.name, "uses", currentAbility.name, "on (", this.Player1.constructor.name, ")", "[", this.Player1.effect.name, "]", "{ HP:", this.Player1.hp, "}", this.Player1.name, "and causes", currentAbility.power, "damage with effect", currentAbility.effect.name);
+                break;
             }
         }
     }
