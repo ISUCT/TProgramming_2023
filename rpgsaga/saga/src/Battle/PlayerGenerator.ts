@@ -1,7 +1,5 @@
 import { Archer, Knight, Mage } from "../Player/Classes/Classes";
-import { Player } from "../Player/Player";
 import { randomNumber } from "../Sources/Random";
-import { Names } from "../Sources/Names";
 import { randomStatsEdges } from "../Sources/RandomStats";
 import { None } from "../Ability/Effect";
 
@@ -11,7 +9,7 @@ export enum Classes {
     Mage
 }
 export class PlayerGenerator {
-    public static generatePlayer(): Player {
+    public static generatePlayer(Names: string[]) {
         let player;
         let playerClass = randomNumber(0, 2);
         let playerName = Names[randomNumber(0, Names.length-1)]

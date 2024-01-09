@@ -1,4 +1,3 @@
-import { Freeze, None } from "../Ability/Effect";
 import { Player } from "../Player/Player";
 import { randomBool, randomNumber } from "../Sources/Random";
 import { Logger } from "./Logger";
@@ -20,14 +19,11 @@ export class Battle{
             let currentAbility = opponents[currentPlayerId].abilities[randomNumber(0, opponents[currentPlayerId].abilities.length-1)];
             let attackerId = currentPlayerId;
             currentPlayerId = currentPlayerId === 0 ? 1 : 0;
-
             LoggerBattle.attack(currentPlayerId, currentAbility);
-
             opponents[currentPlayerId].takeAbilityOnSelf(currentAbility, opponents[attackerId].dmg);
             if(opponents[currentPlayerId].isStunned() && opponents[currentPlayerId].effect.duration>0){
                 opponents[currentPlayerId].effect.duration--;
                 currentPlayerId = currentPlayerId === 0 ? 1 : 0;
-                //opponents[currentPlayerId].takeAbilityOnSelf(currentAbility.type, currentAbility.power, {...currentAbility.effect[0]});
             }
         }
         winner = this.Player0.hp <= 0 ? this.Player1 : this.Player0;
