@@ -27,7 +27,7 @@ export class Bina {
 
     if (isSuccessful) {
       console.log(
-        `${this._message.attackerInfo} has casted a spell ${this._message.spell.toString()} on ${
+        `${this._message.attackerInfo} has casted a spell ${this._message.spell.describe()} on ${
           this._message.targetInfo
         }!`,
       );
@@ -46,7 +46,7 @@ export class Bina {
     if (target.statusEffects.contains(statusEffect)) {
       const node: DoublyLinkedListNode = target.statusEffects.head;
       while (node !== null) {
-        if (node.value.toString() === statusEffect.toString()) {
+        if (node.value.describe() === statusEffect.describe()) {
           node.value.refresh();
           return;
         }

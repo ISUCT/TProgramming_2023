@@ -44,8 +44,8 @@ export class Spell implements ISpell {
     return isCastedSuccessfully;
   }
 
-  public toString(): string {
-    return `${this._name} (${this._activeEffect.toString()})`;
+  public describe(): string {
+    return `${this._name} (${this._activeEffect.describe()})`;
   }
 
   public hasStatusEffect(): boolean {

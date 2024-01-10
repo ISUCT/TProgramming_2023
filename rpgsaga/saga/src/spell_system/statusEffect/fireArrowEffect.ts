@@ -6,6 +6,7 @@ export class FireArrowEffect implements IStatusEffect {
   private _name: string;
   private _initialUsesRemaining: number;
   private _usesRemaining: number;
+  private _damageAmount: number;
 
   get name() {
     return this._name;
@@ -15,6 +16,8 @@ export class FireArrowEffect implements IStatusEffect {
     this._name = name;
     this._initialUsesRemaining = usesAvailable;
     this._usesRemaining = this._initialUsesRemaining;
+
+    this._damageAmount = 2;
   }
 
   public apply(target: Character): boolean {
@@ -27,7 +30,7 @@ export class FireArrowEffect implements IStatusEffect {
         } turns remaining)`,
       );
 
-      target.receiveDamage(2);
+      target.receiveDamage(this._damageAmount);
 
       return true;
     }
@@ -52,7 +55,7 @@ export class FireArrowEffect implements IStatusEffect {
     return false;
   }
 
-  public toString() {
+  public describe() {
     return this._name;
   }
 }

@@ -21,7 +21,7 @@ export class FireArrow implements IActiveEffect {
     return false;
   }
 
-  public toString(): string {
+  public describe(): string {
     return `${this._castsRemaining} casts remaining`;
   }
 

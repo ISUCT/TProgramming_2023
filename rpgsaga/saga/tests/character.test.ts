@@ -18,6 +18,18 @@ describe('Testing Character class', () => {
     expect(character.healthPoints).toBe(105);
     expect(character.spell).toBeInstanceOf(Spell);
   });
+  it('Setting new name which contains 0 characters should result in exception', () => {
+    const character = new Character(
+      'Linda',
+      CharacterClass.mage,
+      105,
+      new Spell('Freeze', new Stun(2, 0), new StunEffect('Stun', 1)),
+    );
+
+    expect(() => {
+      character.name = '';
+    }).toThrow(Error('Name should be longer than 0 characters'));
+  });
   it('Testing receiveDamage method', () => {
     const character = new Character(
       'Linda',

@@ -47,7 +47,7 @@ export class StunEffect implements IStatusEffect {
     return false;
   }
 
-  public toString() {
+  public describe() {
     return this._name;
   }
 }

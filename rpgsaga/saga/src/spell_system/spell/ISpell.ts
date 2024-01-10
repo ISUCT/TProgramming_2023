@@ -6,5 +6,5 @@ export interface ISpell {
   execute(target: Character): boolean;
   hasStatusEffect(): boolean;
   getStatusEffect(): IStatusEffect;
-  toString(): string;
+  describe(): string;
 }

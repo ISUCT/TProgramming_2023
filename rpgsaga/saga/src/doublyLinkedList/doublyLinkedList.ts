@@ -41,7 +41,7 @@ export class DoublyLinkedList {
 
     let tmp = this.head;
     while (tmp !== null) {
-      if (tmp.value.toString() === value.toString()) {
+      if (tmp.value.describe() === value.describe()) {
         return true;
       }
       tmp = tmp.next;
@@ -87,7 +87,7 @@ export class DoublyLinkedList {
     let tmp = this._head;
 
     while (tmp !== null) {
-      if (tmp.value.toString() === value.toString()) {
+      if (tmp.value.describe() === value.describe()) {
         if (tmp.prev !== null) {
           tmp.prev.next = tmp.next;
         } else {

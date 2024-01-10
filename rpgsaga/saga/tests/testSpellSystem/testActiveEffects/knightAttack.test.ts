@@ -66,6 +66,6 @@ describe('Testing toString method', () => {
     const usesRemaining = 2;
     const activeEffect = new KnightAttack(usesRemaining, 7);
 
-    expect(activeEffect.toString()).toBe(`${usesRemaining} casts remaining`);
+    expect(activeEffect.describe()).toBe(`${usesRemaining} casts remaining`);
   });
 });

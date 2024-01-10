@@ -5,5 +5,5 @@ export interface IStatusEffect {
   remove(target: Character);
   refresh();
   canApply(): boolean;
-  toString(): string;
+  describe(): string;
 }

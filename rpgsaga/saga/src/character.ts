@@ -22,7 +22,11 @@ export class Character {
   }
 
   set name(value: string) {
-    this._name = value;
+    if (value.length > 0) {
+      this._name = value;
+    } else {
+      throw Error('Name should be longer than 0 characters');
+    }
   }
 
   get class() {
