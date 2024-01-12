@@ -1,0 +1,41 @@
+import { Player } from "./player";
+
+export class Logger {
+    constructor() {}
+
+    public static logPlayersNameAndClass(p1: Player, p2: Player) {
+        console.log(`(${p1.constructor.name}) ${p1.name} vs (${p2.constructor.name}) ${p2.name}\n`);
+    }
+
+    public static logAttackPlayer(p1: Player, p2: Player, playerToAttack: number) {
+        if(playerToAttack === 1) {
+            console.log(`(${p1.constructor.name}) ${p1.name} attacks (${p2.constructor.name}) ${p2.name} with ${p1.strenght} and (${p2.constructor.name}) ${p2.name} left with ${p2.hp}\n`);
+        } else {
+            console.log(`(${p2.constructor.name}) ${p2.name} attacks (${p1.constructor.name}) ${p1.name} with ${p2.strenght} and (${p1.constructor.name}) ${p1.name} left with ${p1.hp}\n`);
+        }
+    }
+
+    public static logPlayerIsDead(p: Player) {
+        console.log(`(${p.constructor.name}) ${p.name} is dead\n`);
+    }
+
+    public static logWinner(p: Player) {
+        console.log(`(${p.constructor.name}) ${p.name} is the WINNER!!!\n`);
+    }
+
+    public static logSpecialAttack(p1: Player, p2: Player, playerToAttack: number) {
+        if(playerToAttack === 1) {
+            console.log(`(${p1.constructor.name}) ${p1.name} attacks (${p2.constructor.name}) ${p2.name} with ${p1.startStrength} using ${p1.specialAttackName} (strength = ${p1.strenght}) and (${p2.constructor.name}) ${p2.name} left with ${p2.hp}\n`);
+        } else {
+            console.log(`(${p2.constructor.name}) ${p2.name} attacks (${p1.constructor.name}) ${p1.name} with ${p2.startStrength} using ${p2.specialAttackName} (strength = ${p2.strenght}) and (${p1.constructor.name}) ${p1.name} left with ${p1.hp}\n`);
+        }
+    }
+
+    public static logBurningBehavior(p: Player) {
+        console.log(`(${p.constructor.name}) ${p.name} takes fire damage wiht strength 2\n`);
+    }
+
+    public static logImmunity(p: Player) {
+        console.log(`(${p.constructor.name}) ${p.name} has IMMUNITY to fire\n`);
+    }
+}

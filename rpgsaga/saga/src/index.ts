@@ -1,17 +1,23 @@
-import { Rabbit } from './rabbit';
+import { GameLogic } from "./gameLogic";
 
-try {
-    var myRabbit = new Rabbit(5, 'black', 'Dutch dwarf');
-    myRabbit.age = 10;
-    console.log(myRabbit.age);
-} catch(e) {
-    console.log(e);
+class Game {
+    private isPlaying = true;
+    private gameLogic = new GameLogic();
+    constructor() {}
+
+    public gameLoop() {
+        try {
+            while(this.isPlaying) {
+                this.gameLogic.createPlayers(4);
+                this.gameLogic.startFight();
+                this.isPlaying = false;
+            }
+        } catch(err: any) {
+            throw new Error(err);
+        }
+    }
 }
 
+const game = new Game();
 
-myRabbit.name = 'Malebu';
-console.log(myRabbit.name);
-myRabbit.voice();
-myRabbit.toString();
-
-console.log(myRabbit);
+game.gameLoop();
