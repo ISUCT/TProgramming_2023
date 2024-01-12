@@ -1,38 +1,28 @@
-import { Logger } from "./logger";
-
-export abstract class Hero {
-    abstract heroClass: string
-    abstract useAbil(enemy: Hero): void;
-
+import {getRandomNumber} from "./getRandomNumber"
+export abstract class Hero{
     name: string
+    initialHealth: number
+    curHealth: number
     strength: number
-    fullHP: number
-    curHP: number
-    usedAbil: boolean = false
+    tickDamage: number
+    heroType: string
+    abilName: string
+    useAbitlity = false
+    stunned = false
 
-    logger: Logger
-    
-    constructor(name: string, strength: number, HP: number){
+    readonly healthPoint = [50, 75, 100]
+
+    constructor(name: string, type: string, abilName){
         this.name = name
-        this.strength = strength
-        this.fullHP = HP
-        this.curHP = HP
+        this.initialHealth = this.healthPoint[getRandomNumber(0, this.healthPoint.length-1)]
+        this.curHealth = this.initialHealth
+        this.strength = getRandomNumber(2, 25)
+        this.heroType = type
+        this.abilName = abilName
+        this.tickDamage = 0
     }
 
-    heroRecharge(enemy: Hero){
-        this.curHP = this.fullHP
-        this.usedAbil = false
-    }
+    abstract ability(hero : Hero): number
 
-    getHit(damage: number, enemy: Hero, showLogger = true){
-        this.curHP -= damage
-
-        if (showLogger){
-            this.logger.logger(`${this.heroClass, this.name} получает урон от ${enemy.heroClass, enemy.name} в размере ${damage} единиц`)
-        }
-    }
-
-    takeHit(enemy: Hero){
-        enemy.getHit(this.strength, this)
-    }
+    abstract dealDamage(hero : Hero): number
 }
