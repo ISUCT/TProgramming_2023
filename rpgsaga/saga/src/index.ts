@@ -1,4 +1,4 @@
 import { Game } from "./game";
 
-const game = new Game(6)
+const game = new Game(8)
 game.start()

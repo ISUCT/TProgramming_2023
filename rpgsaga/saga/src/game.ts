@@ -38,8 +38,10 @@ export class Game {
             const winners: Player[] = []
             console.log(`Кон ${count}.`)
             for (let i = 0; i < shuffledPlayers.length - 1; i += 2) {
-                shuffledPlayers[i].health =shuffledPlayers[i].full_health 
-                shuffledPlayers[i + 1].health =shuffledPlayers[i + 1].full_health 
+                shuffledPlayers[i].health = shuffledPlayers[i].full_health
+                shuffledPlayers[i].abilityAbsense = false
+                shuffledPlayers[i + 1].health = shuffledPlayers[i + 1].full_health 
+                shuffledPlayers[i + 1].abilityAbsense = false
                 winners.push(this.fight(shuffledPlayers[i], shuffledPlayers[i + 1]))
                 console.log()
             }
@@ -61,7 +63,6 @@ export class Game {
                 if (randomInt(0, 1)){  // если применяется способность
                     if (attackingPlayer.abilityAbsense){  // если стрелы уже использовались
                         let damage = attackingPlayer.dealDmg(defendingPlayer)
-                            damage += defendingPlayer.tickDamage
                         Logger.makeDamage(attackingPlayer, defendingPlayer, damage)
                         if (defendingPlayer.health <= 0) {  // если у защищающегося закончилось хп
                             Logger.death(defendingPlayer)
@@ -77,9 +78,6 @@ export class Game {
                     }
                 } else {  // если способность не применяется
                     let damage = attackingPlayer.dealDmg(defendingPlayer)
-                    if (defendingPlayer.tickDamage){  // если на защищающемся тик дмг
-                        damage += defendingPlayer.tickDamage
-                    }
                     Logger.makeDamage(attackingPlayer, defendingPlayer, damage)
                     if (defendingPlayer.health <= 0) {  // если у защищающегося закончилось хп
                         Logger.death(defendingPlayer)
