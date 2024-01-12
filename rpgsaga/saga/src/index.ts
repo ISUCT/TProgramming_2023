@@ -1,16 +1,8 @@
-import { Phone } from './phone';
+import { Cat } from './cat';
+import {Game} from "./Game";
 
-const first = new Phone('+7900-000 000 (123)', 1990, 'Телефон 1');
-first.year = 1998;
+const Cat1 = new Cat (8, 'Кеша', 'Шотландский вислоухий', 7);
+Cat1.getInfo()
 
-first.year = -1998;
-first.call('12345');
-first.endCall();
-
-const second = new Phone('+799900000', -5);
-// second.name = 'Телефон 2';
-console.log(second.year);
-second.call('12345');
-second.endCall();
-
-console.log(first, second, Phone.phoneCount);
+const game = new Game(8);
+game.start();
