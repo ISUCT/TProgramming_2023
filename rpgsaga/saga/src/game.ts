@@ -40,8 +40,12 @@ export class Game {
             for (let i = 0; i < shuffledPlayers.length - 1; i += 2) {
                 shuffledPlayers[i].health = shuffledPlayers[i].full_health
                 shuffledPlayers[i].abilityAbsense = false
+                shuffledPlayers[i].tickDamage = 0
+
                 shuffledPlayers[i + 1].health = shuffledPlayers[i + 1].full_health 
                 shuffledPlayers[i + 1].abilityAbsense = false
+                shuffledPlayers[i + 1].tickDamage = 0
+
                 winners.push(this.fight(shuffledPlayers[i], shuffledPlayers[i + 1]))
                 console.log()
             }
@@ -83,6 +87,14 @@ export class Game {
                         Logger.death(defendingPlayer)
                         return attackingPlayer
                     }
+                }
+            }
+            if (attackingPlayer.tickDamage > 0){
+                attackingPlayer.health -= attackingPlayer.tickDamage
+                Logger.ticked(attackingPlayer)
+                if (attackingPlayer.health <= 0) {  // если у защищающегося закончилось хп
+                    Logger.death(attackingPlayer)
+                    return defendingPlayer
                 }
             }
             if (turn){  // смена хода

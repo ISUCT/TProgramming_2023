@@ -21,4 +21,8 @@ export class Logger {
     static death(player: Player){
         console.log(`(${player.type}) ${player.name} погибает`)
     }
+
+    static ticked(player: Player){
+        console.log(`(${player.type}) ${player.name} получает ${player.tickDamage} урона от горения`)
+    }
 }
