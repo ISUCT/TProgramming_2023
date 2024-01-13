@@ -1,16 +1,23 @@
-import { Phone } from './phone';
+import { GameLogic } from "./gameLogic";
 
-const first = new Phone('+7900-000 000 (123)', 1990, 'Телефон 1');
-first.year = 1998;
+class Game {
+    private isPlaying = true;
+    private gameLogic = new GameLogic();
+    constructor() {}
 
-first.year = -1998;
-first.call('12345');
-first.endCall();
+    public gameLoop() {
+        try {
+            while(this.isPlaying) {
+                this.gameLogic.createPlayers(4);
+                this.gameLogic.startFight();
+                this.isPlaying = false;
+            }
+        } catch(err: any) {
+            throw new Error(err);
+        }
+    }
+}
 
-const second = new Phone('+799900000', -5);
-// second.name = 'Телефон 2';
-console.log(second.year);
-second.call('12345');
-second.endCall();
+const game = new Game();
 
-console.log(first, second, Phone.phoneCount);
+game.gameLoop();
