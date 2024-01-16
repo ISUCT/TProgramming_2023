@@ -1,4 +1,4 @@
-export class Player {
+export abstract class Player {
     health: number;
     strong: number;
     name: string;
@@ -21,7 +21,5 @@ export class Player {
         return this.strong;
     }
 
-    ability1() {
-        return 0;
-    }
+    abstract ability1();
 }
