@@ -6,7 +6,7 @@ export class Game {
     private names: string[] = ["Джоли Бьорн", "Донат Троллебой", "Дуротан", "Забытый", "Зул'джин", "Зулухед Пришибленный", "Иллидан Ярость Бури", "Ирод", "Изера", "К'тун", "Каргат Острорук", "Кел'Тузед", "Кель'тас Солнечный скиталец", "Кенарий", "Кэрн Кровавое Копыто", "Кил'джеден", "Килрогг Мёртвый Глаз", "Корагг", "Кориалстраз", "Король Ллан Ринн I", "Король Теренас Менетил II", "Ксавий", "Кси'ри", "Леди Вайш"];
     private numberGames: number;
     private customCharacters: any[];
-    players: any[];
+    private players: any[];
     private missedTurns: number = 0;
 
     constructor(numberGames: number, customCharacters = []) {
@@ -55,35 +55,36 @@ export class Game {
         return players;
     }
 
-    private fight(p0: number, p1: number) {
+    private fight(p0: number, p1: number): { p0_damage: number; p1_damage: number; mageCastMissesTurn: boolean, archerCastFire: boolean } {
         const log = new LoggingGame(this.players);
         const randomAbility = this.getRandomInt(0, 1);
+        let p0_damage = 0, p1_damage = 0;
+        let mageCastMissesTurn = false, archerCastFire = this.players[p0].debuffs.playerIsOnFire;
         if (this.players[p0].debuffs.playerIsOnFire) {
             log.playerIsOnFire(p0);
-            this.players[p0].health -= 2;
+            p0_damage += 2;
         }
         if (this.players[p0].debuffs.playerMissesTurn) {
-            log.playerMissesTurn(p0)
+            log.playerMissesTurn(p0);
             this.missedTurns += 1;
-            this.players[p0].debuffs.playerMissesTurn = false;
-            return;
+            return { p0_damage, p1_damage, mageCastMissesTurn, archerCastFire };
         }
         if (randomAbility == 0 || this.players[p1].debuffs.playerIsOnFire || this.missedTurns == 3) { // Если randomAbility равна 0 или Охотник уже использовал "Огненные стрелы" или Маг
             const damage = this.players[p0].attack();
-            log.attack(p0, p1, damage)
-            this.players[p1].health -= damage;
-            return;
+            log.attack(p0, p1, damage);
+            p1_damage += damage;
+            return { p0_damage, p1_damage, mageCastMissesTurn, archerCastFire };
         } else {
             const damage = this.players[p0].ability1();
             log.useAbility(p0, p1, this.players[p0].abilityName, damage);
             if (this.players[p0].className == "Рыцарь") {
-                this.players[p1].health -= damage;
+                p1_damage += damage;
             } else if (this.players[p0].className == "Маг") {
-                this.players[p1].debuffs.playerMissesTurn = true;
+                mageCastMissesTurn = true;
             } else if (this.players[p0].className == "Лучник") {
-                this.players[p1].debuffs.playerIsOnFire = true
+                archerCastFire = true;
             }
-            return;
+            return { p0_damage, p1_damage, mageCastMissesTurn, archerCastFire };
         }
     }
 
@@ -98,15 +99,23 @@ export class Game {
             // 0 - первый игрок, 1 - второй игрок
             turn = this.getRandomInt(0, 1);
             log.startGame(turn);
+            let p0: number, p1: number;
             while (this.players[0].health > 0 && this.players[1].health > 0) {
-                let randomAbility = this.getRandomInt(0, 1);
+                const randomAbility = this.getRandomInt(0, 1);
                 if (turn === 0) { // Ходит первый игрок
-                    this.fight(0, 1);
+                    p0 = 0;
+                    p1 = 1;
                     turn = 1;
                 } else { // Ходит второй игрок
-                    this.fight(1, 0);
+                    p0 = 1;
+                    p1 = 0;
                     turn = 0;
                 }
+                const result = this.fight(p0, p1);
+                this.players[p0].health -= result.p0_damage;
+                this.players[p1].health -= result.p1_damage;
+                this.players[p1].debuffs.playerMissesTurn = result.mageCastMissesTurn;
+                this.players[p1].debuffs.playerIsOnFire = result.archerCastFire;
             }
             log.gameOver();
         }
