@@ -117,6 +117,11 @@ module.exports = {
         selector: 'typeProperty',
         format: ['snake_case', 'camelCase'],
       },
+      {
+        selector: 'classProperty',
+        format: ['camelCase'],
+        leadingUnderscore: 'allow',
+      }
     ],
   },
   settings: {
