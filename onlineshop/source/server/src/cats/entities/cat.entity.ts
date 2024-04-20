@@ -1,4 +1,5 @@
-import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
+import { Entity, ManyToOne, PrimaryKey, Property } from '@mikro-orm/core';
+import { Breed } from '../../breeds/entities/breed.entity';
 import { uuid } from 'uuid'
 @Entity()
 export class Cat {
@@ -11,6 +12,6 @@ export class Cat {
    @Property()
    age: number
 
-   @Property()
-   breed?: string
+   @ManyToOne({ entity: () => Breed })
+   breed?: Breed
 }

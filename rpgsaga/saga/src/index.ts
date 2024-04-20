@@ -25,7 +25,6 @@ setTimeout(() => {
 }, 2000);
 console.log('After timeout');
 
-
 const summ = (n) => {
     return (m) => n + m;
 }

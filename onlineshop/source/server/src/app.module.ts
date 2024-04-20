@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { PostgreSqlDriver } from '@mikro-orm/postgresql';
+import { BreedsModule } from './breeds/breeds.module';
 
 @Module({
   imports: [CatsModule,
@@ -15,7 +16,8 @@ import { PostgreSqlDriver } from '@mikro-orm/postgresql';
     password: 'postgres',
     dbName: 'cats',
     autoLoadEntities: true,
- })
+ }),
+ BreedsModule
 ],
   controllers: [AppController],
   providers: [AppService],

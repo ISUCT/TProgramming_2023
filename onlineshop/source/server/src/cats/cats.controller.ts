@@ -1,4 +1,15 @@
-import { Controller, Get, Post, Body, Param, Delete, Put, NotFoundException, HttpException, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  Put,
+  NotFoundException,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
@@ -13,24 +24,22 @@ export class CatsController {
   @Post()
   create(@Body() createCatDto: CreateCatDto) {
     try {
-        return this.catsService.create(createCatDto);
-    } catch(err) {
-        
-    }
+      return this.catsService.create(createCatDto);
+    } catch (err) {}
   }
 
   @Get()
-  async findAll():Promise<Array<GetCatDto>> {
+  async findAll(): Promise<Array<GetCatDto>> {
     const cats = await this.catsService.findAll();
-    const dto = cats.map(item => {
-        const itm: GetCatDto = {
-            id: item.uuid,
-            name: item.name,
-            age: item.age,
-            breed: item.breed ? item.breed : "unknown"
-        }
-        return itm;
-    })
+    const dto = cats.map((item) => {
+      const itm: GetCatDto = {
+        id: item.uuid,
+        name: item.name,
+        age: item.age,
+        breed: item.breed ? item.breed.name : 'unknown',
+      };
+      return itm;
+    });
     return dto;
   }
 
@@ -40,7 +49,10 @@ export class CatsController {
     // if (cat) {
     //     return cat
     // }
-    throw new HttpException(`cat with id: ${id} was not found`, HttpStatus.NOT_FOUND)
+    throw new HttpException(
+      `cat with id: ${id} was not found`,
+      HttpStatus.NOT_FOUND,
+    );
   }
 
   @Put(':id')
@@ -49,7 +61,15 @@ export class CatsController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.catsService.remove(+id);
+  async remove(@Param('id') id: string) {
+    try {
+      await this.catsService.remove(id);
+    } catch (err) {
+      throw new HttpException(
+        `cat with id: ${id} was not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    return;
   }
 }

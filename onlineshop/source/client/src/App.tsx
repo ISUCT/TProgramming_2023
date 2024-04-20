@@ -1,18 +1,25 @@
 import React from 'react';
 
 import './App.css';
+import MyComponent from './components/MyComponent';
+import Cats from './components/Cats';
 
 const App: React.FC = () => (
-  <div className="App">
-    <header className="App-header">
-      <p>
-        Edit <code>src/App.tsx</code> and save to reload.
-      </p>
-      <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-        Learn React
-      </a>
-    </header>
-  </div>
+  <>
+  <MyComponent />
+  <Cats />
+    <div className="App">
+      <header className="App-header">
+        <p>
+          Edit <code>src/App.tsx</code> and save to reload.
+        </p>
+        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
+          Learn React
+        </a>
+      </header>
+    </div>
+    <div>inner div</div>
+  </>
 );
 
 export default App;

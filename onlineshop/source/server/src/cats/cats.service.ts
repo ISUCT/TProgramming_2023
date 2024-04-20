@@ -45,7 +45,9 @@ export class CatsService {
   }
 
   findAll():Promise<Array<Cat>> {
-    return this.catsRepo.findAll();
+    return this.catsRepo.findAll({
+        populate: ['breed']
+    });
   }
 
   findOne(id: number) {
@@ -56,7 +58,14 @@ export class CatsService {
     return `This action updates a #${id} cat`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} cat`;
+  async remove(id: string) {
+    const em = this.catsRepo.getEntityManager();
+    const cat = await this.catsRepo.findOne(id);
+    if (cat) {
+        em.removeAndFlush(cat);
+        return;
+    }
+    console.log('cat was not found');
+    throw new Error();
   }
 }
