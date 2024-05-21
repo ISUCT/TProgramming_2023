@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+import {Player, Fighter, Warlock, Ranger, Logger, Game} from './classes';
+
+const a = new Game(0, 4);
+a.start();
+=======
 console.log('Before timeout');
 const res = fetch(`https://cat-fact.herokuapp.com/facts/random`);
 console.log(res);
@@ -37,3 +43,4 @@ console.log(a);
 let b = a(6);
 console.log(b);
 console.log(c(3));
+>>>>>>> upstream/master

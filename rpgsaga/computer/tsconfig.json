@@ -1,0 +1,21 @@
+{
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "rootDir": ".",
+    "baseUrl": "./src",
+    "paths": {
+      "*": ["node_modules/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
