@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
 	"folders": [
         {
@@ -23,4 +24,31 @@
 		"editor.detectIndentation": false,
 		"editor.tabSize": 4,
 	}
+=======
+{
+	"folders": [
+        {
+            "name": "Server",
+            "path": "source/server"
+        },
+        {
+            "name": "Client",
+            "path": "source/client"
+        },
+        {
+            "name": "Configs (Root)",
+            "path": "."
+        }
+    ],
+	"settings": {
+		"files.exclude": {
+			"**/.git": true,
+			"**/node_modules": true,
+			"**/build": true,
+			"**/dist": true
+		},
+		"editor.detectIndentation": false,
+		"editor.tabSize": 4,
+	}
+>>>>>>> upstream/master
 }
