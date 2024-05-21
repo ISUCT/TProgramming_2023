@@ -2,7 +2,12 @@ stages:
   - lint_saga
   - test_saga
   - lint_shop
+<<<<<<< HEAD
   - test_shop
+=======
+  - test_server
+  - test_client
+>>>>>>> upstream/master
 
 include:
   - local: /rpgsaga/.gitlab-ci.yml

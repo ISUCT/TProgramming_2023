@@ -1,31 +1,53 @@
-import { Module, OnApplicationBootstrap } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-
-import { RestModule } from '@shop-rest/rest.module';
-import { SeedingModule } from '@shop-storage/seeding/seeding.module';
-import { SeedingService } from '@shop-storage/seeding/seeding.service';
+<<<<<<< HEAD
+import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { CatsModule } from './cats/cats.module';
+import { MikroOrmModule } from '@mikro-orm/nestjs';
+import { PostgreSqlDriver } from '@mikro-orm/postgresql';
+import { BreedsModule } from './breeds/breeds.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 9000,
-      username: 'postgres',
-      password: 'postgres',
-      database: 'shop',
-      synchronize: true,
-      logging: true,
-      autoLoadEntities: true,
-    }),
-    RestModule,
-    SeedingModule,
-  ],
+  imports: [CatsModule,
+ MikroOrmModule.forRoot({
+    driver: PostgreSqlDriver,
+    host: 'localhost',
+    port: 5432,
+    user: 'postgres',
+    password: 'postgres',
+    dbName: 'cats',
+    autoLoadEntities: true,
+ }),
+ BreedsModule
+],
+  controllers: [AppController],
+  providers: [AppService],
 })
-export class AppModule implements OnApplicationBootstrap {
-  constructor(private readonly seedingService: SeedingService) {}
+export class AppModule {}
+=======
+import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { CatsModule } from './cats/cats.module';
+import { MikroOrmModule } from '@mikro-orm/nestjs';
+import { PostgreSqlDriver } from '@mikro-orm/postgresql';
+import { BreedsModule } from './breeds/breeds.module';
 
-  async onApplicationBootstrap(): Promise<void> {
-    await this.seedingService.seed();
-  }
-}
+@Module({
+  imports: [CatsModule,
+ MikroOrmModule.forRoot({
+    driver: PostgreSqlDriver,
+    host: 'localhost',
+    port: 5432,
+    user: 'postgres',
+    password: 'postgres',
+    dbName: 'cats',
+    autoLoadEntities: true,
+ }),
+ BreedsModule
+],
+  controllers: [AppController],
+  providers: [AppService],
+})
+export class AppModule {}
+>>>>>>> upstream/master
