@@ -6,18 +6,17 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "es2017",
+    "target": "ES2022",
     "sourceMap": true,
     "outDir": "./dist",
+    "baseUrl": "./",
     "incremental": true,
-    "strict": true,
-    "strictPropertyInitialization": false,
-    "moduleResolution": "node",
-    "baseUrl": "src",
-    "paths": {
-      "@shop-domain/*": ["domain/*"],
-      "@shop-rest/*": ["rest/*"],
-      "@shop-storage/*": ["storage/*"],
-    }
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "strict": true
   }
 }

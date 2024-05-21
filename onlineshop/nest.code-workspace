@@ -1,19 +1,18 @@
 {
 	"folders": [
-		{
-			"name": "Server",
-			"path": "packages/server"
-		},
-		{
-			"name": "Client",
-			"path": "packages/client"
-		},
-		{
-			"name": "Configs (Root)",
-			"path": "."
-		},
-		
-	],
+        {
+            "name": "Server",
+            "path": "source/server"
+        },
+        {
+            "name": "Client",
+            "path": "source/client"
+        },
+        {
+            "name": "Configs (Root)",
+            "path": "."
+        }
+    ],
 	"settings": {
 		"files.exclude": {
 			"**/.git": true,
