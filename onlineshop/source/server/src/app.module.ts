@@ -1,23 +1,23 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CatsModule } from './cats/cats.module';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
-import { PostgreSqlDriver } from '@mikro-orm/postgresql';
-import { BreedsModule } from './breeds/breeds.module';
+import { MySqlDriver } from '@mikro-orm/mysql';
+import { GoodtypesModule } from './goodtypes/goodtypes.module';
+import { GoodcatalogModule } from './goodcatalog/goodcatalog.module';
 
 @Module({
-  imports: [CatsModule,
+  imports: [GoodcatalogModule,
  MikroOrmModule.forRoot({
-    driver: PostgreSqlDriver,
+    driver: MySqlDriver,
     host: 'localhost',
-    port: 5432,
-    user: 'postgres',
-    password: 'postgres',
-    dbName: 'cats',
+    port: 3306,
+    user: 'root',
+    password: 'mLbr%@.-G.890n^]albYUI3#',
+    dbName: 'zooshop_new',
     autoLoadEntities: true,
  }),
- BreedsModule
+ GoodtypesModule
 ],
   controllers: [AppController],
   providers: [AppService],
