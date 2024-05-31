@@ -46,8 +46,8 @@ import {
     }
   
     @Get(':id')
-    findOne(@Param('id') id: string) {
-      const good = this.goodcatalogService.findOne(id);
+    async findOne(@Param('id') id: string) {
+      const good = await this.goodcatalogService.findOne(id);
       if (good) {
         return good
       }

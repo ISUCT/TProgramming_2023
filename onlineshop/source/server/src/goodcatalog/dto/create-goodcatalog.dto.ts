@@ -4,6 +4,6 @@ export class CreateGoodcatalogDto {
     name: string;
     price: number;
     quantity: number;
-    goodtype: null;
+    goodtype: number;
  }
  

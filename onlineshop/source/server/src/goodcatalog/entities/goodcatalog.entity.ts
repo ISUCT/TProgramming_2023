@@ -7,9 +7,6 @@ export class Goodcatalog {
   @PrimaryKey({ type: 'uuid' })
   id: string = uuidv4();
 
-  @ManyToOne(() => Goodtypes)
-  goodtype?: Goodtypes;
-
   @Property()
   selfdiscount: number;
 
@@ -21,4 +18,7 @@ export class Goodcatalog {
 
   @Property()
   quantity: number;
+
+  @ManyToOne(() => Goodtypes, { nullable: true })
+  goodtype: Goodtypes;
 }
